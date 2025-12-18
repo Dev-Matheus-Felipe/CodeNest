@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+*{ box-sizing: border-box; }
 
-html, body {
+html, body, main{
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 html{
@@ -18,21 +16,34 @@ html{
   font-family: 'Inter', sans-serif;
 }
 
+:root{
+  --primary-color-button: #ff5e00;
+  --secondary-color-button: #f78544;
+
+}
+
 
 /* --------------------------------------- DARK THEME --------------------------------------- */
 
 .dark{
   --background: rgb(0,0,0);
   --text-color: rgb(255,255,255);
-  --primary-button: linear-gradient( #ff5e00,#ff8800);
-  --secondary-button: rgb(20, 23, 28)
+
+  --secondary-button: rgb(20, 23, 28);
+  --secondary-button-hover: rgb(31, 36, 44);
+  
+  --sidebar-text-color: rgb(164, 164, 164);
 }
 
 /* --------------------------------------- LIGHT THEME --------------------------------------- */
 
 .light{
   --background: rgb(255,255,255);
-  --text-color: rgb(0,0,0)
-  --primary-button: linear-gradient( #ff5e00,#ff8800);
-  --secondary-button: rgb(243, 243, 243);
+  --text-color: rgb(0,0,0);
+
+  --secondary-button: rgb(235, 235, 235);
+  --secondary-button-hover: rgb(201, 201, 201);
+
+  --sidebar-text-color: rgb(114, 114, 114);
+
 }

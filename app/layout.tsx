@@ -16,11 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <NavBar/>
+        <ThemeProvider attribute="class">
+          <main className="grid grid-cols-[1fr_4fr_1fr] grid-rows-[1fr_5fr]">
+            <NavBar/>
 
-          <main>
-            {children}
+            <main>
+              {children}
+            </main>
+
           </main>
         </ThemeProvider>
       </body>
