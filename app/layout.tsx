@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { NavBar } from "@/components/navBar/navBar";
 import { ThemeProvider } from "next-themes";
+import { SessionProvider } from "next-auth/react";
+import { LoginProvider } from "@/components/providers/loginProvider/loginProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,14 +19,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class">
-          <main className="grid grid-cols-[1fr_4fr_1fr] grid-rows-[1fr_5fr]">
-            <NavBar/>
+          <SessionProvider>
+            <LoginProvider>
+              <main className="grid grid-cols-[1fr_4fr_1fr] grid-rows-[1fr_5fr]">
+                <NavBar />
 
-            <main>
-              {children}
+              <main>
+                {children}
+              </main>
+
             </main>
-
-          </main>
+          </LoginProvider>
+        </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

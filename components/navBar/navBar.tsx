@@ -2,32 +2,17 @@
 
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-type Navegation = {
-    label: string,
-    src: string,
-    href: string
-}
-
+import { SideBar } from "../sideBar/sideBar";
+import { useSession } from "next-auth/react";
 
 export function NavBar(){
     const {theme, setTheme} = useTheme();
-    const pathname = usePathname();
 
     const [mounted, setMounted] = useState<boolean>(false);
     const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
 
-    const navegation: Navegation[] = [
-        {label: "Home", src: `/icons/${theme === "dark" ? "dark" : "light"}/house.svg`, href: "/"},
-        {label: "Community", src: `/icons/${theme === "dark" ? "dark" : "light"}/star.svg`, href: "/community"},
-        {label: "Collections", src: `/icons/${theme === "dark" ? "dark" : "light"}/house.svg`, href: "/collections"},
-        {label: "Tags", src: `/icons/${theme === "dark" ? "dark" : "light"}/tag.svg`, href: "/tags"},
-        {label: "Profile", src: `/icons/${theme === "dark" ? "dark" : "light"}/profile.svg`, href: "/profile"},
-        {label: "Ask a question", src: `/icons/${theme === "dark" ? "dark" : "light"}/ask.svg`, href: "/ask_questions"},
-    ];
+    const { data: session, status } = useSession()
 
     useEffect(()=> setMounted(true),[]);
     if(!mounted) return null;
@@ -70,7 +55,8 @@ export function NavBar(){
                             loading="eager" />
                     </button>
 
-                    {/*<div className="w-7 h-7 bg-[#ff5e00] rounded-full cursor-pointer" /> */}
+                    { session && session?.user && 
+                        <Image src={`${session.user.image!}`} alt="user icon" width={35} height={35} className="rounded-sm" /> }
                     
                     <button onClick={()=> setSidebarOpened(prev => !prev)} className="z-11">
                         <Image 
@@ -84,34 +70,7 @@ export function NavBar(){
             </div>
 
             {/* SIDEBAR */}
-
-            <aside className={`absolute md:relative md:top-0 md:left-0 md:h-auto top-3 ${sidebarOpened ? "left-2 " : "left-[-90%]"}
-            col-span-1 row-span-1 flex flex-col items-center justify-between p-4 duration-1000 h-[80%] z-10`}>
-                <nav className=" w-full flex flex-col items-center gap-7">
-                    {
-                        navegation.map((e: Navegation, index:number) => (
-                                <Link key={index} href={e.href} className={`cursor-pointer w-45 h-12 flex items-center justify-start
-                                px-5 gap-3 border border-transparent hover:border-amber-600 rounded-sm ${(pathname == e.href) && 
-                                "text-white bg-linear-to-r from-(--primary-color-button) to-(--secondary-color-button) "}
-                                `}>
-
-                                    <Image 
-                                        src={e.src} 
-                                        alt="Sidebar Icon" 
-                                        width={18} 
-                                        height={18} />
-
-                                    <p className={`text-[13px] ${pathname !== e.href && "text-(--sidebar-text-color)"}`}>{e.label}</p>
-                                </Link>
-                        ))
-                    }
-                </nav>
-                
-                <button className="bg-(--secondary-button) w-45 h-10 text-[13px] rounded-sm cursor-pointer
-                hover:bg-(--secondary-button-hover)">
-                    Log in
-                </button>
-            </aside>
+            <SideBar sidebarOpened={sidebarOpened} theme={theme ?? "dark"} logged={session}  />
         </>
     )
 }

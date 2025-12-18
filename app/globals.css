@@ -33,6 +33,9 @@ html{
   --secondary-button-hover: rgb(31, 36, 44);
   
   --sidebar-text-color: rgb(164, 164, 164);
+
+  --login-modal: rgb(20, 23, 28);
+  --login-modal-border: transparent;
 }
 
 /* --------------------------------------- LIGHT THEME --------------------------------------- */
@@ -45,5 +48,8 @@ html{
   --secondary-button-hover: rgb(201, 201, 201);
 
   --sidebar-text-color: rgb(114, 114, 114);
+  
+  --login-modal: rgb(255, 255, 255);
+  --login-modal-border: black;
 
 }
