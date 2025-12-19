@@ -12,7 +12,7 @@ export function NavBar(){
     const [mounted, setMounted] = useState<boolean>(false);
     const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
 
-    const { data: session, status } = useSession()
+    const { data: session, status } = useSession();
 
     useEffect(()=> setMounted(true),[]);
     if(!mounted) return null;
@@ -58,7 +58,7 @@ export function NavBar(){
                     { session && session?.user && 
                         <Image src={`${session.user.image!}`} alt="user icon" width={35} height={35} className="rounded-sm" /> }
                     
-                    <button onClick={()=> setSidebarOpened(prev => !prev)} className="z-11">
+                    <button onClick={()=> setSidebarOpened(prev => !prev)} className="z-11" aria-label="dark mode bars">
                         <Image 
                             src={`/icons/${(theme === "dark") ? "dark" : "light"}/bars.svg`} 
                             alt="Dark mode bars" 

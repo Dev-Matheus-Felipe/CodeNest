@@ -14,7 +14,7 @@ type Navegation = {
 type Logged = {
   expires: string
   user?: {
-    id?: string | null 
+    id?: string | null
     name?: string | null  
     email?: string | null  
     image?: string | null 
@@ -35,7 +35,7 @@ export function SideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean
         {label: "Community", src: `/icons/${theme === "dark" ? "dark" : "light"}/people.svg`, href: "/community"},
         {label: "Collections", src: `/icons/${theme === "dark" ? "dark" : "light"}/star.svg`, href: "/collections"},
         {label: "Tags", src: `/icons/${theme === "dark" ? "dark" : "light"}/tag.svg`, href: "/tags"},
-        {label: "Profile", src: `/icons/${theme === "dark" ? "dark" : "light"}/profile.svg`, href: "/profile"},
+        {label: "Profile", src: `/icons/${theme === "dark" ? "dark" : "light"}/profile.svg`, href: `/profile`},
         {label: "Ask a question", src: `/icons/${theme === "dark" ? "dark" : "light"}/ask.svg`, href: "/ask_questions"},
     ];
 
