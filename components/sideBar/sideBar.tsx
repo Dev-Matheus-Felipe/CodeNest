@@ -35,10 +35,10 @@ export function SideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean
 
     return (
         <aside className={`absolute md:relative md:top-0 md:left-0 md:h-auto  top-3 ${sidebarOpened ? "left-0 " : "left-[-90%]"}
-        col-span-1 row-span-1 flex flex-col items-center justify-between p-4 duration-1000 h-[90%] 
+        col-span-1 row-span-1 flex flex-col items-start justify-between p-4 duration-1000 h-[90%] 
         z-10 bg-(--secondary-button) rounded-sm md:bg-transparent`}>
             
-            <nav className=" w-full flex flex-col items-center gap-7">
+            <nav className=" w-full flex flex-col items-start gap-7">
                 {
                     navegation.map((n: Navegation, index:number) => (
                         <Link key={index} href={n.href}  className={`

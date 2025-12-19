@@ -36,6 +36,9 @@ html{
 
   --login-modal: rgb(20, 23, 28);
   --login-modal-border: transparent;
+
+  --username-color: rgb(147, 197, 253);
+  --profile-hover: rgb(31, 36, 44);;
 }
 
 /* --------------------------------------- LIGHT THEME --------------------------------------- */
@@ -52,4 +55,22 @@ html{
   --login-modal: rgb(255, 255, 255);
   --login-modal-border: black;
 
+  --username-color: #ff5e00;
+  --profile-hover: #adadad4d;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;          /* largura da barra */
+  height: 8px;         /* altura da barra horizontal */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;  /* track transparente */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4b5563; /* cor do dedinho */
+  border-radius: 9999px;     /* deixar arredondado */
+  border: 2px solid transparent; /* margem interna opcional */
 }
