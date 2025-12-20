@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { SideBar } from "../sideBar/sideBar";
+import { LeftSideBar } from "../leftSideBar/leftSideBar";
 import { useSession } from "next-auth/react";
 
 export function NavBar(){
@@ -70,7 +70,7 @@ export function NavBar(){
             </div>
 
             {/* SIDEBAR */}
-            <SideBar sidebarOpened={sidebarOpened} theme={theme ?? "dark"} logged={session}  />
+            <LeftSideBar sidebarOpened={sidebarOpened} theme={theme ?? "dark"} logged={session}  />
         </>
     )
 }

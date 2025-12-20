@@ -1,8 +1,6 @@
-import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext } from "react";
 
 type Navegation = {
     label: string,
@@ -20,7 +18,7 @@ type Logged = {
   }
 }
 
-export function SideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean, theme: string, logged: Logged | null}){
+export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean, theme: string, logged: Logged | null}){
 
     const pathname = usePathname();
 
@@ -34,7 +32,7 @@ export function SideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean
     ];
 
     return (
-        <aside className={`absolute md:relative md:top-0 md:left-0 md:h-auto  top-3 ${sidebarOpened ? "left-0 " : "left-[-90%]"}
+        <aside className={`absolute md:relative md:left-0 md:h-full top-0 ${sidebarOpened ? "left-0 " : "left-[-90%]"}
         col-span-1 row-span-1 flex flex-col items-start justify-between p-4 duration-1000 h-[90%] 
         z-10 bg-(--secondary-button) rounded-sm md:bg-transparent`}>
             
@@ -54,7 +52,7 @@ export function SideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean
                 }
             </nav>
             
-            <button className="md:bg-(--secondary-button) bg-(--secondary-button-hover) w-45 h-10 text-[13px] rounded-sm cursor-pointer
+            <button className="md:bg-(--secondary-button) bg-(--secondary-button-hover) w-43 h-10 text-[13px] rounded-sm cursor-pointer
             hover:bg-(--secondary-button-hover)" onClick={() =>{}}>
                 {logged ? "Log out" : "Log in"} 
             </button>
