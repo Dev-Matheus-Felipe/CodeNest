@@ -20,7 +20,7 @@ export function NavBar(){
     return (
         <>
             {/* NAVBAR */}
-            <div className="col-span-full row-span-1 flex items-center justify-between px-10">
+            <div className="col-span-full row-span-1 flex items-center justify-between profile:px-10 px-4">
             
                 {/* LOGO */}
                 <div className="text-xl">Code<span className="text-[#ff5e00] font-bold">Nest</span></div>

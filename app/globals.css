@@ -3,6 +3,7 @@
 
 @theme{
   --breakpoint-sidebar: 1030px;
+  --breakpoint-profile: 469px;
 }
 
 *{ box-sizing: border-box; }
@@ -43,6 +44,8 @@ html{
 
   --username-color: rgb(147, 197, 253);
   --profile-hover: rgb(20, 23, 28);
+
+  --myprofile-container: #252525;
 }
 
 /* --------------------------------------- LIGHT THEME --------------------------------------- */
@@ -61,6 +64,8 @@ html{
 
   --username-color: #ff5e00;
   --profile-hover: #bebebe4d;
+
+  --myprofile-container: rgb(231, 231, 231);
 }
 
 
