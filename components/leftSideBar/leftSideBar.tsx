@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -54,7 +55,7 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
                 </nav>
                 
                 <button className="md:bg-(--secondary-button) bg-(--secondary-button-hover) w-43 h-10 text-[13px] rounded-sm cursor-pointer
-                hover:bg-(--secondary-button-hover)" onClick={() =>{}}>
+                hover:bg-(--secondary-button-hover)" onClick={() =>{ signIn("github")}}>
                     {logged ? "Log out" : "Log in"} 
                 </button>
             </aside>

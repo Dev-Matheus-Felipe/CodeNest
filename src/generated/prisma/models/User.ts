@@ -31,8 +31,11 @@ export type UserMinAggregateOutputType = {
   image: string | null
   username: string | null
   description: string | null
-  createdAt: Date | null
   emailVerified: Date | null
+  createdAt: Date | null
+  createdResume: string | null
+  portfolio: string | null
+  bannedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -42,8 +45,11 @@ export type UserMaxAggregateOutputType = {
   image: string | null
   username: string | null
   description: string | null
-  createdAt: Date | null
   emailVerified: Date | null
+  createdAt: Date | null
+  createdResume: string | null
+  portfolio: string | null
+  bannedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -53,8 +59,11 @@ export type UserCountAggregateOutputType = {
   image: number
   username: number
   description: number
-  createdAt: number
   emailVerified: number
+  createdAt: number
+  createdResume: number
+  portfolio: number
+  bannedAt: number
   _all: number
 }
 
@@ -66,8 +75,11 @@ export type UserMinAggregateInputType = {
   image?: true
   username?: true
   description?: true
-  createdAt?: true
   emailVerified?: true
+  createdAt?: true
+  createdResume?: true
+  portfolio?: true
+  bannedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -77,8 +89,11 @@ export type UserMaxAggregateInputType = {
   image?: true
   username?: true
   description?: true
-  createdAt?: true
   emailVerified?: true
+  createdAt?: true
+  createdResume?: true
+  portfolio?: true
+  bannedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -88,8 +103,11 @@ export type UserCountAggregateInputType = {
   image?: true
   username?: true
   description?: true
-  createdAt?: true
   emailVerified?: true
+  createdAt?: true
+  createdResume?: true
+  portfolio?: true
+  bannedAt?: true
   _all?: true
 }
 
@@ -172,8 +190,11 @@ export type UserGroupByOutputType = {
   image: string | null
   username: string | null
   description: string | null
-  createdAt: Date
   emailVerified: Date | null
+  createdAt: Date
+  createdResume: string | null
+  portfolio: string | null
+  bannedAt: Date | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -204,8 +225,11 @@ export type UserWhereInput = {
   image?: Prisma.StringNullableFilter<"User"> | string | null
   username?: Prisma.StringNullableFilter<"User"> | string | null
   description?: Prisma.StringNullableFilter<"User"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  createdResume?: Prisma.StringNullableFilter<"User"> | string | null
+  portfolio?: Prisma.StringNullableFilter<"User"> | string | null
+  bannedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
 }
@@ -217,8 +241,11 @@ export type UserOrderByWithRelationInput = {
   image?: Prisma.SortOrder
   username?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdResume?: Prisma.SortOrder
+  portfolio?: Prisma.SortOrder
+  bannedAt?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
 }
@@ -233,8 +260,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringNullableFilter<"User"> | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
   description?: Prisma.StringNullableFilter<"User"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  createdResume?: Prisma.StringNullableFilter<"User"> | string | null
+  portfolio?: Prisma.StringNullableFilter<"User"> | string | null
+  bannedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
 }, "id" | "email" | "username">
@@ -246,8 +276,11 @@ export type UserOrderByWithAggregationInput = {
   image?: Prisma.SortOrder
   username?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdResume?: Prisma.SortOrder
+  portfolio?: Prisma.SortOrder
+  bannedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -263,8 +296,11 @@ export type UserScalarWhereWithAggregatesInput = {
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   username?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   emailVerified?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  createdResume?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  portfolio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  bannedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -274,8 +310,11 @@ export type UserCreateInput = {
   image?: string | null
   username?: string | null
   description?: string | null
-  createdAt?: Date | string
   emailVerified?: Date | string | null
+  createdAt?: Date | string
+  createdResume?: string | null
+  portfolio?: string | null
+  bannedAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
@@ -287,8 +326,11 @@ export type UserUncheckedCreateInput = {
   image?: string | null
   username?: string | null
   description?: string | null
-  createdAt?: Date | string
   emailVerified?: Date | string | null
+  createdAt?: Date | string
+  createdResume?: string | null
+  portfolio?: string | null
+  bannedAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -299,8 +341,11 @@ export type UserUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
@@ -311,8 +356,11 @@ export type UserUncheckedUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -324,8 +372,11 @@ export type UserCreateManyInput = {
   image?: string | null
   username?: string | null
   description?: string | null
-  createdAt?: Date | string
   emailVerified?: Date | string | null
+  createdAt?: Date | string
+  createdResume?: string | null
+  portfolio?: string | null
+  bannedAt?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -334,8 +385,11 @@ export type UserUpdateManyMutationInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -344,8 +398,11 @@ export type UserUncheckedUpdateManyInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -355,8 +412,11 @@ export type UserCountOrderByAggregateInput = {
   image?: Prisma.SortOrder
   username?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdResume?: Prisma.SortOrder
+  portfolio?: Prisma.SortOrder
+  bannedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -366,8 +426,11 @@ export type UserMaxOrderByAggregateInput = {
   image?: Prisma.SortOrder
   username?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdResume?: Prisma.SortOrder
+  portfolio?: Prisma.SortOrder
+  bannedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -377,8 +440,11 @@ export type UserMinOrderByAggregateInput = {
   image?: Prisma.SortOrder
   username?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdResume?: Prisma.SortOrder
+  portfolio?: Prisma.SortOrder
+  bannedAt?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -391,13 +457,13 @@ export type NullableStringFieldUpdateOperationsInput = {
   unset?: boolean
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
   unset?: boolean
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type UserCreateNestedOneWithoutAccountsInput = {
@@ -435,8 +501,11 @@ export type UserCreateWithoutAccountsInput = {
   image?: string | null
   username?: string | null
   description?: string | null
-  createdAt?: Date | string
   emailVerified?: Date | string | null
+  createdAt?: Date | string
+  createdResume?: string | null
+  portfolio?: string | null
+  bannedAt?: Date | string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
@@ -447,8 +516,11 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   image?: string | null
   username?: string | null
   description?: string | null
-  createdAt?: Date | string
   emailVerified?: Date | string | null
+  createdAt?: Date | string
+  createdResume?: string | null
+  portfolio?: string | null
+  bannedAt?: Date | string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -474,8 +546,11 @@ export type UserUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
@@ -485,8 +560,11 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -497,8 +575,11 @@ export type UserCreateWithoutSessionsInput = {
   image?: string | null
   username?: string | null
   description?: string | null
-  createdAt?: Date | string
   emailVerified?: Date | string | null
+  createdAt?: Date | string
+  createdResume?: string | null
+  portfolio?: string | null
+  bannedAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
 }
 
@@ -509,8 +590,11 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   image?: string | null
   username?: string | null
   description?: string | null
-  createdAt?: Date | string
   emailVerified?: Date | string | null
+  createdAt?: Date | string
+  createdResume?: string | null
+  portfolio?: string | null
+  bannedAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -536,8 +620,11 @@ export type UserUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
 }
 
@@ -547,8 +634,11 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdResume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bannedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -599,8 +689,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   image?: boolean
   username?: boolean
   description?: boolean
-  createdAt?: boolean
   emailVerified?: boolean
+  createdAt?: boolean
+  createdResume?: boolean
+  portfolio?: boolean
+  bannedAt?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -615,11 +708,14 @@ export type UserSelectScalar = {
   image?: boolean
   username?: boolean
   description?: boolean
-  createdAt?: boolean
   emailVerified?: boolean
+  createdAt?: boolean
+  createdResume?: boolean
+  portfolio?: boolean
+  bannedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "image" | "username" | "description" | "createdAt" | "emailVerified", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "image" | "username" | "description" | "emailVerified" | "createdAt" | "createdResume" | "portfolio" | "bannedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -639,8 +735,11 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     image: string | null
     username: string | null
     description: string | null
-    createdAt: Date
     emailVerified: Date | null
+    createdAt: Date
+    createdResume: string | null
+    portfolio: string | null
+    bannedAt: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1041,8 +1140,11 @@ export interface UserFieldRefs {
   readonly image: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly description: Prisma.FieldRef<"User", 'String'>
-  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly emailVerified: Prisma.FieldRef<"User", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly createdResume: Prisma.FieldRef<"User", 'String'>
+  readonly portfolio: Prisma.FieldRef<"User", 'String'>
+  readonly bannedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

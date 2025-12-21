@@ -15,11 +15,69 @@ model User {
   image     String?
   username  String? @unique
   description String?
+  emailVerified DateTime?
+
   accounts  Account[]
   sessions  Session[]
+
   createdAt DateTime  @default(now())
-  emailVerified DateTime?
+  createdResume String?
+
+  portfolio String?
+  bannedAt DateTime?
+
+  responses Response[]
+
+  posts Post[]
+
+  savedPosts SavedPost[]
 }
+
+model Post {
+  id          String   @id @default(cuid()) @map("_id")
+  title       String
+  content     String?   
+  description String?     
+  code        String?    
+  createdAt   DateTime @default(now())
+  
+  authorId    String
+  author      User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  likes       Int @default(0)         
+  responses   Response[]          
+  savedBy     SavedPost[]             
+}
+
+
+model Response {
+  id        String   @id @default(cuid()) @map("_id")
+  content   String
+  createdAt DateTime @default(now())
+
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+
+
+model SavedPost {
+  id      String   @id @default(cuid()) @map("_id")
+  userId  String
+  postId  String
+
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId]) 
+}
+
+
 
 model Account {
   id                 String  @id @default(cuid()) @map("_id")

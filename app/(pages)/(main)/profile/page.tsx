@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default async function MyProfile(){
     const user = await auth();
-
+    
     return (
         <div className="flex flex-col h-full w-full p-[2%] pt-5 gap-5 profile:max-h-[calc(100vh-100px)]">
             <div className="flex w-full h-auto flex-col items-center profile:flex-row profile:gap-0 gap-5 ">
@@ -36,15 +36,15 @@ export default async function MyProfile(){
                             <Image src="/icons/general/link.svg" alt="Link icon" width={18} height={18}/> 
                             Portfolio
                         </a>
-                        <p className="flex gap-2 cursor-pointer items-center text-xs">
+                        <p className="flex gap-2 items-center text-xs">
                             <Image src="/icons/general/schedule.svg" alt="Schedule icon" width={18} height={18}/> 
-                            joined September 2025
+                            {user?.user.createdResume}
                         </p>
 
                          
                         <p className="text-[12px] flex gap-2  items-center">
                             <Image src="/icons/general/like.svg" alt="Link icon" width={18} height={18}/> 
-                            1
+                            0
                         </p>
                     </div>      
 

@@ -20,19 +20,46 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
   callbacks: {
     async signIn({user}){
+      if(!user.email) return false;
+      
+      const userFound = await prisma.user.findUnique({
+        where: {id: user.id},
+        select: {bannedAt: true}
+      })
+
+      if(userFound) return false;
+
+      return true
+    } 
+  },
+
+  events: {
+    async createUser({user}){
       if(!user.username){
         const FirstName = (user.name) ? user.name.split(" ")[0].toLocaleLowerCase() : "user";
         const SlicedId = (user.id) ? user.id.slice(0,6) : Math.floor(Math.random() * 500);
 
         const username = `${FirstName}-${SlicedId}`;
 
+        const userFound = await prisma.user.findUnique({
+          where: {id: user.id},
+          select: {createdAt: true}
+        })
+
+        if(!userFound) return;
+
+        const data = new Date(userFound?.createdAt);
+
+        const createdResume = data.toLocaleDateString("en-US",{
+          month: "long",
+          year: "numeric"
+        })
+
         await prisma.user.update({
           where: {id: user.id},
-          data: {username},
+          data: {username,createdResume},
         });
       }
-
-      return true;
     }
   },
 
