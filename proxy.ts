@@ -3,13 +3,22 @@ import type { NextRequest } from 'next/server';
 import { prisma } from './lib/prisma';
 import { auth } from './lib/auth';
 
+const protectedPaths = ["/profile","profile/edit","/collections"];
+
+const verifyPath = (pathname : string) => {
+    return (protectedPaths.some(e => e === pathname) ) ? true : false;
+}
+
 export async function proxy(request: NextRequest) {
     const session = await auth();
 
-    if (!session?.user?.id) {
-        return NextResponse.next();
-    }
+    const isProtected = verifyPath(request.nextUrl.pathname);
 
+    if(!session) return (isProtected) 
+        ? NextResponse.redirect(new URL("/",request.url )) 
+        : NextResponse.next();
+    
+    
     const userFound = await prisma.user.findUnique({
         where: { id: session.user.id },
         select: { bannedAt: true }
@@ -17,7 +26,7 @@ export async function proxy(request: NextRequest) {
 
     if (userFound?.bannedAt) {
         return NextResponse.json(
-            { message: 'You have banned!' },
+            { message: 'You have been banned!' },
             { status: 403 }
         );
     }

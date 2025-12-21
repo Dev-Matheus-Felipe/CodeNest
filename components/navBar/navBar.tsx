@@ -12,7 +12,7 @@ export function NavBar(){
     const [mounted, setMounted] = useState<boolean>(false);
     const [sidebarOpened, setSidebarOpened] = useState<boolean>(false);
 
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
 
     useEffect(()=> setMounted(true),[]);
     if(!mounted) return null;

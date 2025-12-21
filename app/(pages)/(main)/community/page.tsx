@@ -20,7 +20,7 @@ export default async function Community(){
                     <input 
                         type="text" 
                         placeholder="Search for users here..." 
-                        className="w-full h-full border border-gray outline-0  border-(--secondary-button) 
+                        className="w-full h-full border border-gray outline-0 border-(--secondary-button) 
                         text-sm pl-11 pr-5 rounded-md" />
                 </form>
 

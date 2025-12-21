@@ -6,17 +6,7 @@ import Google from "next-auth/providers/google"
  
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  providers: [
-    GitHub({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
-    }),
-
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-    })
-  ],
+  providers: [ GitHub, Google ],
 
   callbacks: {
     async signIn({user}){
@@ -27,7 +17,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         select: {bannedAt: true}
       })
 
-      if(userFound) return false;
+      if(userFound?.bannedAt) return false;
 
       return true
     } 

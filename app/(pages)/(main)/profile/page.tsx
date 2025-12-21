@@ -1,14 +1,19 @@
 import { auth } from "@/lib/auth"
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default async function MyProfile(){
-    const user = await auth();
+    const session = await auth();
+
+    if(!session){
+        redirect("/");
+    }
     
     return (
         <div className="flex flex-col h-full w-full p-[2%] pt-5 gap-5 profile:max-h-[calc(100vh-100px)]">
             <div className="flex w-full h-auto flex-col items-center profile:flex-row profile:gap-0 gap-5 ">
                 <Image 
-                    src={user?.user.image ?? ""} 
+                    src={session.user.image ?? ""} 
                     alt="Profile Picture" 
                     width={130} 
                     height={130} 
@@ -18,8 +23,8 @@ export default async function MyProfile(){
                 <div className="flex flex-col  w-full h-auto md:p-3 md:pl-10 pl-2 gap-2">
                     <div className="flex justify-between w-full">
                         <div className=" flex flex-col gap-1">
-                            <h1 className="text-2xl">{user?.user.name ?? "User"}</h1>
-                            <p className="text-sm">@{user?.user.username}</p>
+                            <h1 className="text-2xl">{session.user.name ?? "User"}</h1>
+                            <p className="text-sm">@{session.user.username}</p>
                         </div>
 
                         <button className="bg-(--secondary-button) w-30 h-10 rounded-md text-xs cursor-pointer 
@@ -38,7 +43,7 @@ export default async function MyProfile(){
                         </a>
                         <p className="flex gap-2 items-center text-xs">
                             <Image src="/icons/general/schedule.svg" alt="Schedule icon" width={18} height={18}/> 
-                            {user?.user.createdResume}
+                            {session.user.createdResume}
                         </p>
 
                          
