@@ -4,7 +4,8 @@ declare module "next-auth" {
   interface User extends DefaultUser {
     username?: string | null;
     description?: string | null;
-    createdResume?: string;
+    createdResume?: string | null;
+    portfolio?: string | null;
   }
 
   interface Session {

@@ -1,20 +1,12 @@
+import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
-type Logged = {
-  expires: string
-  user?: {
-    id?: string | null
-    name?: string | null  
-    email?: string | null  
-    image?: string | null 
-  }
-}
 
-export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean, theme: string, logged: Logged | null}){
+export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean, theme: string, logged: Session | null}){
 
     const pathname = usePathname();
 
@@ -43,8 +35,8 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
 
     return (
         <>
-            <div className={`w-45 h-17 bg-(--primary-color-button) text-white absolute z-999 left-1/2 -translate-x-1/2 rounded-md 
-            ${buttonHandler ? "-top-2" : "-top-40"} flex items-center justify-center gap-5 duration-500`}>
+            <div className={`w-45 h-16 bg-(--primary-color-button) text-white absolute z-999 left-1/2 -translate-x-1/2 rounded-md 
+            ${buttonHandler ? "-top-1" : "-top-40"} flex items-center justify-center gap-2 duration-500`}>
                 <Image src={`/icons/general/login.svg`} alt="Home Icon"  width={15} height={15} />
                 <h1 className="text-sm">Please Log in first</h1>
             </div>

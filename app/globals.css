@@ -28,6 +28,7 @@ html{
 }
 
 
+
 /* --------------------------------------- DARK THEME --------------------------------------- */
 
 .dark{
@@ -45,7 +46,8 @@ html{
   --username-color: rgb(147, 197, 253);
   --profile-hover: rgb(20, 23, 28);
 
-  --myprofile-container: #252525;
+  --myprofile-container: rgb(107, 114, 128);
+
 }
 
 /* --------------------------------------- LIGHT THEME --------------------------------------- */
@@ -65,7 +67,8 @@ html{
   --username-color: #ff5e00;
   --profile-hover: #bebebe4d;
 
-  --myprofile-container: rgb(231, 231, 231);
+  --myprofile-container: rgb(222, 222, 222);
+
 }
 
 
