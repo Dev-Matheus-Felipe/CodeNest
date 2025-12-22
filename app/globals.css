@@ -47,6 +47,7 @@ html{
   --profile-hover: rgb(20, 23, 28);
 
   --myprofile-container: rgb(107, 114, 128);
+  --confirm-button: rgb(20, 23, 28);
 
 }
 
@@ -68,7 +69,7 @@ html{
   --profile-hover: #bebebe4d;
 
   --myprofile-container: rgb(222, 222, 222);
-
+  --confirm-button: rgb(0, 0, 0);
 }
 
 

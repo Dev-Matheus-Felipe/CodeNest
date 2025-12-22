@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Session, User } from "next-auth";
-import { EditProfileButton } from "../editProfileButton/editProfileButton";
+import { User } from "next-auth";
+import { EditProfileButton } from "./buttons/editProfile/editProfile";
 
 export function ProfileComponent({user, myProfile} : {user: User, myProfile: boolean}){
 
@@ -14,6 +14,7 @@ export function ProfileComponent({user, myProfile} : {user: User, myProfile: boo
                     alt="Profile Picture" 
                     width={130} 
                     height={130} 
+                    loading="eager"
                     className="rounded-full max-w-32.5 max-h-32.5 border-3" />
 
                 {/* MAIN INFOS */}

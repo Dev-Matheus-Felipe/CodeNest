@@ -11,7 +11,7 @@ export default function MainLayout({children} : {children: React.ReactNode}){
                 <NavBar />
 
                     <main className="col-span-1 row-span-1 ">
-                        <Suspense fallback={<p>Loading...</p>}>
+                        <Suspense fallback={<p></p>}>
                             {children}
                         </Suspense>
                     </main>

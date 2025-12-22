@@ -37,7 +37,7 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
         <>
             <div className={`w-45 h-16 bg-(--primary-color-button) text-white absolute z-999 left-1/2 -translate-x-1/2 rounded-md 
             ${buttonHandler ? "-top-1" : "-top-40"} flex items-center justify-center gap-2 duration-500`}>
-                <Image src={`/icons/general/login.svg`} alt="Home Icon"  width={15} height={15} />
+                <Image src="/icons/general/login.svg" alt="login Icon" width={15} height={15} />
                 <h1 className="text-sm">Please Log in first</h1>
             </div>
 
