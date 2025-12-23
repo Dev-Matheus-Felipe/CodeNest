@@ -2,7 +2,7 @@
 
 import { EditProfileForm } from "@/lib/actions/editProfileForm";
 import { User } from "next-auth";
-import { useActionState, useEffect, useRef, useState, useTransition } from "react";
+import { useActionState, useState, useTransition } from "react";
 import { toast } from "sonner";
 
 type EditPage = {
@@ -15,6 +15,7 @@ type EditPage = {
 export function Form({user} : {user: User}){  
     "no-cache"
     const [state, action, isLoading] = useActionState(EditProfileForm, {success: false, message: {}});
+    const [message, setMessage] = useState<Record<string, string>>({});
 
 
     const inputStyle = "bg-(--secondary-button) h-11 mt-1 mb-4 w-full rounded-sm outline-0 px-3 text-xs";
@@ -33,15 +34,38 @@ export function Form({user} : {user: User}){
 
     const [isPending, startTransition] = useTransition()
 
-    const onSubmit = (formData: FormData) => {
+
+    const onSubmit = (formdata: FormData) => {
+        const data = {
+            name: formdata.get("name") as string,
+            username: formdata.get("username") as string,
+            bio: formdata.get("bio") as string,
+            portfolio: formdata.get("portfolio") as string
+        }
+
+        const notHaveChanges =
+            data.name == user.name &&
+            data.username == user.username &&
+            data.bio == (user.bio ?? "") &&
+            data.portfolio === (user.portfolio ?? "")
+
+        if(notHaveChanges){
+            toast.warning("nothing to update");
+            return;
+        }
+
         startTransition(async () => {
-            const result = await EditProfileForm(null, formData)
+            const result = await EditProfileForm(null, formdata)
+            const loadingID  = toast.loading("Saving...");
 
             if (result.success) 
-                toast.success("Profile updated successfully");
+                toast.success("Profile updated successfully",{id: loadingID});
+
+            else
+                toast.error("Error updating user",{id: loadingID});
+
+            setMessage(result.message);
             
-            else 
-                toast.error("Error updating profile");
         })
     }
 
@@ -70,8 +94,8 @@ export function Form({user} : {user: User}){
                             autoComplete="off" />
 
                             {
-                                (!state.success && state.message[input]) &&
-                                    <p className="text-red-600 text-xs pb-3">{state.message[input]}</p>
+                                (!state.success && message[input]) &&
+                                    <p className="text-red-600 text-xs pb-3">{message[input]}</p>
                             }
                     </div>
                 ))

@@ -27,7 +27,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
       classNames: {
         toast: "!w-auto",
         success: "!bg-green-600",
-        error: "!bg-red-500"
+        error: "!bg-red-500",
+        warning: "!bg-[#ff5e00]"
       },
     }}
       style={
