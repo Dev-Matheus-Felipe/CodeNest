@@ -2,7 +2,7 @@
 
 import { EditProfileForm } from "@/lib/actions/editProfileForm";
 import { User } from "next-auth";
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useState } from "react";
 import { toast } from "sonner";
 
 type EditPage = {
@@ -13,7 +13,6 @@ type EditPage = {
 }
 
 export function Form({user} : {user: User}){  
-    "no-cache"
     const [state, action, isLoading] = useActionState(EditProfileForm, {success: false, message: {}});
     const [message, setMessage] = useState<Record<string, string>>({});
 
@@ -32,10 +31,9 @@ export function Form({user} : {user: User}){
         return `${word[0].toUpperCase()}${word.slice(1)}`
     }
 
-    const [isPending, startTransition] = useTransition()
 
 
-    const onSubmit = (formdata: FormData) => {
+    const onSubmit = async(formdata: FormData) => {
         const data = {
             name: formdata.get("name") as string,
             username: formdata.get("username") as string,
@@ -54,19 +52,16 @@ export function Form({user} : {user: User}){
             return;
         }
 
-        startTransition(async () => {
-            const result = await EditProfileForm(null, formdata)
-            const loadingID  = toast.loading("Saving...");
+        const result = await EditProfileForm(null, formdata);
+        const loadingID  = toast.loading("Saving...");
 
-            if (result.success) 
-                toast.success("Profile updated successfully",{id: loadingID});
+        if (result.success) 
+            toast.success("Profile updated successfully",{id: loadingID});
 
-            else
-                toast.error("Error updating user",{id: loadingID});
+        else
+            toast.error("Error updating user",{id: loadingID});
 
-            setMessage(result.message);
-            
-        })
+        setMessage(result.message);
     }
 
     return( 
@@ -74,7 +69,7 @@ export function Form({user} : {user: User}){
             {
                 inputsData.map((input, index: number) => (
                     <div key={index}>
-                        <label>
+                        <label htmlFor={input}>
                             {nameToLabel(input)}
 
                             {(input === "name" || input === "username" ) && 
@@ -84,6 +79,7 @@ export function Form({user} : {user: User}){
                         <input 
                             className={inputStyle} 
                             type="text" 
+                            id={input}
                             name={input} 
                             value={data[input as keyof EditPage]}
 

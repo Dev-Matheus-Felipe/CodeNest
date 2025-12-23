@@ -1,16 +1,14 @@
 import { Session } from "next-auth";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import { toast } from "sonner";
 
 
 export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean, theme: string, logged: Session | null}){
 
     const pathname = usePathname();
-
-    const [buttonHandler, setButtonHandler] = useState(false);
 
     const linkStyles = `cursor-pointer w-45 h-12 flex items-center justify-start px-5 gap-3 border border-transparent
     hover:border-amber-600 rounded-sm } `;
@@ -23,24 +21,28 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
     const profileHandler = (e : React.MouseEvent) => {
         if(!logged){
             e.preventDefault();
-            if(buttonHandler) return;
-
-            setButtonHandler(true);
-
-            setTimeout(()=>{
-                setButtonHandler(false);
-            },2000)
+            toast.warning("Must be logged!");
         }
+    }
+
+    const loginHandler = async() => {
+        const loading = toast.loading("Loading...");
+
+        if(logged){
+            await signOut();
+            toast.success("Logged out successfully.", {id: loading});
+        }
+
+        else{
+            await signIn("github");
+            toast.success("Logged in successfully.", {id: loading});
+        }
+        
+        
     }
 
     return (
         <>
-            <div className={`w-45 h-16 bg-(--primary-color-button) text-white absolute z-999 left-1/2 -translate-x-1/2 rounded-md 
-            ${buttonHandler ? "-top-1" : "-top-40"} flex items-center justify-center gap-2 duration-500`}>
-                <Image src="/icons/general/login.svg" alt="login Icon" width={15} height={15} />
-                <h1 className="text-sm">Please Log in first</h1>
-            </div>
-
             <aside className={`absolute md:relative md:left-0 md:h-full top-0 ${sidebarOpened ? "left-0 " : "left-[-90%]"}
                 col-span-1 row-span-1 flex flex-col items-start justify-between p-4 duration-1000 md:gap-0 gap-10
                 z-10 bg-(--secondary-button) rounded-sm md:bg-transparent`}>
@@ -57,7 +59,8 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
                         <p className={`text-[13px] ${pathname !== "/community" && "text-(--sidebar-text-color)"}`}>Community</p>
                     </Link>
 
-                    <Link href="/collections" className={`${linkStyles} ${linkSelected("/collections")}`}>
+                    <Link href="/collections" className={`${linkStyles} ${linkSelected("/collections")}`} 
+                    onClick={(e)=> profileHandler(e)}>
                         <Image src={`/icons/${theme}/star.svg`} alt="Star Icon"  width={18} height={18} />
                         <p className={`text-[13px] ${pathname !== "/collections" && "text-(--sidebar-text-color)"}`}>Collections</p>
                     </Link>
@@ -72,7 +75,7 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
                         <p className={`text-[13px] ${pathname !== "/profile" && "text-(--sidebar-text-color)"}`}>Profile</p>
                     </Link>
 
-                    <Link href="/question" className={`${linkStyles} ${linkSelected("/tags")}`}>
+                    <Link href="/question" className={`${linkStyles} ${linkSelected("/question")}`} onClick={(e)=> profileHandler(e)}>
                         <Image src={`/icons/${theme}/ask.svg`} alt="Tag Icon"  width={18} height={18} />
                         <p className={`text-[13px] ${pathname !== "/question" && "text-(--sidebar-text-color)"}`}>Ask a question</p>
                     </Link>
@@ -82,7 +85,7 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
                 
                 <button className="md:bg-(--secondary-button) bg-(--secondary-button-hover) text-[13px] rounded-sm w-43 h-10
                  cursor-pointer hover:bg-(--secondary-button-hover)" 
-                 onClick={() =>{ signIn("github")}}>
+                 onClick={() =>{loginHandler()}}>
                     {logged ? "Log out" : "Log in"} 
                 </button>
             </aside>

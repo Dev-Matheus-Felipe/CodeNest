@@ -36,9 +36,11 @@ model User {
 model Post {
   id          String   @id @default(cuid()) @map("_id")
   title       String
-  content     String?   
-  description String?     
+  description String     
   code        String?    
+  language    String
+  tags        String
+
   createdAt   DateTime @default(now())
   
   authorId    String

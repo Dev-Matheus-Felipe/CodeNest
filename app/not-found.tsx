@@ -1,3 +1,3 @@
 export default function PageNotFound(){
-    return(<p>asdadd</p>)
+    return(<p>PAGE NOT FOUND</p>)
 }

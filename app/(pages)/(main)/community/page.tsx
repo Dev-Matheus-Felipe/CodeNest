@@ -7,7 +7,7 @@ export default async function Community(){
     
     return (
         <div className="w-full h-full flex flex-col gap-7 p-[2%] items-center">
-            <h1 className="text-2xl w-full px-4 border-b border-[#565656] pb-5">All Users</h1>
+            <h1 className="text-2xl w-full px-4 border-b border-[#565656] pb-5 font-bold">All Users</h1>
             <div className="w-full flex justify-between items-center gap-2">
                 <form className=" w-[75%] h-11 relative flex items-center">
                     <Image 

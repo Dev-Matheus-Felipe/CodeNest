@@ -3,7 +3,7 @@
 import z4  from "zod/v4";
 import { prisma } from "../prisma";
 import { auth } from "../auth";
-import { refresh } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export type FormState = {
   success: boolean;
@@ -66,7 +66,7 @@ export const EditProfileForm = async (state: FormState | null, formdata: FormDat
             }
         })
 
-        refresh();
+        revalidatePath("/profile");
         return {success: true, message: {update: "User updated"}};
          
     }catch{

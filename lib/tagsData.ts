@@ -4,6 +4,7 @@ export const tags = [
   "TypeScript",
   "Python",
   "Java",
+  "C",
   "C#",
   "C++",
   "Go",
