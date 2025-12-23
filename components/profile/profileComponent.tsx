@@ -53,9 +53,9 @@ export function ProfileComponent({user, myProfile} : {user: User, myProfile: boo
                     </div>      
 
                     {
-                        user.description &&
+                        user.bio &&
                         <p className="md:text-xs text-[11px] w-ful pb-3 profile:pb-0">
-                            {user.description}
+                            {user.bio}
                         </p>    
                     }       
                 </div>

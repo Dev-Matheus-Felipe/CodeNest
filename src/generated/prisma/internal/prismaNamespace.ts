@@ -391,6 +391,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  Post: 'Post',
+  Response: 'Response',
+  SavedPost: 'SavedPost',
   Account: 'Account',
   Session: 'Session'
 } as const
@@ -408,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session"
+    modelProps: "user" | "post" | "response" | "savedPost" | "account" | "session"
     txIsolationLevel: never
   }
   model: {
@@ -483,6 +486,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    Post: {
+      payload: Prisma.$PostPayload<ExtArgs>
+      fields: Prisma.PostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        findFirst: {
+          args: Prisma.PostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        findMany: {
+          args: Prisma.PostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>[]
+        }
+        create: {
+          args: Prisma.PostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        createMany: {
+          args: Prisma.PostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        update: {
+          args: Prisma.PostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        deleteMany: {
+          args: Prisma.PostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostPayload>
+        }
+        aggregate: {
+          args: Prisma.PostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePost>
+        }
+        groupBy: {
+          args: Prisma.PostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.PostFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.PostAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        count: {
+          args: Prisma.PostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PostCountAggregateOutputType> | number
+        }
+      }
+    }
+    Response: {
+      payload: Prisma.$ResponsePayload<ExtArgs>
+      fields: Prisma.ResponseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ResponseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ResponseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload>
+        }
+        findFirst: {
+          args: Prisma.ResponseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ResponseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload>
+        }
+        findMany: {
+          args: Prisma.ResponseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload>[]
+        }
+        create: {
+          args: Prisma.ResponseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload>
+        }
+        createMany: {
+          args: Prisma.ResponseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ResponseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload>
+        }
+        update: {
+          args: Prisma.ResponseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload>
+        }
+        deleteMany: {
+          args: Prisma.ResponseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ResponseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ResponseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResponsePayload>
+        }
+        aggregate: {
+          args: Prisma.ResponseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateResponse>
+        }
+        groupBy: {
+          args: Prisma.ResponseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResponseGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.ResponseFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.ResponseAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        count: {
+          args: Prisma.ResponseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResponseCountAggregateOutputType> | number
+        }
+      }
+    }
+    SavedPost: {
+      payload: Prisma.$SavedPostPayload<ExtArgs>
+      fields: Prisma.SavedPostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SavedPostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SavedPostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload>
+        }
+        findFirst: {
+          args: Prisma.SavedPostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SavedPostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload>
+        }
+        findMany: {
+          args: Prisma.SavedPostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload>[]
+        }
+        create: {
+          args: Prisma.SavedPostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload>
+        }
+        createMany: {
+          args: Prisma.SavedPostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SavedPostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload>
+        }
+        update: {
+          args: Prisma.SavedPostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload>
+        }
+        deleteMany: {
+          args: Prisma.SavedPostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SavedPostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SavedPostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedPostPayload>
+        }
+        aggregate: {
+          args: Prisma.SavedPostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSavedPost>
+        }
+        groupBy: {
+          args: Prisma.SavedPostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavedPostGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.SavedPostFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.SavedPostAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        count: {
+          args: Prisma.SavedPostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavedPostCountAggregateOutputType> | number
         }
       }
     }
@@ -657,7 +882,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   image: 'image',
   username: 'username',
-  description: 'description',
+  bio: 'bio',
   emailVerified: 'emailVerified',
   createdAt: 'createdAt',
   createdResume: 'createdResume',
@@ -666,6 +891,41 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  description: 'description',
+  code: 'code',
+  createdAt: 'createdAt',
+  authorId: 'authorId',
+  likes: 'likes'
+} as const
+
+export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
+export const ResponseScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  postId: 'postId',
+  authorId: 'authorId'
+} as const
+
+export type ResponseScalarFieldEnum = (typeof ResponseScalarFieldEnum)[keyof typeof ResponseScalarFieldEnum]
+
+
+export const SavedPostScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  postId: 'postId',
+  createdAt: 'createdAt'
+} as const
+
+export type SavedPostScalarFieldEnum = (typeof SavedPostScalarFieldEnum)[keyof typeof SavedPostScalarFieldEnum]
 
 
 export const AccountScalarFieldEnum = {
@@ -859,6 +1119,9 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  post?: Prisma.PostOmit
+  response?: Prisma.ResponseOmit
+  savedPost?: Prisma.SavedPostOmit
   account?: Prisma.AccountOmit
   session?: Prisma.SessionOmit
 }

@@ -50,6 +50,9 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Post: 'Post',
+  Response: 'Response',
+  SavedPost: 'SavedPost',
   Account: 'Account',
   Session: 'Session'
 } as const
@@ -66,7 +69,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   image: 'image',
   username: 'username',
-  description: 'description',
+  bio: 'bio',
   emailVerified: 'emailVerified',
   createdAt: 'createdAt',
   createdResume: 'createdResume',
@@ -75,6 +78,41 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  description: 'description',
+  code: 'code',
+  createdAt: 'createdAt',
+  authorId: 'authorId',
+  likes: 'likes'
+} as const
+
+export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
+export const ResponseScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  postId: 'postId',
+  authorId: 'authorId'
+} as const
+
+export type ResponseScalarFieldEnum = (typeof ResponseScalarFieldEnum)[keyof typeof ResponseScalarFieldEnum]
+
+
+export const SavedPostScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  postId: 'postId',
+  createdAt: 'createdAt'
+} as const
+
+export type SavedPostScalarFieldEnum = (typeof SavedPostScalarFieldEnum)[keyof typeof SavedPostScalarFieldEnum]
 
 
 export const AccountScalarFieldEnum = {

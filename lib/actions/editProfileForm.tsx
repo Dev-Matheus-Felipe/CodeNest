@@ -1,37 +1,38 @@
 "use server"
 
-import z4, { success } from "zod/v4";
+import z4  from "zod/v4";
 import { prisma } from "../prisma";
 import { auth } from "../auth";
 import { refresh } from "next/cache";
 
-type FormState = {
+export type FormState = {
   success: boolean;
   message: Record<string, string>;
 };
 
-export const EditProfileForm = async (state: FormState, formdata: FormData) => {
-    const formSchema = z4.object({
-        name: z4.string("Not a string")
-            .min(3, "Min Length: 3")
-            .max(20,"Max Length: 20")
-            .regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$/, "Name Invalidated"),
+const formSchema = z4.object({
+    name: z4.string("Not a string")
+        .min(3, "Min Length: 3")
+        .max(20,"Max Length: 20")
+        .regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$/, "Name Invalidated"),
 
-        username: z4
-            .string("Not a string")
-            .min(3, "Min Length: 3")
-            .max(20,"Max Length: 20")
-            .regex(/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/,"Username Invalidated"),
-        
-        bio: z4
-            .string("Not a string")
-            .max(255, "Max Length: 255")
-            .optional(),
-        
-        portfolio: z4.string().url("Not a Http Url").nullable().optional()
+    username: z4
+        .string("Not a string")
+        .min(3, "Min Length: 3")
+        .max(20,"Max Length: 20")
+        .regex(/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/,"Username Invalidated"),
+    
+    bio: z4
+        .string("Not a string")
+        .max(255, "Max Length: 255")
+        .optional(),
+    
+    portfolio: z4.string().url("Not a Http url").nullable().optional()
 
-    })
+});
 
+export const EditProfileForm = async (state: FormState | null, formdata: FormData): Promise<FormState> => {
+    
     const data = {
         name: formdata.get("name") as string,
         username: formdata.get("username") as string,
@@ -47,12 +48,12 @@ export const EditProfileForm = async (state: FormState, formdata: FormData) => {
             message[e.path[0] as string] = e.message;
         });
 
-        return { success: false, message };
+        return { success: false, message};
     }
 
     const session = await auth();
 
-    if(!session) return {success: false, message: {}};
+    if(!session) return {success: false, message: {} };
 
     try{
         await prisma.user.update({
@@ -60,12 +61,12 @@ export const EditProfileForm = async (state: FormState, formdata: FormData) => {
             data: {
                 name: data.name,
                 username: data.username,
-                description: data.bio,
+                bio: data.bio,
                 portfolio: data.portfolio
             }
         })
 
-        refresh(); 
+        refresh();
         return {success: true, message: {update: "User updated"}};
          
     }catch{

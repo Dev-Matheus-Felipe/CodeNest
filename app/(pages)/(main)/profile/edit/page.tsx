@@ -7,7 +7,7 @@ import { auth } from "@/lib/auth"
 
 export default async  function Edit(){    
     const session = await auth();
-    if(!session) return null;
+    if(!session?.user) return null;
 
     
     return (
@@ -18,7 +18,7 @@ export default async  function Edit(){
                 <BackProfileButton />   
             </div>
 
-            <ProfileForm session={session} />
+            <ProfileForm user={session.user} />
         </div>
     )
 }
