@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { prisma } from './lib/prisma';
 import { auth } from './lib/auth';
 
-const protectedPaths = ["/profile","profile/edit","/collections"];
+const protectedPaths = ["/profile","profile/edit","/collections","/question"];
 
 const verifyPath = (pathname : string) => {
     return (protectedPaths.some(e => e === pathname) ) ? true : false;

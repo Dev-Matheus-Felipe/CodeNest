@@ -27,6 +27,7 @@ type Action =
     | {type: "selectTag", tagSelected: string}
     | {type: "removeTag", tag: string}
     | {type: "message", message: Record<string,string>}
+    | {type: "reset", initialState: State}
 
 
 function reducer(state: State, action: Action){
@@ -57,6 +58,9 @@ function reducer(state: State, action: Action){
         case "message":
             return {...state, message: action.message};
 
+        case "reset":
+            return action.initialState;
+
         default: 
             return state;
     }
@@ -64,9 +68,7 @@ function reducer(state: State, action: Action){
 }
 
 export default function Question(){
-    const [formState, action, isLoading] = useActionState(PostForm,{success: false, message: {}});
-    const [editCodeTags, setEditCodeTags] = useState<boolean>(false);
-    const [state, dispatch] = useReducer(reducer, {
+    const initialState = {
         title: "",
         description: "",
         code: "",
@@ -75,7 +77,11 @@ export default function Question(){
         tags: tags,
         tagsSelected: [],
         message: {}
-    });
+    }
+
+    const [formState, action, isLoading] = useActionState(PostForm,{success: false, message: {}});
+    const [editCodeTags, setEditCodeTags] = useState<boolean>(false);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const inputStyle = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";
     
@@ -95,13 +101,14 @@ export default function Question(){
         const loading = toast.loading("Saving...");
         const result = await PostForm(null,formData);
 
-        if(result.success)
+        if(result.success){
             toast.success("Post has created successfully", {id: loading});
-        
-        else
+            dispatch({type: "reset", initialState: initialState})
+        }else
             toast.error(result.message.updated as string, {id: loading});
 
-        dispatch({type: "message", message: result.message})
+        dispatch({type: "message", message: result.message});
+        window.scrollTo({top: 0, behavior: "smooth"})
     }
 
     return (

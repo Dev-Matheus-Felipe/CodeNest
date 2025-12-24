@@ -42,7 +42,7 @@ export default async function Community(){
                 {
                     users.map((e, index) => (
                         <Link href={`/profile/${users[0].username}`} key={index} className="flex flex-col items-center px-3 py-3 
-                        cursor-pointer rounded-md text-center  hover:bg-(--profile-hover) duration-300 h-full">
+                        cursor-pointer rounded-md text-center border border-transparent hover:border-gray-500 duration-200 h-full">
                             <Image 
                                 src={e.image ?? ""}
                                 className="rounded-full"

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { User } from "next-auth";
 import { EditProfileButton } from "./buttons/editProfile/editProfile";
-import { Post } from "../post/post";
+import { PostComponent } from "../posts/postComponent";
+import { PostContainer } from "../posts/postContainer";
 
 export function ProfileComponent({user, myProfile} : {user: User, myProfile: boolean}){
 
@@ -115,7 +116,7 @@ export function ProfileComponent({user, myProfile} : {user: User, myProfile: boo
                     <p className="px-4 py-2 rounded-md">Answers</p>
                 </div>
 
-                <Post user={user} />
+                <PostContainer user={user} />
             </div>
         </div>
     )

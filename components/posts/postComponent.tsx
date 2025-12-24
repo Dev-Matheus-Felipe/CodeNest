@@ -1,0 +1,85 @@
+import Image from "next/image";
+import { askedTimeAgo, PostType } from "./postInfo";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+
+
+export async function PostComponent({post, home} : {post: PostType, home?: boolean}){
+    const session = await auth();
+
+    if(!session?.user) return null;
+    
+    const titleIconsCss = "w-auto min-w-8 h-auto hover:bg-(--secondary-button) rounded-full p-2 flex justify-center items-center";
+    const tags = post.tags.split(",");
+
+    return (
+        <Link className={`flex flex-col w-[99%] px-5 py-3 mb-5 rounded-sm cursor-pointer relative gap-2
+        ${!home && "border border-gray-500  bg-[rgba(255,255,255,0.01)]"}`} href={`/post/${post.id}`}>
+            <div className="flex justify-between">
+
+                {/* TITLE */}
+                <h1 className="profile:text-lg text-[15px] font-bold pr-13 pb-1">
+                    {post.title}
+                </h1>
+
+                
+                {   /* TITLE ICONS */
+                    session.user.id === post.author.id &&
+                    <div className="flex gap-1 p-2 absolute left-full -translate-x-full top-1">
+                        {
+                            ["trash","edit"].map((e,index) => (
+                                <div key={index} className={titleIconsCss}>
+                                    <Image src={`/icons/general/${e}.svg`} alt={`${e} icon`} width={15} height={15}/>
+                                </div>
+                            ))
+                        }
+                    </div>
+                }
+            </div>
+
+            {/* TAGS */}
+            <div className="flex gap-2">
+                {
+                    tags.map((e, index) => (
+                        <p className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-2 px-3 rounded-2xl 
+                        cursor-pointer`} key={index}>{e}</p>
+                    ))
+                }
+            </div>
+
+            {/* AUTHOR INFO */}
+            <div className="pt-4 flex justify-between">
+                <div className="flex gap-2 items-center">
+                    <Image src={post.author.image!} alt="Profile Picture" width={22} height={22} className="rounded-full"/>
+                    <p className="profile:text-xs text-[10px] pr-2">
+                        {post.author.name}
+                    </p>
+                    
+                    <Image src="/icons/general/time.svg" alt="Time icon" width={15} height={15} />
+                    <p className="profile:text-xs text-[10px]">
+                        {askedTimeAgo(post.createdAt)}
+                    </p>
+                </div>
+
+                <div className="flex gap-4">
+                    <div className="flex gap-2 items-center">
+                        <Image src="/icons/general/like.svg" alt="Like icon" width={20} height={20} />
+
+                        <p className="profile:text-xs text-[10px]">
+                            Likes {post.likes}
+                        </p>
+                    </div>
+
+                    <div className="flex gap-2 items-center">
+                        <Image src="/icons/general/message.svg" alt="Like icon" width={20} height={20} />
+
+                        <p className="profile:text-xs text-[10px]">
+                            Answers 0
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </Link>
+    )
+}
