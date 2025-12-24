@@ -130,3 +130,28 @@ export const tags = [
   "Microservices",
   "Clean Architecture"
 ];
+
+
+export const codeEditTags = [
+  "javascript",
+  "jsx",
+  "tsx",
+  "python",
+  "java",
+  "c",
+  "cpp",
+  "csharp",
+  "go",
+  "rust",
+  "php",
+  "ruby",
+  "bash",
+  "json",
+  "css",
+  "html",
+  "sql",
+  "yaml",
+  "markdown",
+  "typescript",
+  "r"
+];

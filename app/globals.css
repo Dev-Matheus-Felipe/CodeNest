@@ -53,7 +53,7 @@ html{
   --code-editor: rgb(20, 23, 28);
 
   --tags: rgb(31, 36, 44);
-
+  --codeEdit-tag: rgb(31, 36, 44);
 }
 
 /* --------------------------------------- LIGHT THEME --------------------------------------- */
@@ -79,6 +79,7 @@ html{
   --code-editor: rgb(83, 83, 83);
 
   --tags: rgb(236, 236, 236);
+  --codeEdit-tag: rgb(232, 232, 232);
 }
 
 ::-webkit-scrollbar {

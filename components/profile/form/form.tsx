@@ -52,8 +52,9 @@ export function Form({user} : {user: User}){
             return;
         }
 
-        const result = await EditProfileForm(null, formdata);
+        
         const loadingID  = toast.loading("Saving...");
+        const result = await EditProfileForm(null, formdata);
 
         if (result.success) 
             toast.success("Profile updated successfully",{id: loadingID});
