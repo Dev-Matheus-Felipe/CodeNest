@@ -86,7 +86,7 @@ export default function Question(){
     const handleSelectTag = (tag: string) => {
         if(state.tagsSelected.length >= 3){
             toast.warning("Only 3 tags allowed.");
-            return; // não chama o dispatch
+            return;
         }
         dispatch({type:"selectTag", tagSelected: tag});
     }
@@ -98,108 +98,114 @@ export default function Question(){
         if(result.success)
             toast.success("Post has created successfully", {id: loading});
         
-        else{
-            dispatch({type: "message", message: result.message})
+        else
             toast.error(result.message.updated as string, {id: loading});
-        }
+
+        dispatch({type: "message", message: result.message})
     }
 
     return (
         <div className="p-[2%] h-full m-auto w-[95%] pt-5">
             <h1 className="text-2xl pb-7 font-bold">Ask a question</h1>
-            <form className="w-full flex flex-col" action={formHandler}>
+            <form className="w-full flex flex-col gap-7" action={formHandler}>
 
                 {/* TITLE */}
-                <label htmlFor='title'>Question title <span className="text-orange-500 pl-1 text-lg">*</span></label>
-                <input 
-                    id='title' 
-                    name='title' 
-                    type="text" 
-                    value={state.title}
-                    onChange={(e) => dispatch({type: "title", title: e.target.value})}
-                    className={inputStyle} 
-                    placeholder="Be specific and image you asking a question to another person"/>
+                <div>
+                    <label htmlFor='title'>Question title <span className="text-orange-500 pl-1 text-lg">*</span></label>
+                    <input 
+                        id='title' 
+                        name='title' 
+                        type="text" 
+                        value={state.title}
+                        onChange={(e) => dispatch({type: "title", title: e.target.value})}
+                        className={inputStyle} 
+                        placeholder="Be specific and image you asking a question to another person"/>
 
-                {
-                    (!formState.success && state.message["title"]) &&
-                        <p className="text-red-600 text-xs pb-3">{state.message["title"]}</p>
-                }
+                    {
+                        (!formState.success && state.message["title"]) &&
+                            <p className="text-red-600 text-xs py-3">{state.message["title"]}</p>
+                    }
+                </div>
                 
 
                 {/* DESCRIPTION */}
-                <label htmlFor='description'>Question description<span className="text-orange-500 pl-1 text-lg">*</span></label>
-                <input 
-                    type="text"
-                    value={state.description}
-                    onChange={(e) => dispatch({type: "description", description: e.target.value})}
-                    id='description' 
-                    name='description' 
-                    className={inputStyle} 
-                    placeholder="Describre your problem here" />
+                <div>
+                    <label htmlFor='description'>Question description<span className="text-orange-500 pl-1 text-lg">*</span></label>
+                    <input 
+                        type="text"
+                        value={state.description}
+                        onChange={(e) => dispatch({type: "description", description: e.target.value})}
+                        id='description' 
+                        name='description' 
+                        className={inputStyle} 
+                        placeholder="Describre your problem here" />
 
-                {
-                    (!formState.success && state.message["description"]) &&
-                        <p className="text-red-600 text-xs pb-3">{state.message["description"]}</p>
-                }
+                    {
+                        (!formState.success && state.message["description"]) &&
+                            <p className="text-red-600 text-xs py-3">{state.message["description"]}</p>
+                    }
+                </div>
 
 
                 {/* TAGS */}
-                <div className='w-full h-auto relative'>
-                    <label htmlFor="tags">Tags<span className="text-orange-500 pl-1 text-lg ">*</span></label>
-                    <input 
-                        id='tags' 
-                        name='tags' 
-                        type="text" 
-                        className={`${inputStyle} mb-4!`}
-                        value={state.input}
-                        onChange={(e) => {dispatch({type: "input", input: e.target.value})}}
-                        autoComplete='off'
-                        placeholder="Add tags (max: 3)" />
+                <div>
+                    <div className='w-full h-auto relative'>
+                        <label htmlFor="tags">Tags<span className="text-orange-500 pl-1 text-lg ">*</span></label>
+                        <input 
+                            id='tags' 
+                            name='tags' 
+                            type="text" 
+                            className={`${inputStyle} mb-4!`}
+                            value={state.input}
+                            onChange={(e) => {dispatch({type: "input", input: e.target.value})}}
+                            autoComplete='off'
+                            placeholder="Add tags (max: 3)" />
 
-                    <div className={`w-[98%] left-[50%] -translate-x-[50%] max-h-50 absolute rounded-md bg-(--tags) z-10 flex 
-                    ${filteredTags.length > 0 && state.input ? "py-2" : "py-0"}`}>
-                       <div className='w-[99%] max-h-50 overflow-y-auto flex flex-col pl-2'>
+                        <div className={`w-[98%] left-[50%] -translate-x-[50%] max-h-50 absolute rounded-md bg-(--tags) z-10 flex 
+                        ${filteredTags.length > 0 && state.input ? "py-2" : "py-0"}`}>
+                        <div className='w-[99%] max-h-50 overflow-y-auto flex flex-col pl-2'>
+                            {
+                                state.input && filteredTags.map((e, index) => (
+                                    <p className={`text-xs w-[99%] cursor-pointer hover:text-orange-500 border border-transparent
+                                    hover:border-(--primary-color-button) pl-3 py-3`} 
+                                    key={index} onClick={()=> handleSelectTag(e)}>{e}</p>
+                                ))
+                            }
+                        </div>
+                        </div>
+                    </div>
+
+                    <div className="flex w-full items-center gap-2">
                         {
-                            state.input && filteredTags.map((e, index) => (
-                                <p className={`text-xs w-[99%] cursor-pointer hover:text-orange-500 border border-transparent
-                                hover:border-(--primary-color-button) pl-3 py-3`} 
-                                key={index} onClick={()=> handleSelectTag(e)}>{e}</p>
+                            state.tagsSelected.map((e) => (
+                                <p key={e} className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-2 px-4 
+                                rounded-2xl cursor-pointer`} onClick={() => dispatch({type: "removeTag", tag: e})}>
+                                    {e}
+                                </p>
                             ))
                         }
-                       </div>
+
+                        <input type='hidden' value={state.tagsSelected.join(",")} id='tag' name='tag' />
                     </div>
-                </div>
 
-                <div className="flex w-full items-center gap-2">
                     {
-                        state.tagsSelected.map((e) => (
-                            <p key={e} className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-2 px-4 rounded-2xl 
-                            cursor-pointer`} onClick={() => dispatch({type: "removeTag", tag: e})}>
-                                {e}
-                            </p>
-                        ))
+                        (!formState.success && state.message["tags"]) &&
+                            <p className="text-red-600 text-xs py-3">{state.message["tags"]}</p>
                     }
-
-                    <input type='hidden' value={state.tagsSelected.join(",")} id='tag' name='tag' />
                 </div>
-
-                {
-                    (!formState.success && state.message["tags"]) &&
-                        <p className="text-red-600 text-xs pb-3">{state.message["tags"]}</p>
-                }
 
                 {/* CODE */}
-                <div className="flex justify-between items-center py-5 relative">
+                <div className="flex justify-between items-center relative">
                     <label  className='mb-2'>Code (optional)</label>
 
                     <button className={`bg-(--secondary-button) hover:bg-(--secondary-button-hover) w-25 py-3 cursor-pointer rounded-md 
-                    text-xs flex items-center justify-around px-2`} 
-                    type='button' onClick={()=> setEditCodeTags(true)}>
+                    text-xs flex items-center justify-center gap-1.5 px-2`} 
+                    type='button' onClick={()=> setEditCodeTags(prev => !prev)}>
                         <p className="text-xs">{state.language}</p>
                         
                         <Image
                             src="/icons/general/select.svg" 
-                            alt="Search Icon" 
+                            alt="Select Icon" 
                             width={13}
                             height={13}/>
                     </button>
@@ -207,7 +213,7 @@ export default function Question(){
                     {
                         editCodeTags &&
                         <div className={`absolute z-10 top-full left-full  -translate-x-full h-60 w-25
-                        bg-(--codeEdit-tag) -translate-y-3.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
+                        bg-(--codeEdit-tag) translate-y-1.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
                             {
                                 codeEditTags.map((e) => (
                                     <p 
@@ -239,7 +245,7 @@ export default function Question(){
                 </div>
                 {
                     (!formState.success && state.message["code"]) &&
-                        <p className="text-red-600 text-xs pb-3">{state.message["code"]}</p>
+                        <p className="text-red-600 text-xs py-3">{state.message["code"]}</p>
                 }
                 <div className='w-full flex justify-end mt-5'>
                     <button className={`text-white bg-linear-to-r from-(--primary-color-button) 

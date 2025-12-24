@@ -8,11 +8,16 @@ import { FormState } from "./editProfileForm";
 
 
 const formSchema = z4.object({
-    title: z4.string().min(5,"Min Length: 20").max(35,"Max Length: 35").regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*/),
-    description: z4.string().min(5,"Min Length: 20").max(200,"Max Length: 200").regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*/),
+    title: z4.string().min(5,"Min Length: 20").max(70,"Max Length: 70").regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*/),
     language: z4.string(),
     code: z4.string().max(10000,"Caracter limits reached").optional(),
     tags: z4.string().min(1,"Tag Required"),
+    
+    description: z4
+        .string()
+        .min(5,"Min Length: 5")
+        .max(200,"Max Length: 200")
+        .regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*/,"Invalidated Field"),
 
 })
 
@@ -49,6 +54,6 @@ export async function PostForm(previousState: FormState | null, formData: FormDa
             message[e.path[0] as string] = e.message;
         });
 
-        return { success: false, message: {updated: "Invalidated Fields"}};
+        return { success: false, message: {updated: "Invalidated Fields", ...message}};
     }
 }

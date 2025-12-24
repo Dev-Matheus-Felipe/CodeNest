@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { User } from "next-auth";
 import { EditProfileButton } from "./buttons/editProfile/editProfile";
+import { Post } from "../post/post";
 
 export function ProfileComponent({user, myProfile} : {user: User, myProfile: boolean}){
 
@@ -66,7 +67,7 @@ export function ProfileComponent({user, myProfile} : {user: User, myProfile: boo
                 <div className="flex flex-col gap-3 profile:w-40 w-auto">
                     <h1 className="text-lg">Stats</h1>
 
-                    <div className="bg-(--myprofile-container) max-w-43 min-w-20 h-14 px-2 profile:px-0
+                    <div className="border border-gray-500 max-w-43 min-w-20 h-14 px-2 profile:px-0
                     flex items-center justify-center gap-5 rounded-md">
                         <div className="flex flex-col items-center text-[12px]">
                             <p>1</p>
@@ -85,7 +86,8 @@ export function ProfileComponent({user, myProfile} : {user: User, myProfile: boo
 
                     <div className="w-40 h-18 flex flex-col gap-3 items-center justify-center rounded-md">
                         <div className="flex w-full justify-between items-center">
-                            <p className="text-[8px] text-(--username-color) bg-(--secondary-button) py-2 px-4 rounded-2xl cursor-pointer">
+                            <p className={`text-[8px] text-(--username-color) bg-(--secondary-button) py-2 px-4 rounded-2xl 
+                            cursor-pointer`}>
                                 NEXT JS
                             </p>
 
@@ -93,7 +95,8 @@ export function ProfileComponent({user, myProfile} : {user: User, myProfile: boo
                         </div>
 
                         <div className="flex w-full justify-between items-center">
-                            <p className="text-[8px] text-(--username-color) bg-(--secondary-button) py-2 px-4 rounded-2xl cursor-pointer">
+                            <p className={`text-[8px] text-(--username-color) bg-(--secondary-button) py-2 px-4 rounded-2xl 
+                            cursor-pointer`}>
                                 REACT JS
                             </p>
 
@@ -112,9 +115,7 @@ export function ProfileComponent({user, myProfile} : {user: User, myProfile: boo
                     <p className="px-4 py-2 rounded-md">Answers</p>
                 </div>
 
-                <div className="w-full flex-1">
-
-                </div>
+                <Post user={user} />
             </div>
         </div>
     )
