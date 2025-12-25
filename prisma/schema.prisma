@@ -55,6 +55,8 @@ model Post {
 model Response {
   id        String   @id @default(cuid()) @map("_id")
   content   String
+  code      String?
+  language  String
   createdAt DateTime @default(now())
 
   likes       Int @default(0)   

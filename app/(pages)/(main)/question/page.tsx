@@ -250,10 +250,9 @@ export default function Question(){
                     <input type='hidden' value={state.code} id='code' name='code' />
 
                 </div>
-                {
-                    (!formState.success && state.message["code"]) &&
-                        <p className="text-red-600 text-xs py-3">{state.message["code"]}</p>
-                }
+                    {(!formState.success && state.message["code"]) &&
+                            <p className="text-red-600 text-xs py-3">{state.message["code"]}</p>}
+                            
                 <div className='w-full flex justify-end mt-5'>
                     <button className={`text-white bg-linear-to-r from-(--primary-color-button) 
                     to-(--secondary-color-button) px-5 py-2 rounded-md cursor-pointer text-sm`}>Confirm</button>

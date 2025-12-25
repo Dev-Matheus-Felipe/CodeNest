@@ -98,7 +98,10 @@ export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof Post
 export const ResponseScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  code: 'code',
+  language: 'language',
   createdAt: 'createdAt',
+  likes: 'likes',
   postId: 'postId',
   authorId: 'authorId'
 } as const

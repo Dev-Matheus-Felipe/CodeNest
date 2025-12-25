@@ -1,14 +1,17 @@
 import { PostComponent } from "@/components/posts/postComponent";
 import { prisma } from "@/lib/prisma";
 import { User } from "next-auth";
+import { Answers } from "../answers";
 
 export async function ProfileContainer({user} : {user: User}){
     if(!user) return null;
     
     const posts = await prisma.post.findMany({
         where: { authorId: user.id },
-        include: { author: true },
+        include: {  author: true },
     });
+
+    console.log(posts);
 
     const allTags = posts
         .flatMap(post => post.tags.split(","));
@@ -37,10 +40,7 @@ export async function ProfileContainer({user} : {user: User}){
                             <p>Questions</p>
                         </div>
 
-                        <div className="flex flex-col items-center text-[12px]">
-                            <p>0</p>
-                            <p>Answers</p>
-                        </div>
+                        <Answers user={user} />
                     </div>
                 </div>
 
