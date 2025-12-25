@@ -41,8 +41,8 @@ export default async function Community(){
             grid-cols-[repeat(auto-fit,minmax(130px,150px))]">
                 {
                     users.map((e, index) => (
-                        <Link href={`/profile/${users[0].username}`} key={index} className="flex flex-col items-center px-3 py-3 
-                        cursor-pointer rounded-md text-center border border-transparent hover:border-gray-500 duration-200 h-full">
+                        <Link href={`/profile/${users[0].username}`} key={index} className="flex flex-col items-center w-35 py-3 
+                        cursor-pointer rounded-md text-center hover:bg-[rgba(255,255,255,0.11)] duration-200 h-full">
                             <Image 
                                 src={e.image ?? ""}
                                 className="rounded-full"
@@ -51,7 +51,7 @@ export default async function Community(){
                                 height={100}
                                 loading="eager"/>
                             
-                            <h1 className="pt-3 pb-1 text-sm">{e.name?.slice(0,15)}</h1>
+                            <h1 className="pt-3 pb-1 text-sm">{e.name?.slice(0,15) ?? "User"}</h1>
                             <p className="text-xs text-(--username-color)">@{e.username}</p>
                         </Link>
                     ))

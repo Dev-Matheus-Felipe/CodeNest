@@ -1,21 +1,17 @@
 import Image from "next/image";
 import { askedTimeAgo, PostType } from "./postInfo";
 import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
-
-export async function PostComponent({post, home} : {post: PostType, home?: boolean}){
+export async function PostComponent({post} : {post: PostType}){
     const session = await auth();
 
-    if(!session?.user) return null;
-    
-    const titleIconsCss = "w-auto min-w-8 h-auto hover:bg-(--secondary-button) rounded-full p-2 flex justify-center items-center";
+    const titleIconsCss = "w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center";
     const tags = post.tags.split(",");
 
     return (
-        <Link className={`flex flex-col w-[99%] px-5 py-3 mb-5 rounded-sm cursor-pointer relative gap-2
-        ${!home && "border border-gray-500  bg-[rgba(255,255,255,0.01)]"}`} href={`/post/${post.id}`}>
+        <Link className={`flex flex-col w-[98%] py-3 mb-5 rounded-sm cursor-pointer relative gap-2
+        hover:bg-[rgba(255,255,255,0.02)] px-4`} href={`/post/${post.id}`}>
             <div className="flex justify-between">
 
                 {/* TITLE */}
@@ -25,15 +21,15 @@ export async function PostComponent({post, home} : {post: PostType, home?: boole
 
                 
                 {   /* TITLE ICONS */
-                    session.user.id === post.author.id &&
+                    (session?.user && session.user.id === post.author.id) &&
                     <div className="flex gap-1 p-2 absolute left-full -translate-x-full top-1">
-                        {
-                            ["trash","edit"].map((e,index) => (
-                                <div key={index} className={titleIconsCss}>
-                                    <Image src={`/icons/general/${e}.svg`} alt={`${e} icon`} width={15} height={15}/>
-                                </div>
-                            ))
-                        }
+                        <div className={titleIconsCss}>
+                            <Image src={`/icons/general/trash.svg`} alt="trash icon" width={15} height={15}/>
+                        </div>
+
+                        <div className={titleIconsCss}>
+                            <Image src={`/icons/general/edit.svg`} alt="edit icon" width={15} height={15}/>
+                        </div>
                     </div>
                 }
             </div>

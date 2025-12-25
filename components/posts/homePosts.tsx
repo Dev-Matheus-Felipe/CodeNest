@@ -5,13 +5,14 @@ export async function HomePosts (){
     const posts = await prisma.post.findMany({
         include: {author: true}
     });
+
     return (
-        <div className="overflow-y-auto h-100">
+        <div className="flex flex-col gap-4">
             {
                 posts.length <= 0
-                    ?  <p>No posts added yet</p>
+                    ? <p className="text-sm">No posts added yet...</p>
                     : posts.map((post, index) => (
-                        <PostComponent post={post} key={index} home={true} />
+                        <PostComponent post={post} key={index} />
                     ))
 
             }

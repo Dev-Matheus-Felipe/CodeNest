@@ -1,15 +1,12 @@
 import { BackProfileButton } from "@/components/profile/buttons/backProfile/backProfile";
 import { Form as ProfileForm } from "@/components/profile/form/form";
 import { auth } from "@/lib/auth"
-
-
-
+import { redirect } from "next/navigation";
 
 export default async  function Edit(){    
     const session = await auth();
-    if(!session?.user) return null;
+    if(!session?.user) return redirect("/");
 
-    
     return (
         <div className="p-[2%] flex flex-col justify-center w-[90%] m-auto portfolio:m-0 mt-5">
             <div className="flex justify-between">

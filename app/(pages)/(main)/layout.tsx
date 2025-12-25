@@ -16,7 +16,9 @@ export default function MainLayout({children} : {children: React.ReactNode}){
                         </Suspense>
                     </main>
 
-                <RightSideBar />
+                <Suspense fallback={<p>Loading...</p>}>
+                    <RightSideBar />
+                </Suspense>
             </div>
         </SessionProvider>
     )
