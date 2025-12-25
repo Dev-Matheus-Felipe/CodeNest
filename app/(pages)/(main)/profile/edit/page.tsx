@@ -1,4 +1,4 @@
-import { BackProfileButton } from "@/components/profile/buttons/backProfile/backProfile";
+import { BackProfileButton } from "@/components/profile/buttons/backProfile";
 import { Form as ProfileForm } from "@/components/profile/form/form";
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation";

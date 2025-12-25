@@ -3,7 +3,29 @@ import { PostComponent } from "./postComponent";
 
 export async function HomePosts (){
     const posts = await prisma.post.findMany({
-        include: {author: true}
+        select: {
+            id: true,
+            title: true,
+            tags: true,
+            createdAt: true,
+            likes: true,
+
+            author: {
+                select: {
+                    name: true,
+                    image: true
+                }
+            },
+
+            responses: {
+                select: {
+                    id: true,
+                    content: true,
+                    likes: true,
+                    createdAt: true
+                }
+            }
+        }
     });
 
     return (
@@ -11,8 +33,8 @@ export async function HomePosts (){
             {
                 posts.length <= 0
                     ? <p className="text-sm">No posts added yet...</p>
-                    : posts.map((post, index) => (
-                        <PostComponent post={post} key={index} />
+                    : posts.map((post) => (
+                        <PostComponent post={post} key={post.id} />
                     ))
 
             }

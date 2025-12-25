@@ -1,4 +1,3 @@
-import { auth } from "@/lib/auth";
 import Image from "next/image";
 import { askedTimeAgo } from "./postInfo";
 import { CodeEditorComponent } from "../CodeEditor/CodeEditorComponent";
@@ -23,44 +22,17 @@ export type ResponseTpe = {
 
 
 export async function Response({response} : {response: ResponseTpe}){
-    const session = await auth();
-    const titleIconsCss = "w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center";
 
     return (
-        <div className={`flex flex-col w-full py-3 mt-5 rounded-sm cursor-pointer relative gap-2
-        hover:bg-[rgba(255,255,255,0.02)] px-3`}>
-            <div className="flex justify-between">
+        <div className={`flex flex-col w-full py-6 mt-5 rounded-sm cursor-pointer relative gap-2
+        hover:bg-[rgba(255,255,255,0.02)] px-4`}>
+        
 
-                {/* TITLE */}
-                <h1 className="profile:text-lg text-[15px] font-bold pr-13 pb-1">
-                    {response.author.name}
-                </h1>
-
-                
-                {   /* TITLE ICONS */
-                    (response.authorId === session?.user.id) &&
-                    <div className="flex gap-1 p-2 absolute left-full -translate-x-full top-1">
-                        <div className={titleIconsCss}>
-                            <Image src={`/icons/general/trash.svg`} alt="trash icon" width={15} height={15}/>
-                        </div>
-
-                        <div className={titleIconsCss}>
-                            <Image src={`/icons/general/edit.svg`} alt="edit icon" width={15} height={15}/>
-                        </div>
-                    </div>
-                }
+            <div className="profile:text-[17px] text-xs">
+                <h1>{response.content} </h1>
             </div>
 
-            <div className="portfolio:text-sm text-xs">
-                <p>{response.content} </p>
-            </div>
-
-            {
-                response.code &&
-                <div>
-                    <CodeEditorComponent post={response} />
-                </div>
-            }
+            { response.code && <div> <CodeEditorComponent post={response} /> </div> }
 
             {/* AUTHOR INFO */}
             <div className="pt-4 flex justify-between">

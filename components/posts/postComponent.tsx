@@ -1,11 +1,26 @@
+import { UserType } from "../profile/functions/getUser";
+import { askedTimeAgo } from "./postInfo";
 import Image from "next/image";
-import { askedTimeAgo, PostType } from "./postInfo";
-import { auth } from "@/lib/auth";
 import Link from "next/link";
 
-export async function PostComponent({post} : {post: PostType}){
-    const session = await auth();
+type PostType = {
+    createdAt: Date;
+    id: string,
+    title: string,
+    tags: string,
+    likes: number,
 
+    author: {
+        image?: string | null,
+        name?: string | null,
+    },
+
+    responses: {
+        id: string
+    }[]
+}
+
+export function PostComponent({post, user} : {post: PostType, user?: UserType}){
     const titleIconsCss = "w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center";
     const tags = post.tags.split(",");
 
@@ -21,7 +36,7 @@ export async function PostComponent({post} : {post: PostType}){
 
                 
                 {   /* TITLE ICONS */
-                    (session?.user && session.user.id === post.author.id) &&
+                    (user?.id) &&
                     <div className="flex gap-1 p-2 absolute left-full -translate-x-full top-1">
                         <div className={titleIconsCss}>
                             <Image src={`/icons/general/trash.svg`} alt="trash icon" width={15} height={15}/>
@@ -71,7 +86,7 @@ export async function PostComponent({post} : {post: PostType}){
                         <Image src="/icons/general/message.svg" alt="Like icon" width={20} height={20} />
 
                         <p className="profile:text-xs text-[10px]">
-                            Answers 0
+                            Answers {post.responses.length}
                         </p>
                     </div>
                 </div>

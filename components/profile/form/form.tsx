@@ -100,7 +100,7 @@ export function Form({user} : {user: User}){
         
             <button className={`bg-(--confirm-button) h-10 w-25  rounded-md text-xs cursor-pointer 
             ${!isLoading && "hover:bg-orange-500"} text-white mt-3 `} type="submit" disabled={isLoading}>
-                {isLoading ? "Sending..." : "Confirm"}
+                {isLoading ? "Saving..." : "Confirm"}
             </button>    
         </form>
     )

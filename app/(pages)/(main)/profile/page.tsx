@@ -1,14 +1,17 @@
 import { ProfileComponent } from "@/components/profile/profileComponent";
-import { auth } from "@/lib/auth"
+import { GetUser } from "@/components/profile/functions/getUser";
 import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth"
 
 export default async function MyProfile(){
     const session = await auth();
+    const username = session?.user.username;
 
-    if(!session?.user)
-        redirect("/");
+    if(!username) redirect("/");
+
+    const user = await GetUser({username: username});
+
+    if(!user) redirect("/");
     
-    return (
-        <ProfileComponent user={session.user} myProfile={true} />
-    )
+    return <ProfileComponent user={user} myProfile={true} />;
 }
