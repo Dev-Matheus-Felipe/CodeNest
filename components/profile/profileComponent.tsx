@@ -9,6 +9,7 @@ import { PostAnswers } from "./generalComponents/post-answers";
 export function ProfileComponent({user, myProfile} : {user: UserType, myProfile: boolean}){
     const topTags = GetTags({posts: user.posts});
     const userLikes = GetLikes({user: user});
+    console.log(userLikes);
 
     return (
         <div className="flex flex-col h-full w-full p-[2%] gap-5 profile:max-h-[calc(100vh-100px)]">

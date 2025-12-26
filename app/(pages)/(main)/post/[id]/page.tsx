@@ -1,3 +1,4 @@
+import { Like } from "@/components/buttons/like";
 import { CodeEditorComponent } from "@/components/CodeEditor/CodeEditorComponent";
 import { askedTimeAgo } from "@/components/posts/postInfo";
 import { Response } from "@/components/posts/response";
@@ -41,8 +42,12 @@ export default async function Post({params}: PageProps){
                     <p className="text-md">{post.author.name}</p>
                 </div>
 
-                <div className="cursor-pointer hover:bg-(--secondary-button) flex items-center justify-center w-7 h-7 rounded-full">
-                    <Image src="/icons/general/star.svg" alt="star icon" width={18} height={18} /> 
+                <div className="flex gap-3">
+                    <Like id={post.id} content="post"  />
+
+                    <div className="cursor-pointer hover:bg-(--secondary-button) flex items-center justify-center w-7 h-7 rounded-full">
+                        <Image src="/icons/general/star.svg" alt="star icon" width={18} height={18} /> 
+                    </div>
                 </div>
             </div>
 

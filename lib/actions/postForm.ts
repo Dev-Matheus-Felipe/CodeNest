@@ -5,8 +5,6 @@ import { prisma } from "../prisma";
 import { auth } from "../auth";
 import { FormState } from "./editProfileForm";
 
-
-
 const formSchema = z4.object({
     title: z4.string().min(5,"Min Length: 20").max(70,"Max Length: 70").regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*/),
     language: z4.string(),

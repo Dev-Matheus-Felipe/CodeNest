@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { askedTimeAgo } from "./postInfo";
 import { CodeEditorComponent } from "../CodeEditor/CodeEditorComponent";
+import { Like } from "../buttons/like";
 
 export type ResponseTpe = {
     id: string;
@@ -22,7 +23,6 @@ export type ResponseTpe = {
 
 
 export async function Response({response} : {response: ResponseTpe}){
-
     return (
         <div className={`flex flex-col w-full py-6 mt-5 rounded-sm cursor-pointer relative gap-2
         hover:bg-[rgba(255,255,255,0.02)] px-4`}>
@@ -50,10 +50,9 @@ export async function Response({response} : {response: ResponseTpe}){
 
                 <div className="flex gap-4">
                     <div className="flex gap-2 items-center">
-                        <Image src="/icons/general/like.svg" alt="Like icon" width={20} height={20} />
-
+                        <Like id={response.id} content="response" />
                         <p className="profile:text-xs text-[10px]">
-                            Likes {response.likes}
+                             {response.likes}
                         </p>
                     </div>
                 </div>

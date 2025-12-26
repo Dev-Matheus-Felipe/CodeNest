@@ -205,8 +205,8 @@ export default function Question(){
                 <div className="flex justify-between items-center relative">
                     <label  className='mb-2'>Code (optional)</label>
 
-                    <button className={`bg-(--secondary-button) hover:bg-(--secondary-button-hover) w-25 py-3 cursor-pointer rounded-md 
-                    text-xs flex items-center justify-center gap-1.5 px-2`} 
+                    <button className={`bg-(--secondary-button) hover:bg-(--secondary-button-hover)  cursor-pointer rounded-md 
+                    text-xs flex items-center justify-around  w-25 py-3 px-3`} 
                     type='button' onClick={()=> setEditCodeTags(prev => !prev)}>
                         <p className="text-xs">{state.language}</p>
                         
@@ -219,13 +219,13 @@ export default function Question(){
 
                     {
                         editCodeTags &&
-                        <div className={`absolute z-10 top-full left-full  -translate-x-full h-60 w-25
+                        <div className={`absolute z-10 top-full left-full -translate-x-full h-60 w-25
                         bg-(--codeEdit-tag) translate-y-1.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
                             {
                                 codeEditTags.map((e) => (
                                     <p 
                                         key={e} 
-                                        className='border py-1 pl-2 hover:text-orange-500 cursor-pointer'
+                                        className='border py-1 pl-2 hover:text-orange-500 cursor-pointer rounded-sm'
                                         onClick={()=>{
                                              dispatch({type:"language", language: e});
                                              setEditCodeTags(false);
