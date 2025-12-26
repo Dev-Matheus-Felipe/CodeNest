@@ -1,7 +1,9 @@
 import { Like } from "@/components/buttons/like";
 import { CodeEditorComponent } from "@/components/CodeEditor/CodeEditorComponent";
+import { PostForm } from "@/components/posts/postForm";
 import { askedTimeAgo } from "@/components/posts/postInfo";
 import { Response } from "@/components/posts/response";
+import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 
@@ -32,7 +34,11 @@ export default async function Post({params}: PageProps){
         }
     })
 
+
     if(!post) return <p className="w-full h-[50%] flex justify-center items-center">Post not foud</p>
+    
+    const session = await auth();
+    const liked =  !!session?.user?.id && post.likedBy.includes(session.user.id);
 
     return (
         <div className="flex flex-col w-full h-full pt-5 p-[3%] pb-4 gap-3">
@@ -42,8 +48,10 @@ export default async function Post({params}: PageProps){
                     <p className="text-md">{post.author.name}</p>
                 </div>
 
-                <div className="flex gap-3">
-                    <Like id={post.id} content="post"  />
+                <div className="flex gap-2 text-xs items-center">
+                    <Like id={post.id} content="post" liked={liked} user={session?.user} /> 
+
+                        {post.likedBy.length}
 
                     <div className="cursor-pointer hover:bg-(--secondary-button) flex items-center justify-center w-7 h-7 rounded-full">
                         <Image src="/icons/general/star.svg" alt="star icon" width={18} height={18} /> 
@@ -74,19 +82,11 @@ export default async function Post({params}: PageProps){
             
             {post.code && <CodeEditorComponent post={post} />}
 
-            {post.responses.length >=0 && post.responses.map((response,index) => (
-                <Response key={index} response={response} />
+            {post.responses.length >=0 && post.responses.map((response) => (
+                <Response key={response.id} response={response} />
             ))}
 
-            <div className="mt-10 bg-(--secondary-button) hover:bg-(--secondary-button-hover) cursor-pointer px-5 py-4 rounded-md">
-                <div className="flex justify-between">
-                    <h1 className="text-md">Write your answer here</h1>
-                    <Image src="/icons/general/arrow.svg" alt="Arrow icon" width={15} height={15} />
-                </div>
-                <form>
-
-                </form>
-            </div>
+            <PostForm user={session?.user} post={post.id} />
         </div>
     )
 }

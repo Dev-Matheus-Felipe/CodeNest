@@ -8,7 +8,7 @@ export async function HomePosts (){
             title: true,
             tags: true,
             createdAt: true,
-            likes: true,
+            likedBy: true,
 
             author: {
                 select: {
@@ -21,7 +21,7 @@ export async function HomePosts (){
                 select: {
                     id: true,
                     content: true,
-                    likes: true,
+                    likedBy: true,
                     createdAt: true
                 }
             }

@@ -8,7 +8,7 @@ type PostType = {
     id: string,
     title: string,
     tags: string,
-    likes: number,
+    likedBy: string[],
 
     author: {
         image?: string | null,
@@ -78,7 +78,7 @@ export function PostComponent({post, user} : {post: PostType, user?: UserType}){
                         <Image src="/icons/general/like.svg" alt="Like icon" width={20} height={20} />
 
                         <p className="profile:text-xs text-[10px]">
-                            Likes {post.likes}
+                            Likes {post.likedBy.length}
                         </p>
                     </div>
 

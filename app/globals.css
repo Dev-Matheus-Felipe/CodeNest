@@ -54,6 +54,8 @@ html{
 
   --tags: rgb(31, 36, 44);
   --codeEdit-tag: rgb(31, 36, 44);
+
+  --like-color: white;
 }
 
 /* --------------------------------------- LIGHT THEME --------------------------------------- */
@@ -80,6 +82,8 @@ html{
 
   --tags: rgb(236, 236, 236);
   --codeEdit-tag: rgb(232, 232, 232);
+
+  --like-color: rgb(222, 222, 222);;
 }
 
 ::-webkit-scrollbar {

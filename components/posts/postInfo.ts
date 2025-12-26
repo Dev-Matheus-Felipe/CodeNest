@@ -7,7 +7,7 @@ export type PostType = {
   tags: string;
   createdAt: Date;
 
-  likes: number;
+  likedBy: string[];
 
   author: {
     id: string;

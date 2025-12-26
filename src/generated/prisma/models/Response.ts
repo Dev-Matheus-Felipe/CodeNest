@@ -20,18 +20,8 @@ export type ResponseModel = runtime.Types.Result.DefaultSelection<Prisma.$Respon
 
 export type AggregateResponse = {
   _count: ResponseCountAggregateOutputType | null
-  _avg: ResponseAvgAggregateOutputType | null
-  _sum: ResponseSumAggregateOutputType | null
   _min: ResponseMinAggregateOutputType | null
   _max: ResponseMaxAggregateOutputType | null
-}
-
-export type ResponseAvgAggregateOutputType = {
-  likes: number | null
-}
-
-export type ResponseSumAggregateOutputType = {
-  likes: number | null
 }
 
 export type ResponseMinAggregateOutputType = {
@@ -40,7 +30,6 @@ export type ResponseMinAggregateOutputType = {
   code: string | null
   language: string | null
   createdAt: Date | null
-  likes: number | null
   postId: string | null
   authorId: string | null
 }
@@ -51,7 +40,6 @@ export type ResponseMaxAggregateOutputType = {
   code: string | null
   language: string | null
   createdAt: Date | null
-  likes: number | null
   postId: string | null
   authorId: string | null
 }
@@ -62,20 +50,12 @@ export type ResponseCountAggregateOutputType = {
   code: number
   language: number
   createdAt: number
-  likes: number
+  likedBy: number
   postId: number
   authorId: number
   _all: number
 }
 
-
-export type ResponseAvgAggregateInputType = {
-  likes?: true
-}
-
-export type ResponseSumAggregateInputType = {
-  likes?: true
-}
 
 export type ResponseMinAggregateInputType = {
   id?: true
@@ -83,7 +63,6 @@ export type ResponseMinAggregateInputType = {
   code?: true
   language?: true
   createdAt?: true
-  likes?: true
   postId?: true
   authorId?: true
 }
@@ -94,7 +73,6 @@ export type ResponseMaxAggregateInputType = {
   code?: true
   language?: true
   createdAt?: true
-  likes?: true
   postId?: true
   authorId?: true
 }
@@ -105,7 +83,7 @@ export type ResponseCountAggregateInputType = {
   code?: true
   language?: true
   createdAt?: true
-  likes?: true
+  likedBy?: true
   postId?: true
   authorId?: true
   _all?: true
@@ -149,18 +127,6 @@ export type ResponseAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ResponseAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ResponseSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ResponseMinAggregateInputType
@@ -191,8 +157,6 @@ export type ResponseGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: ResponseCountAggregateInputType | true
-  _avg?: ResponseAvgAggregateInputType
-  _sum?: ResponseSumAggregateInputType
   _min?: ResponseMinAggregateInputType
   _max?: ResponseMaxAggregateInputType
 }
@@ -203,12 +167,10 @@ export type ResponseGroupByOutputType = {
   code: string | null
   language: string
   createdAt: Date
-  likes: number
+  likedBy: string[]
   postId: string
   authorId: string
   _count: ResponseCountAggregateOutputType | null
-  _avg: ResponseAvgAggregateOutputType | null
-  _sum: ResponseSumAggregateOutputType | null
   _min: ResponseMinAggregateOutputType | null
   _max: ResponseMaxAggregateOutputType | null
 }
@@ -237,7 +199,7 @@ export type ResponseWhereInput = {
   code?: Prisma.StringNullableFilter<"Response"> | string | null
   language?: Prisma.StringFilter<"Response"> | string
   createdAt?: Prisma.DateTimeFilter<"Response"> | Date | string
-  likes?: Prisma.IntFilter<"Response"> | number
+  likedBy?: Prisma.StringNullableListFilter<"Response">
   postId?: Prisma.StringFilter<"Response"> | string
   authorId?: Prisma.StringFilter<"Response"> | string
   post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
@@ -250,7 +212,7 @@ export type ResponseOrderByWithRelationInput = {
   code?: Prisma.SortOrder
   language?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  likes?: Prisma.SortOrder
+  likedBy?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   post?: Prisma.PostOrderByWithRelationInput
@@ -266,7 +228,7 @@ export type ResponseWhereUniqueInput = Prisma.AtLeast<{
   code?: Prisma.StringNullableFilter<"Response"> | string | null
   language?: Prisma.StringFilter<"Response"> | string
   createdAt?: Prisma.DateTimeFilter<"Response"> | Date | string
-  likes?: Prisma.IntFilter<"Response"> | number
+  likedBy?: Prisma.StringNullableListFilter<"Response">
   postId?: Prisma.StringFilter<"Response"> | string
   authorId?: Prisma.StringFilter<"Response"> | string
   post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
@@ -279,14 +241,12 @@ export type ResponseOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   language?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  likes?: Prisma.SortOrder
+  likedBy?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   _count?: Prisma.ResponseCountOrderByAggregateInput
-  _avg?: Prisma.ResponseAvgOrderByAggregateInput
   _max?: Prisma.ResponseMaxOrderByAggregateInput
   _min?: Prisma.ResponseMinOrderByAggregateInput
-  _sum?: Prisma.ResponseSumOrderByAggregateInput
 }
 
 export type ResponseScalarWhereWithAggregatesInput = {
@@ -298,7 +258,7 @@ export type ResponseScalarWhereWithAggregatesInput = {
   code?: Prisma.StringNullableWithAggregatesFilter<"Response"> | string | null
   language?: Prisma.StringWithAggregatesFilter<"Response"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Response"> | Date | string
-  likes?: Prisma.IntWithAggregatesFilter<"Response"> | number
+  likedBy?: Prisma.StringNullableListFilter<"Response">
   postId?: Prisma.StringWithAggregatesFilter<"Response"> | string
   authorId?: Prisma.StringWithAggregatesFilter<"Response"> | string
 }
@@ -309,7 +269,7 @@ export type ResponseCreateInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   post: Prisma.PostCreateNestedOneWithoutResponsesInput
   author: Prisma.UserCreateNestedOneWithoutResponsesInput
 }
@@ -320,7 +280,7 @@ export type ResponseUncheckedCreateInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   postId: string
   authorId: string
 }
@@ -330,7 +290,7 @@ export type ResponseUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   post?: Prisma.PostUpdateOneRequiredWithoutResponsesNestedInput
   author?: Prisma.UserUpdateOneRequiredWithoutResponsesNestedInput
 }
@@ -340,7 +300,7 @@ export type ResponseUncheckedUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   postId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -351,7 +311,7 @@ export type ResponseCreateManyInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   postId: string
   authorId: string
 }
@@ -361,7 +321,7 @@ export type ResponseUpdateManyMutationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
 }
 
 export type ResponseUncheckedUpdateManyInput = {
@@ -369,7 +329,7 @@ export type ResponseUncheckedUpdateManyInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   postId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -390,13 +350,9 @@ export type ResponseCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   language?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  likes?: Prisma.SortOrder
+  likedBy?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
-}
-
-export type ResponseAvgOrderByAggregateInput = {
-  likes?: Prisma.SortOrder
 }
 
 export type ResponseMaxOrderByAggregateInput = {
@@ -405,7 +361,6 @@ export type ResponseMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   language?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  likes?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
 }
@@ -416,13 +371,8 @@ export type ResponseMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   language?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  likes?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
-}
-
-export type ResponseSumOrderByAggregateInput = {
-  likes?: Prisma.SortOrder
 }
 
 export type ResponseCreateNestedManyWithoutAuthorInput = {
@@ -509,13 +459,22 @@ export type ResponseUncheckedUpdateManyWithoutPostNestedInput = {
   deleteMany?: Prisma.ResponseScalarWhereInput | Prisma.ResponseScalarWhereInput[]
 }
 
+export type ResponseCreatelikedByInput = {
+  set: string[]
+}
+
+export type ResponseUpdatelikedByInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type ResponseCreateWithoutAuthorInput = {
   id?: string
   content: string
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   post: Prisma.PostCreateNestedOneWithoutResponsesInput
 }
 
@@ -525,7 +484,7 @@ export type ResponseUncheckedCreateWithoutAuthorInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   postId: string
 }
 
@@ -563,7 +522,7 @@ export type ResponseScalarWhereInput = {
   code?: Prisma.StringNullableFilter<"Response"> | string | null
   language?: Prisma.StringFilter<"Response"> | string
   createdAt?: Prisma.DateTimeFilter<"Response"> | Date | string
-  likes?: Prisma.IntFilter<"Response"> | number
+  likedBy?: Prisma.StringNullableListFilter<"Response">
   postId?: Prisma.StringFilter<"Response"> | string
   authorId?: Prisma.StringFilter<"Response"> | string
 }
@@ -574,7 +533,7 @@ export type ResponseCreateWithoutPostInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   author: Prisma.UserCreateNestedOneWithoutResponsesInput
 }
 
@@ -584,7 +543,7 @@ export type ResponseUncheckedCreateWithoutPostInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   authorId: string
 }
 
@@ -619,7 +578,7 @@ export type ResponseCreateManyAuthorInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   postId: string
 }
 
@@ -628,7 +587,7 @@ export type ResponseUpdateWithoutAuthorInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   post?: Prisma.PostUpdateOneRequiredWithoutResponsesNestedInput
 }
 
@@ -637,7 +596,7 @@ export type ResponseUncheckedUpdateWithoutAuthorInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   postId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -646,7 +605,7 @@ export type ResponseUncheckedUpdateManyWithoutAuthorInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   postId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -656,7 +615,7 @@ export type ResponseCreateManyPostInput = {
   code?: string | null
   language: string
   createdAt?: Date | string
-  likes?: number
+  likedBy?: Prisma.ResponseCreatelikedByInput | string[]
   authorId: string
 }
 
@@ -665,7 +624,7 @@ export type ResponseUpdateWithoutPostInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   author?: Prisma.UserUpdateOneRequiredWithoutResponsesNestedInput
 }
 
@@ -674,7 +633,7 @@ export type ResponseUncheckedUpdateWithoutPostInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -683,7 +642,7 @@ export type ResponseUncheckedUpdateManyWithoutPostInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
+  likedBy?: Prisma.ResponseUpdatelikedByInput | string[]
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -695,7 +654,7 @@ export type ResponseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   code?: boolean
   language?: boolean
   createdAt?: boolean
-  likes?: boolean
+  likedBy?: boolean
   postId?: boolean
   authorId?: boolean
   post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
@@ -710,12 +669,12 @@ export type ResponseSelectScalar = {
   code?: boolean
   language?: boolean
   createdAt?: boolean
-  likes?: boolean
+  likedBy?: boolean
   postId?: boolean
   authorId?: boolean
 }
 
-export type ResponseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "content" | "code" | "language" | "createdAt" | "likes" | "postId" | "authorId", ExtArgs["result"]["response"]>
+export type ResponseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "content" | "code" | "language" | "createdAt" | "likedBy" | "postId" | "authorId", ExtArgs["result"]["response"]>
 export type ResponseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -733,7 +692,7 @@ export type $ResponsePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     code: string | null
     language: string
     createdAt: Date
-    likes: number
+    likedBy: string[]
     postId: string
     authorId: string
   }, ExtArgs["result"]["response"]>
@@ -1135,7 +1094,7 @@ export interface ResponseFieldRefs {
   readonly code: Prisma.FieldRef<"Response", 'String'>
   readonly language: Prisma.FieldRef<"Response", 'String'>
   readonly createdAt: Prisma.FieldRef<"Response", 'DateTime'>
-  readonly likes: Prisma.FieldRef<"Response", 'Int'>
+  readonly likedBy: Prisma.FieldRef<"Response", 'String[]'>
   readonly postId: Prisma.FieldRef<"Response", 'String'>
   readonly authorId: Prisma.FieldRef<"Response", 'String'>
 }

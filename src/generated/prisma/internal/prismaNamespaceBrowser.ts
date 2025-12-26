@@ -89,7 +89,7 @@ export const PostScalarFieldEnum = {
   tags: 'tags',
   createdAt: 'createdAt',
   authorId: 'authorId',
-  likes: 'likes'
+  likedBy: 'likedBy'
 } as const
 
 export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -101,7 +101,7 @@ export const ResponseScalarFieldEnum = {
   code: 'code',
   language: 'language',
   createdAt: 'createdAt',
-  likes: 'likes',
+  likedBy: 'likedBy',
   postId: 'postId',
   authorId: 'authorId'
 } as const

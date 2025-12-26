@@ -92,7 +92,7 @@ export function PostAnswers({user} : {user: UserType}){
                                             <Image src="/icons/general/like.svg" alt="Like icon" width={20} height={20} />
                     
                                             <p className="profile:text-xs text-[10px]">
-                                                Likes {response.likes}
+                                                Likes {response.likedBy.length}
                                             </p>
                                         </div>
                                     </div>
