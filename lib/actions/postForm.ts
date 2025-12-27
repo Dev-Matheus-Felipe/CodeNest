@@ -10,8 +10,6 @@ const formSchema = z4.object({
     title: z4.string().min(5,"Min Length: 5").max(70,"Max Length: 70").regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*/),
     language: z4.string(),
     code: z4.string().max(10000,"Caracter limits reached").optional(),
-    tags: z4.string().min(1,"Tag Required"),
-    
     description: z4
         .string()
         .min(5,"Min Length: 5")
@@ -28,7 +26,7 @@ export async function PostForm(previousState: FormState | null, formData: FormDa
         description: formData.get("description") as string,
         language: formData.get("language") as string,
         code: code.length === 0 ? undefined : code,
-        tags: formData.get("tag") as string
+        tags: formData.get("tag") as string,
     }
 
     const result = formSchema.safeParse(data);

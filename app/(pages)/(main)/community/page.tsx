@@ -19,32 +19,32 @@ export default async function Community(){
 
                     <input 
                         type="text" 
+                        name="search"
+                        id="search"
                         placeholder="Search for users here..." 
-                        className="w-full h-full border border-gray outline-0 border-(--secondary-button) 
-                        text-sm pl-11 pr-5 rounded-md" />
+                        className={`w-full h-full border border-gray outline-0 border-(--secondary-button) text-xs pl-11
+                        pr-5 rounded-md`} />
                 </form>
 
-                <button className=" bg-(--secondary-button) hover:bg-(--secondary-button-hover) 
-                w-28 h-11 cursor-pointer rounded-md flex justify-center gap-1 items-center">
+                <button className={`bg-(--secondary-button) hover:bg-(--secondary-button-hover) w-28 h-11 cursor-pointer 
+                rounded-md flex justify-center gap-1 items-center`}>
                     <p className="text-xs">Select a filter</p>
 
                     <Image 
                         src="/icons/general/select.svg" 
                         alt="Search Icon" 
                         width={13}
-                        height={13} 
-                        className=""/>
+                        height={13} />
                 </button>
             </div>
 
-            <div className="w-full max-h-full gap-5 grid pr-5 overflow-y-scroll
-            grid-cols-[repeat(auto-fit,minmax(130px,150px))]">
+            <div className="w-full max-h-full gap-5 grid pr-5 overflow-y-scroll grid-cols-[repeat(auto-fit,minmax(130px,150px))">
                 {
-                    users.map((e, index) => (
-                        <Link href={`/profile/${users[0].username}`} key={index} className="flex flex-col items-center w-35 py-3 
-                        cursor-pointer rounded-md text-center hover:bg-[rgba(255,255,255,0.11)] duration-200 h-full">
+                    users.map((e) => (
+                        <Link href={`/profile/${users[0].username}`} key={e.id} className={`flex flex-col items-center w-35 py-3 
+                        cursor-pointer rounded-md text-center hover:bg-(--secondary-button) duration-200 h-full`}>
                             <Image 
-                                src={e.image ?? ""}
+                                src={e.image ?? "/icons/general/user.svg"}
                                 className="rounded-full"
                                 alt="user icon" 
                                 width={100} 

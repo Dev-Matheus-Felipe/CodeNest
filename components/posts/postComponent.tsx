@@ -1,24 +1,8 @@
 import { UserType } from "../profile/functions/getUser";
+import { PostType } from "@/lib/types/post";
 import { askedTimeAgo } from "./postInfo";
 import Image from "next/image";
 import Link from "next/link";
-
-type PostType = {
-    createdAt: Date;
-    id: string,
-    title: string,
-    tags: string,
-    likedBy: string[],
-
-    author: {
-        image?: string | null,
-        name?: string | null,
-    },
-
-    responses: {
-        id: string
-    }[]
-}
 
 export function PostComponent({post, user} : {post: PostType, user?: UserType}){
     const titleIconsCss = "w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center";
@@ -62,7 +46,14 @@ export function PostComponent({post, user} : {post: PostType, user?: UserType}){
             {/* AUTHOR INFO */}
             <div className="pt-4 flex justify-between">
                 <div className="flex gap-2 items-center">
-                    <Image src={post.author.image!} alt="Profile Picture" width={22} height={22} className="rounded-full"/>
+
+                    <Image 
+                        src={post.author.image ?? "/icons/general/user.svg"} 
+                        alt="Profile Picture" 
+                        width={22} 
+                        height={22} 
+                        className="rounded-full"/>
+                        
                     <p className="profile:text-xs text-[10px] pr-2">
                         {post.author.name}
                     </p>
@@ -71,6 +62,7 @@ export function PostComponent({post, user} : {post: PostType, user?: UserType}){
                     <p className="profile:text-xs text-[10px]">
                         {`asked ${askedTimeAgo(post.createdAt)}`}
                     </p>
+
                 </div>
 
                 <div className="flex gap-4">

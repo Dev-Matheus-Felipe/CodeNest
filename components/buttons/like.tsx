@@ -24,7 +24,6 @@ export function Like({id, content, liked, user} : LikeType){
                 width={18} 
                 height={18} 
                 onClick={() => like()} /> 
-
         </button>
     )
 }

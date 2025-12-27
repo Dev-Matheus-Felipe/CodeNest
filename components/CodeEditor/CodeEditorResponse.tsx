@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { ResponseTpe } from "../posts/response"
 import { CodeEditorComponent } from "./CodeEditorComponent"
+import { ResponseTpe } from "../posts/response"
+import { useState } from "react"
 
 export function CodeEditorResponse({response} : {response: ResponseTpe}){
-    const [state, setState] = useState(false);
+    const [state, setState] = useState(true);
     return  (
         <>
             <div className="profile:text-[17px] text-xs pb-5 flex justify-between ">
@@ -19,10 +19,9 @@ export function CodeEditorResponse({response} : {response: ResponseTpe}){
                         </p>
                 }
             </div> 
-            {
-                (response.code && !state)  &&
-                    <CodeEditorComponent post={response} />
-            }
+
+            { (response.code && !state)  &&
+                <CodeEditorComponent post={response} /> }
         </>
     )
     

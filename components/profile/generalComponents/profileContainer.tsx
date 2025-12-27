@@ -1,7 +1,6 @@
 import { UserType } from "../functions/getUser";
 import { GetTags } from "../functions/getTags";
 import { PostAnswers } from "./post-answers";
-import { prisma } from "@/lib/prisma";
 import { Answers } from "./answers";
 
 export async function ProfileContainer({user} : {user: UserType}){
@@ -48,7 +47,7 @@ export async function ProfileContainer({user} : {user: UserType}){
             </div>
 
             {/* POSTS / ANSWERS */}
-            <PostAnswers posts={posts} responses={responses} user={user} />
+            <PostAnswers user={user} />
         </>
     )
 }

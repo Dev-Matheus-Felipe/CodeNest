@@ -1,19 +1,13 @@
-import { Like } from "@/components/buttons/like";
 import { CodeEditorComponent } from "@/components/CodeEditor/CodeEditorComponent";
-import { PostForm } from "@/components/posts/postForm";
 import { askedTimeAgo } from "@/components/posts/postInfo";
+import { PostForm } from "@/components/posts/postForm";
 import { Response } from "@/components/posts/response";
-import { auth } from "@/lib/auth";
+import { Like } from "@/components/buttons/like";
 import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 import Image from "next/image";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
-export default async function Post({params}: PageProps){
+export default async function Post({params}: { params: {id: string} }){
     const { id } = await params;
 
     const post = await prisma.post.findUnique({
@@ -44,7 +38,12 @@ export default async function Post({params}: PageProps){
         <div className="flex flex-col w-full h-full pt-5 p-[3%] pb-4 gap-3">
             <div className="flex justify-between">
                 <div className="flex gap-3 items-center">
-                    <Image src={post.author.image!} alt="Author Image" width={30} height={30} className="rounded-full"/> 
+                    <Image 
+                        src={post.author.image ?? "/icons/general/user.svg"} 
+                        alt="Author Image" 
+                        width={30} 
+                        height={30} 
+                        className="rounded-full"/> 
                     <p className="text-md">{post.author.name}</p>
                 </div>
 

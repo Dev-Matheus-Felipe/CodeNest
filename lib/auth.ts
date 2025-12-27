@@ -26,8 +26,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   events: {
     async createUser({user}){
       if(!user.username){
-        const FirstName = (user.name) ? user.name.split(" ")[0].toLocaleLowerCase() : "user";
-        const SlicedId = (user.id) ? user.id.slice(0,6) : Math.floor(Math.random() * 500);
+        let FirstName = (user.name) ? user.name.split(" ")[0].toLocaleLowerCase() : "user";
+        if(FirstName.length > 13) FirstName = FirstName.slice(0,12);
+        
+        const SlicedId = (user.id) ? user.id.slice(0,6) : Math.floor(Math.random() * 100000);
 
         const username = `${FirstName}-${SlicedId}`;
 
@@ -38,16 +40,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if(!userFound) return;
 
-        const data = new Date(userFound?.createdAt);
+        const data = new Date(userFound.createdAt);
+        const image = user.image ? user.image : "/icons/general/user.svg";
 
         const createdResume = data.toLocaleDateString("en-US",{
           month: "long",
           year: "numeric"
         })
-
+        
         await prisma.user.update({
           where: {id: user.id},
-          data: {username,createdResume},
+          data: {username,createdResume, image},
         });
       }
     }

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { askedTimeAgo } from "./postInfo";
-import { CodeEditorComponent } from "../CodeEditor/CodeEditorComponent";
 import { Like } from "../buttons/like";
 import { auth } from "@/lib/auth";
 import { CodeEditorResponse } from "../CodeEditor/CodeEditorResponse";
@@ -39,7 +38,12 @@ export async function Response({response} : {response: ResponseTpe}){
             {/* AUTHOR INFO */}
             <div className="pt-4 flex justify-between">
                 <div className="flex gap-2 items-center">
-                    <Image src={response.author.image!} alt="Profile Picture" width={22} height={22} className="rounded-full"/>
+                    <Image 
+                        src={response.author.image ?? "/icons/general/user.svg" } 
+                        alt="Profile Picture" 
+                        width={22} 
+                        height={22} 
+                        className="rounded-full"/>
                     <p className="profile:text-xs text-[10px] pr-2">
                         {response.author.name}
                     </p>

@@ -46,7 +46,6 @@ function reducer(state: State, action: Action){
 
 }
 
-
 export function PostForm({user, post} : {user?: User, post: string}){
     const inputStyle = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";
      const initialState: State = {
@@ -98,7 +97,7 @@ export function PostForm({user, post} : {user?: User, post: string}){
 
                 {/* TITLE */}
                 <div>
-                    <label htmlFor='title'>Answer content <span className="text-orange-500 pl-1 text-lg">*</span></label>
+                    <label htmlFor='content'>Answer content <span className="text-orange-500 pl-1 text-lg">*</span></label>
                     <input 
                         id='content' 
                         name='content' 
@@ -108,10 +107,8 @@ export function PostForm({user, post} : {user?: User, post: string}){
                         className={inputStyle} 
                         placeholder="Write your answer here..."/>
 
-                    {
-                        (!formState.success && state.message["content"]) &&
-                            <p className="text-red-600 text-xs py-3">{state.message["content"]}</p>
-                    }
+                    { (!formState.success && state.message["content"]) &&
+                            <p className="text-red-600 text-xs py-3">{state.message["content"]}</p> }
                 </div>
                 
 
@@ -120,7 +117,7 @@ export function PostForm({user, post} : {user?: User, post: string}){
 
                 {/* CODE */}
                 <div className="flex justify-between items-center relative">
-                    <label  className='mb-2'>Code (optional)</label>
+                    <label  htmlFor="code" className='mb-2'>Code (optional)</label>
 
                     <button className={`bg-(--secondary-button) hover:bg-(--secondary-button-hover)  cursor-pointer rounded-md 
                     text-xs flex items-center justify-around  w-25 py-3 px-3`} 
@@ -161,6 +158,8 @@ export function PostForm({user, post} : {user?: User, post: string}){
                         language={state.language}
                         onChange={(e) => {dispatch({type:"code", code: e.target.value})}}
                         padding={10}
+                        id="code"
+                        name="code"
                         placeholder="Please write your code here if it is needed"
                         className='min-h-60 text-sm! rounded-md w-full max-w-250 overflow-x-scroll! bg-(--code-editor)!' />
 
@@ -168,10 +167,11 @@ export function PostForm({user, post} : {user?: User, post: string}){
 
                 </div>
                     {(!formState.success && state.message["code"]) &&
-                            <p className="text-red-600 text-xs py-3">{state.message["code"]}</p>}
+                            <p className="text-red-600 text-xs py-3">{state.message["code"]}</p> }
                             
                 <input type='hidden' value={post} id='post' name='post' />
                 <div className='w-full flex justify-end mt-5'>
+                    
                     <button className={`text-white bg-linear-to-r from-(--primary-color-button) 
                     to-(--secondary-color-button) px-5 py-2 rounded-md cursor-pointer text-sm`} >Confirm</button>
                 </div>

@@ -1,72 +1,57 @@
 "use client"
 
+import { editProfileSchema, formType } from "@/lib/schemas/editProfileSchema";
 import { EditProfileForm } from "@/lib/actions/editProfileForm";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { User } from "next-auth";
-import { useActionState, useState } from "react";
 import { toast } from "sonner";
 
-type EditPage = {
-    name: string,
-    username: string,
-    bio: string,
-    portfolio: string,
-}
-
 export function Form({user} : {user: User}){  
-    const [state, action, isLoading] = useActionState(EditProfileForm, {success: false, message: {}});
-    const [message, setMessage] = useState<Record<string, string>>({});
-
-
-    const inputStyle = "bg-(--secondary-button) h-11 mt-1 mb-4 w-full rounded-sm outline-0 px-3 text-xs";
-    const inputsData = ["name","username","bio","portfolio"];
-
-    const [data, setData] = useState<EditPage>({
+    const initialValues = {
         name: user.name ?? "",
         username: user.username ?? "",
         bio: user.bio ?? "",
-        portfolio: user.portfolio ?? ""
-    })
+        portfolio: user.portfolio ?? "",
+    }
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors, isSubmitting, isDirty},
+
+    } = useForm<formType>({
+        resolver: zodResolver(editProfileSchema),
+        defaultValues: initialValues
+    });
+
+    const inputStyle = "bg-(--secondary-button) h-11 mt-1 mb-4 w-full rounded-sm outline-0 px-3 text-xs";
+    const inputsData: (keyof formType)[] = ["name","username","bio","portfolio"];
+
 
     const nameToLabel = (word: string) => {
         return `${word[0].toUpperCase()}${word.slice(1)}`
     }
 
-
-
-    const onSubmit = async(formdata: FormData) => {
-        const data = {
-            name: formdata.get("name") as string,
-            username: formdata.get("username") as string,
-            bio: formdata.get("bio") as string,
-            portfolio: formdata.get("portfolio") as string
-        }
-
-        const notHaveChanges =
-            data.name == user.name &&
-            data.username == user.username &&
-            data.bio == (user.bio ?? "") &&
-            data.portfolio === (user.portfolio ?? "")
-
-        if(notHaveChanges){
+    const onSubmit = async(data: formType) => {
+        if(!isDirty){
             toast.warning("nothing to update");
             return;
         }
 
-        
         const loadingID  = toast.loading("Saving...");
-        const result = await EditProfileForm(null, formdata);
+        const result = await EditProfileForm({data: data});
 
         if (result.success) 
             toast.success("Profile updated successfully",{id: loadingID});
 
         else
-            toast.error("Error updating user",{id: loadingID});
-
-        setMessage(result.message);
+            toast.error(result.message.update ,{id: loadingID});
+        
     }
 
     return( 
-        <form className="flex flex-col" action={onSubmit}>
+        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
             {
                 inputsData.map((input, index: number) => (
                     <div key={index}>
@@ -78,29 +63,25 @@ export function Form({user} : {user: User}){
                         </label>
 
                         <input 
+                            {...register(input)}
                             className={inputStyle} 
                             type="text" 
                             id={input}
-                            name={input} 
-                            value={data[input as keyof EditPage]}
-
-                            onChange={(e)=>{setData(o => ({
-                                ...o, [input]: e.target.value
-                            }))}}
-
                             autoComplete="off" />
-
-                            {
-                                (!state.success && message[input]) &&
-                                    <p className="text-red-600 text-xs pb-3">{message[input]}</p>
-                            }
+                        {
+                            errors[input] && (
+                                <p className="text-red-500 text-[10px] -mt-3 mb-2">
+                                    {errors[input]?.message as string}
+                                </p>
+                            )
+                        }
                     </div>
                 ))
             }
         
-            <button className={`bg-(--confirm-button) h-10 w-25  rounded-md text-xs cursor-pointer 
-            ${!isLoading && "hover:bg-orange-500"} text-white mt-3 `} type="submit" disabled={isLoading}>
-                {isLoading ? "Saving..." : "Confirm"}
+            <button className={`bg-(--confirm-button) h-10 w-20  rounded-md text-xs cursor-pointer hover:bg-orange-500
+            text-white mt-3`} type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Saving..." : "Save"}
             </button>    
         </form>
     )

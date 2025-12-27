@@ -36,6 +36,8 @@ export function NavBar(){
 
                     <input 
                         type="text" 
+                        name="search"
+                        id="search"
                         placeholder="Search anything globally..." 
                         className="w-full h-full px-11 text-xs outline-none" />
                 </form>

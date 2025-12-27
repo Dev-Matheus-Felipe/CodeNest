@@ -11,6 +11,7 @@ export type LikeType = {
   liked: boolean;
   user?: User
 };
+
 type LeaveLikeInput = {
   id: string;
   content: "post" | "response";

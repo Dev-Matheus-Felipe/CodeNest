@@ -6,7 +6,7 @@ export default  function Home() {
   const tagStyles = "text-xs text-(--username-color) bg-(--secondary-button) py-2 px-3 rounded-lg cursor-pointer";
   
   return (
-    <div className="w-full h-[calc(100vh-120px)] pt-5 pr-10 grid grid-cols-1 grid-rows-[auto_1fr]">
+    <div className="w-full h-[calc(100vh-120px)] p-[2%] pt-5 pr-10 grid grid-cols-1 grid-rows-[auto_1fr]">
       
         <div className=" col-span-1 row-span-1">
           <div className="flex justify-between">
@@ -24,6 +24,8 @@ export default  function Home() {
 
               <input 
                   type="text" 
+                  name="search"
+                  id="search"
                   placeholder="Search for questions here" 
                   className="w-full h-full px-11 text-xs outline-none" />
           </form>
