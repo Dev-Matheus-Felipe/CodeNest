@@ -48,7 +48,7 @@ export  function PostFormComponent({post} : {post?: Post}){
     );
 
     const onSubmit = async(data : PostFormType) => {
-        if(!isDirty && post){
+        if(isDirty && post){
             toast.warning("nothing to update");
             return;
         }

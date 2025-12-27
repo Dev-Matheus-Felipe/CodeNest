@@ -41,18 +41,19 @@ export default async function Community(){
             <div className="w-full max-h-full gap-5 grid pr-5 overflow-y-scroll grid-cols-[repeat(auto-fit,minmax(130px,150px))">
                 {
                     users.map((e) => (
-                        <Link href={`/profile/${users[0].username}`} key={e.id} className={`flex flex-col items-center w-35 py-3 
-                        cursor-pointer rounded-md text-center hover:bg-(--secondary-button) duration-200 h-full`}>
+                        <Link href={`/profile/${users[0].username}`} key={e.id} className={`flex flex-col items-center w-43 py-3 
+                        cursor-pointer rounded-md text-center duration-200  h-full`}>
                             <Image 
                                 src={e.image ?? "/icons/general/user.svg"}
                                 className="rounded-full"
                                 alt="user icon" 
-                                width={100} 
-                                height={100}
+                                width={115} 
+                                height={115}
                                 loading="eager"/>
                             
-                            <h1 className="pt-3 pb-1 text-sm">{e.name?.slice(0,15) ?? "User"}</h1>
-                            <p className="text-xs text-(--username-color)">@{e.username}</p>
+                            <h1 className="pt-3 pb-1 text-md">{e.name?.slice(0,15) ?? "User"}</h1>
+                            <p className="text-[11px] text-(--username-color)">@{e.username}</p>
+                            
                         </Link>
                     ))
                 }

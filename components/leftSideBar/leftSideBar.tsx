@@ -15,7 +15,7 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
 
     const linkSelected = (currentlyPath : string) => {
         return `${(pathname === currentlyPath) 
-            && "text-white bg-linear-to-r from-(--primary-color-button) to-(--secondary-color-button)"}`;
+            && "text-white bg-linear-to-r from-(--primary-color-button) to-(--secondary-color-button) font-bold"}`;
     }
 
     const profileHandler = (e : React.MouseEvent) => {

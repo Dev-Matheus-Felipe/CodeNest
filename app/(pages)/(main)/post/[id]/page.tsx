@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
 import { ResponseForm } from "@/components/posts/responseForm";
+import { AddCollection } from "@/components/buttons/addCollection";
 
 export default async function Post({params}: { params: {id: string} }){
     const { id } = await params;
@@ -34,6 +35,10 @@ export default async function Post({params}: { params: {id: string} }){
     const session = await auth();
     const liked =  !!session?.user?.id && post.likedBy.includes(session.user.id);
 
+    const saved = (session?.user.id) 
+        ? await prisma.savedPost.findUnique({where: {userId_postId: {userId: session.user.id, postId: post.id}}}) ? true : false
+        : false;
+
     return (
         <div className="flex flex-col w-full h-full pt-5 p-[3%] pb-4 gap-3">
             <div className="flex justify-between">
@@ -52,9 +57,7 @@ export default async function Post({params}: { params: {id: string} }){
 
                         {post.likedBy.length}
 
-                    <div className="cursor-pointer hover:bg-(--secondary-button) flex items-center justify-center w-7 h-7 rounded-full">
-                        <Image src="/icons/general/star.svg" alt="star icon" width={18} height={18} /> 
-                    </div>
+                    <AddCollection user={session?.user ? true : false} post={post.id} saved={saved} />
                 </div>
             </div>
 

@@ -17,7 +17,7 @@ export const editProfileSchema = z4.object({
         .max(255, "Max Length: 255")
         .optional(),
     
-    portfolio: z4.string().url("Not a Http url").nullable().optional()
+    portfolio: z4.string().url("Not a Http url").optional().or(z4.literal(""))
 
 });
 

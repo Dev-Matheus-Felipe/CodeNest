@@ -16,7 +16,7 @@ export function Like({id, content, liked, user} : LikeType){
     }
 
     return (
-        <button className={`cursor-pointer hover:bg-(--secondary-button) flex items-center justify-center w-6 h-6 rounded-full
+        <button className={`cursor-pointer hover:bg-(--secondary-button) flex items-center justify-center w-5.5 h-5.5 rounded-full
         ${liked ? "bg-(--like-color)" : "bg-transparent"}`}>
             <Image 
                 src="/icons/general/like.svg" 

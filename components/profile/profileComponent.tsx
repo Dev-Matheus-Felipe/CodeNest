@@ -46,7 +46,7 @@ export function ProfileComponent({user, myProfile} : {user: UserType, myProfile:
 
                         <p className="flex gap-2 items-center text-xs">
                             <Image src="/icons/general/schedule.svg" alt="Schedule icon" width={18} height={18}/> 
-                            {user.createdResume}
+                            joined {user.createdResume}
                         </p>
 
                          

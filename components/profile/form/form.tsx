@@ -18,7 +18,7 @@ export function Form({user} : {user: User}){
     const {
         register,
         handleSubmit,
-        formState: {errors, isSubmitting, isDirty},
+        formState: {errors, isSubmitting},
 
     } = useForm<EditProfileSchemaType>({
         resolver: zodResolver(editProfileSchema),
@@ -34,7 +34,13 @@ export function Form({user} : {user: User}){
     }
 
     const onSubmit = async(data: EditProfileSchemaType) => {
-        if(!isDirty){
+        const hasChanges =
+            data.name !== initialValues.name ||
+            data.username !== initialValues.username ||
+            data.bio !== initialValues.bio ||
+            data.portfolio !== initialValues.portfolio;
+
+        if (!hasChanges) {
             toast.warning("nothing to update");
             return;
         }
