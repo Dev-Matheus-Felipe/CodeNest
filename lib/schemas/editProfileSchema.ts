@@ -21,4 +21,4 @@ export const editProfileSchema = z4.object({
 
 });
 
-export type formType = z4.infer<typeof editProfileSchema>;   
+export type EditProfileSchemaType = z4.infer<typeof editProfileSchema>;   

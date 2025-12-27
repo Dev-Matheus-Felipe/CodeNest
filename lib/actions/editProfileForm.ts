@@ -1,11 +1,11 @@
 "use server"
 
-import { editProfileSchema, formType } from "../schemas/editProfileSchema";
+import { editProfileSchema, EditProfileSchemaType } from "../schemas/editProfileSchema";
 import { revalidatePath } from "next/cache";
 import { prisma } from "../prisma";
 import { auth } from "../auth";
 
-export const EditProfileForm = async ({data} :  {data: formType}) => {
+export const EditProfileForm = async ({data} :  {data: EditProfileSchemaType}) => {
     const session = await auth();
     if(!session) return {success: false, message:{update: "User not found"} };
 
@@ -13,7 +13,7 @@ export const EditProfileForm = async ({data} :  {data: formType}) => {
     if (!parsed.success) {
         return {
             success: false,
-            message: { update: "Invalid data" }
+            message: { update: "Invalid Fields" }
         };
     }
 

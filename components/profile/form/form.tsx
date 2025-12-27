@@ -1,6 +1,6 @@
 "use client"
 
-import { editProfileSchema, formType } from "@/lib/schemas/editProfileSchema";
+import { editProfileSchema, EditProfileSchemaType } from "@/lib/schemas/editProfileSchema";
 import { EditProfileForm } from "@/lib/actions/editProfileForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,20 +20,20 @@ export function Form({user} : {user: User}){
         handleSubmit,
         formState: {errors, isSubmitting, isDirty},
 
-    } = useForm<formType>({
+    } = useForm<EditProfileSchemaType>({
         resolver: zodResolver(editProfileSchema),
         defaultValues: initialValues
     });
 
     const inputStyle = "bg-(--secondary-button) h-11 mt-1 mb-4 w-full rounded-sm outline-0 px-3 text-xs";
-    const inputsData: (keyof formType)[] = ["name","username","bio","portfolio"];
+    const inputsData: (keyof EditProfileSchemaType)[] = ["name","username","bio","portfolio"];
 
 
     const nameToLabel = (word: string) => {
         return `${word[0].toUpperCase()}${word.slice(1)}`
     }
 
-    const onSubmit = async(data: formType) => {
+    const onSubmit = async(data: EditProfileSchemaType) => {
         if(!isDirty){
             toast.warning("nothing to update");
             return;
