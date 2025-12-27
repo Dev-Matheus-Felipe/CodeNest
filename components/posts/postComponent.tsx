@@ -1,11 +1,15 @@
 import { UserType } from "../profile/functions/getUser";
+import { DeletePost } from "../buttons/deletePost";
+import { EditPost } from "../buttons/editPost";
 import { PostType } from "@/lib/types/post";
 import { askedTimeAgo } from "./postInfo";
 import Image from "next/image";
 import Link from "next/link";
 
+export const titleIconsCss = 
+    "z-10 w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center cursor-pointer";
+
 export function PostComponent({post, user} : {post: PostType, user?: UserType}){
-    const titleIconsCss = "w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center";
     const tags = post.tags.split(",");
 
     return (
@@ -22,13 +26,9 @@ export function PostComponent({post, user} : {post: PostType, user?: UserType}){
                 {   /* TITLE ICONS */
                     (user?.id) &&
                     <div className="flex gap-1 p-2 absolute left-full -translate-x-full top-1">
-                        <div className={titleIconsCss}>
-                            <Image src={`/icons/general/trash.svg`} alt="trash icon" width={15} height={15}/>
-                        </div>
+                        <DeletePost post={post} />
 
-                        <div className={titleIconsCss}>
-                            <Image src={`/icons/general/edit.svg`} alt="edit icon" width={15} height={15}/>
-                        </div>
+                        <EditPost post={post} />
                     </div>
                 }
             </div>

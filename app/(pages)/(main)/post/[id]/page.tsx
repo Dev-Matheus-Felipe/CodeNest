@@ -1,11 +1,11 @@
 import { CodeEditorComponent } from "@/components/CodeEditor/CodeEditorComponent";
 import { askedTimeAgo } from "@/components/posts/postInfo";
-import { PostForm } from "@/components/posts/postForm";
 import { Response } from "@/components/posts/response";
 import { Like } from "@/components/buttons/like";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
+import { ResponseForm } from "@/components/posts/responseForm";
 
 export default async function Post({params}: { params: {id: string} }){
     const { id } = await params;
@@ -85,7 +85,7 @@ export default async function Post({params}: { params: {id: string} }){
                 <Response key={response.id} response={response} />
             ))}
 
-            <PostForm user={session?.user} post={post.id} />
+            <ResponseForm user={session?.user} post={post.id} />
         </div>
     )
 }

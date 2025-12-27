@@ -8,7 +8,7 @@ export function CodeEditorComponent({post} : {post: PostType | ResponseTpe}){
     if(!post.code) return null;
     
     return (
-        <div className='w-full max-h-100 bg-(--code-editor) flex items-center py-1'>
+        <div className='w-full min-h-100 bg-(--code-editor) flex items-center py-1'>
             <CodeEditor
                 value={post.code}
                 language={post.language}

@@ -4,7 +4,7 @@ export const postFormType = z4.object({
     title: z4.string().min(5,"Min Length: 5").max(70,"Max Length: 70").regex(/^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*/),
     language: z4.string(),
     code: z4.string().max(10000,"Caracter limits reached").optional(),
-    tagsSelected: z4.array(z4.string()).max(3, "Max  3 tags are allowed"),
+    tagsSelected: z4.array(z4.string()).min(1,"Min 1 tag").max(3, "Max  3 tags are allowed"),
     description: z4
         .string()
         .min(5,"Min Length: 5")
