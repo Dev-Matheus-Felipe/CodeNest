@@ -52,10 +52,12 @@ export default async function Post({params}: { params: {id: string} }){
                     <p className="text-md">{post.author.name}</p>
                 </div>
 
-                <div className="flex gap-2 text-xs items-center">
-                    <Like id={post.id} content="post" liked={liked} user={session?.user} /> 
+                <div className="flex gap-4 text-xs items-center">
+                    <div className="flex items-center gap-1">
+                        <Like id={post.id} content="post" liked={liked} user={session?.user} /> 
 
                         {post.likedBy.length}
+                    </div>
 
                     <AddCollection user={session?.user ? true : false} post={post.id} saved={saved} />
                 </div>
@@ -80,7 +82,7 @@ export default async function Post({params}: { params: {id: string} }){
                 </div>
             </div>
 
-            <p className="text-md">{post.description}</p>
+            <p className="text-md w-full px-1">{post.description}</p>
             
             {post.code && <CodeEditorComponent post={post} />}
 

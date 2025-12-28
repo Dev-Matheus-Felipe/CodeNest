@@ -44,8 +44,8 @@ export  function PostFormComponent({post} : {post?: Post}){
 
 
     const filteredTags: string[] = tags.filter(tag =>
-        tag.toLowerCase().includes(searchTags.toLowerCase()) && !tagsSelected.includes(tag)
-    );
+        tag.name.toLowerCase().includes(searchTags.toLowerCase()) && !tagsSelected.includes(tag.name)
+    ).map(e => e.name);
 
     const onSubmit = async(data : PostFormType) => {
         if(isDirty && post){
