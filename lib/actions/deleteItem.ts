@@ -2,7 +2,7 @@
 
 import { Response } from "@prisma/client";
 import { prisma } from "../prisma";
-import { refresh, revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { PostType } from "../types/post";
 
 export async function DeleteItem({itemType, item} : {itemType: "post" | "response", item: Response | PostType}){

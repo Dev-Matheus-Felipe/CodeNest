@@ -1,6 +1,3 @@
-
-export const dynamic = "force-dynamic";
-
 import { HomePosts } from "@/components/posts/homePosts";
 import { prisma } from "@/lib/prisma";
 

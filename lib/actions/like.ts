@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "../prisma";
 import { auth } from "@/lib/auth";
 import { User } from "next-auth";
-import { Post } from "@prisma/client";
 
 export type LikeType = {
   id: string;

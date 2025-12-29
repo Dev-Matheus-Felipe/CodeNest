@@ -1,6 +1,3 @@
-
-export const dynamic = "force-dynamic";
-
 import { CollectionContainer } from "@/components/generals/collection";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";

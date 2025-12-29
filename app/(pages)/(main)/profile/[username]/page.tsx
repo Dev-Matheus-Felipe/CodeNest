@@ -3,10 +3,9 @@ import { GetUser } from "@/components/profile/functions/getUser";
 import z4 from "zod/v4";
 
 const usernameSchema = z4.string().min(3).max(20).regex(/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/);
-export const dynamic = "force-dynamic";
 
 export default async function ProfilePage({ params }: { params: { username: string } }) {
-  const { username } =  params;
+  const { username } = await  params;
 
   const result = usernameSchema.safeParse(username);
 

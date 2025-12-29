@@ -2,8 +2,6 @@ import { TagsContainer } from "@/components/generals/tags";
 import { prisma } from "@/lib/prisma";
 import { tags } from "@/lib/tagsData";
 
-export const dynamic = "force-dynamic";
-
 export default async function Tags() {
   const posts = await prisma.post.findMany({
     select: {

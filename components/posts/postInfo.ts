@@ -1,5 +1,3 @@
-"use client"
-
 export type PostType = {
   id: string;
   title: string;

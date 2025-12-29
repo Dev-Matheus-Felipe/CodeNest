@@ -8,12 +8,9 @@ import { ResponseForm } from "@/components/posts/responseForm";
 import { AddCollection } from "@/components/buttons/addCollection";
 import { AskedTime } from "@/components/generals/askedTime";
 
-export const dynamic = "force-dynamic";
-
-
 export default async function Post({params}: { params: {id: string} }){
     
-    const { id } =  params;
+    const { id } =  await params;
 
     const post = await prisma.post.findUnique({
         where: {id: id},
