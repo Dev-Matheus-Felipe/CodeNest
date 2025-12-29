@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "@prisma/client";
+import { User } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";

@@ -6,6 +6,7 @@ declare module "next-auth" {
     bio?: string | null;
     createdResume?: string | null;
     portfolio?: string | null;
+    createdAt: Date
   }
 
   interface Session {

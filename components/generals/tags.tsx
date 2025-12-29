@@ -4,7 +4,7 @@ import { PostType } from "@/lib/types/post"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { PostComponent } from "../posts/postComponent"
-import { useParams, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 
 type Result  = {
     description: string,
