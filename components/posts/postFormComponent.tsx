@@ -4,12 +4,15 @@ import { postFormType, PostFormType } from '@/lib/schemas/postFormSchema';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Post } from '@prisma/client';
 import { codeEditTags, tags } from '@/lib/tagsData';
 import { PostForm } from '@/lib/actions/postForm';
 import { useState } from 'react';
 import Image from 'next/image';
 import { toast } from 'sonner';
+
+import { Prisma } from "@prisma/client";
+
+type Post = Prisma.PostGetPayload<{}>;
 
 export  function PostFormComponent({post} : {post?: Post}){
     const inputStyle = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";
