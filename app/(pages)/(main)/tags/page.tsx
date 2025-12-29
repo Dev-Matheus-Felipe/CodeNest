@@ -1,7 +1,6 @@
 import { TagsContainer } from "@/components/generals/tags";
 import { prisma } from "@/lib/prisma";
 import { tags } from "@/lib/tagsData";
-import { Post } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
@@ -36,7 +35,7 @@ export default async function Tags() {
     tagMap[tag.name] = [];
   });
 
-  posts.forEach((post: Post) => {
+  posts.forEach((post) => {
     post.tags.split(",").forEach(tag => {
       if (tagMap[tag]) {
         tagMap[tag].push(post);
