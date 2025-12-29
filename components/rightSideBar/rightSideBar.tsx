@@ -3,10 +3,8 @@ import Link from "next/link";
 
 import { Prisma } from "@prisma/client";
 
-type Post = Prisma.PostGetPayload<{}>;
-
 export default async function RightSideBar(){
-    const posts: Post[] = await prisma.post.findMany();
+    const posts = await prisma.post.findMany();
 
     const tags = posts.flatMap(e => e.tags.split(","));
 

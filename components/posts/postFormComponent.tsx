@@ -10,9 +10,16 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { toast } from 'sonner';
 
-import { Prisma } from "@prisma/client";
 
-type Post = Prisma.PostGetPayload<{}>;
+type Post = {
+  id: string;
+  title: string;
+  description: string;
+  code: string | null;
+  language: string;
+  tags: string;
+};
+
 
 export  function PostFormComponent({post} : {post?: Post}){
     const inputStyle = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";
