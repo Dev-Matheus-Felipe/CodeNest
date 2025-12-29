@@ -8,7 +8,8 @@ import { ResponseForm } from "@/components/posts/responseForm";
 import { AddCollection } from "@/components/buttons/addCollection";
 import { AskedTime } from "@/components/generals/askedTime";
 
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 
 export default async function Post({params}: { params: {id: string} }){
     const { id } = await params;
