@@ -1,9 +1,10 @@
 import { TagsContainer } from "@/components/generals/tags";
 import { prisma } from "@/lib/prisma";
 import { tags } from "@/lib/tagsData";
+import { PostType } from "@/lib/types/post";
 
 export default async function Tags() {
-  const posts = await prisma.post.findMany({
+  const posts: PostType[] = await prisma.post.findMany({
     select: {
         createdAt: true,
         id: true,
