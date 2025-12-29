@@ -7,12 +7,10 @@ import Image from "next/image";
 import { ResponseForm } from "@/components/posts/responseForm";
 import { AddCollection } from "@/components/buttons/addCollection";
 import { AskedTime } from "@/components/generals/askedTime";
-import { unstable_noStore } from "next/cache";
 
 
 
 export default async function Post({params}: { params: {id: string} }){
-    unstable_noStore();
     
     const { id } = await params;
 
