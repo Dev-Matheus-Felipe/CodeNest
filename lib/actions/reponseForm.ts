@@ -1,10 +1,10 @@
 "use server"
 
 import { responseSchema, ResponseSchemaType } from "../schemas/responseSchema";
-import { Response } from "@prisma/client";
 import { refresh } from "next/cache";
 import { prisma } from "../prisma";
 import { auth } from "../auth";
+import { Response } from "@/components/posts/responseForm";
 
 export async function Responseform({data, post, type} : {data: ResponseSchemaType, post: string, type?: Response}){
     const session = await auth();

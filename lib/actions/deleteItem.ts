@@ -1,9 +1,9 @@
 "use server"
 
-import { Response } from "@prisma/client";
 import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
 import { PostType } from "../types/post";
+import { Response } from "@/components/posts/responseForm";
 
 export async function DeleteItem({itemType, item} : {itemType: "post" | "response", item: Response | PostType}){
     if(itemType === "post")

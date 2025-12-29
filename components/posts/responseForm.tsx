@@ -7,11 +7,20 @@ import { toast } from "sonner";
 import { codeEditTags } from "@/lib/tagsData";
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import { Controller, useForm } from "react-hook-form";
-import { Response } from "@prisma/client";
 import { responseSchema, ResponseSchemaType } from "@/lib/schemas/responseSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Responseform } from "@/lib/actions/reponseForm";
 
+export type Response = {
+    id: string;
+    content: string;
+    code: string | null;
+    language: string;
+    createdAt: Date;
+    likedBy: string[];
+    postId: string;
+    authorId: string;
+}
 
 export function ResponseForm({user, post, response} : {user?: User, post: string, response?: Response}){
     const inputStyle = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";

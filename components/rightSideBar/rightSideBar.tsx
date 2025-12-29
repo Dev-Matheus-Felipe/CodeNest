@@ -1,8 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link";
 
-import { Prisma } from "@prisma/client";
-
 export default async function RightSideBar(){
     const posts = await prisma.post.findMany();
 
