@@ -1,6 +1,9 @@
 import { prisma } from "@/lib/prisma"
-import { Post } from "@prisma/client";
 import Link from "next/link";
+
+import { Prisma } from "@prisma/client";
+
+type Post = Prisma.PostGetPayload<{}>;
 
 export default async function RightSideBar(){
     const posts: Post[] = await prisma.post.findMany();
