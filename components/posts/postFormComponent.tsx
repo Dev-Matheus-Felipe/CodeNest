@@ -4,7 +4,7 @@ import { postFormType, PostFormType } from '@/lib/schemas/postFormSchema';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Post } from '@/src/generated/prisma/client';
+import { Post } from '@prisma/client';
 import { codeEditTags, tags } from '@/lib/tagsData';
 import { PostForm } from '@/lib/actions/postForm';
 import { useState } from 'react';

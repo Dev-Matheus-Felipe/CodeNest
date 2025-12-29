@@ -1,6 +1,6 @@
 "use server"
 
-import { Response } from "@/src/generated/prisma/client";
+import { Response } from "@prisma/client";
 import { prisma } from "../prisma";
 import { refresh, revalidatePath } from "next/cache";
 import { PostType } from "../types/post";

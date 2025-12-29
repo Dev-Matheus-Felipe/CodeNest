@@ -1,4 +1,4 @@
-import { Prisma } from "@/src/generated/prisma/client";
+import { Prisma } from "@prisma/client";
 
 export type SavedPostWithPost = Prisma.SavedPostGetPayload<{
   include: {

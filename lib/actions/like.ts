@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "../prisma";
 import { auth } from "@/lib/auth";
 import { User } from "next-auth";
+import { Post, Response } from "@prisma/client";
 
 export type LikeType = {
   id: string;
@@ -40,7 +41,7 @@ export async function leaveLike({ id, content }: LeaveLikeInput) {
       data: {
         likedBy: {
           set: hasLiked
-            ? post.likedBy.filter((uid) => uid !== userId)
+            ? post.likedBy.filter((uid: Post) => uid.id !== userId)
             : [...post.likedBy, userId],
         },
       },
@@ -60,7 +61,7 @@ export async function leaveLike({ id, content }: LeaveLikeInput) {
       data: {
         likedBy: {
           set: hasLiked
-            ? response.likedBy.filter((uid) => uid !== userId)
+            ? response.likedBy.filter((uid: Response) => uid.id !== userId)
             : [...response.likedBy, userId],
         },
       },

@@ -1,7 +1,7 @@
 "use server"
 
 import { responseSchema, ResponseSchemaType } from "../schemas/responseSchema";
-import { Response } from "@/src/generated/prisma/client";
+import { Response } from "@prisma/client";
 import { refresh } from "next/cache";
 import { prisma } from "../prisma";
 import { auth } from "../auth";
