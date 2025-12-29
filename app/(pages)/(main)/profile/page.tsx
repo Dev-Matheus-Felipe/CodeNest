@@ -2,6 +2,7 @@ import { ProfileComponent } from "@/components/profile/profileComponent";
 import { GetUser } from "@/components/profile/functions/getUser";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth"
+export const dynamic = "force-dynamic";
 
 export default async function MyProfile(){
     const session = await auth();

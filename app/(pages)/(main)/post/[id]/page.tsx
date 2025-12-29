@@ -1,5 +1,5 @@
 import { CodeEditorComponent } from "@/components/CodeEditor/CodeEditorComponent";
-import { Response } from "@/components/posts/response";
+import { Response, ResponseTpe } from "@/components/posts/response";
 import { Like } from "@/components/buttons/like";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
@@ -8,11 +8,12 @@ import { ResponseForm } from "@/components/posts/responseForm";
 import { AddCollection } from "@/components/buttons/addCollection";
 import { AskedTime } from "@/components/generals/askedTime";
 
+export const dynamic = "force-dynamic";
 
 
 export default async function Post({params}: { params: {id: string} }){
     
-    const { id } = await params;
+    const { id } =  params;
 
     const post = await prisma.post.findUnique({
         where: {id: id},
@@ -84,7 +85,7 @@ export default async function Post({params}: { params: {id: string} }){
             
             {post.code && <CodeEditorComponent post={post} />}
 
-            {post.responses.length >=0 && post.responses.map((response) => (
+            {post.responses.length >=0 && post.responses.map((response: ResponseTpe) => (
                 <Response key={response.id} response={response} />
             ))}
 
