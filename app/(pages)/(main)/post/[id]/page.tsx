@@ -7,6 +7,7 @@ import { auth } from "@/lib/auth";
 import Image from "next/image";
 import { ResponseForm } from "@/components/posts/responseForm";
 import { AddCollection } from "@/components/buttons/addCollection";
+import { AskedTime } from "@/components/generals/askedTime";
 
 export default async function Post({params}: { params: {id: string} }){
     const { id } = await params;
@@ -66,12 +67,7 @@ export default async function Post({params}: { params: {id: string} }){
             <h1 className="text-2xl">{post.title}</h1>
 
             <div className="flex gap-5 items-center pb-7">
-                <div className="flex gap-1 items-center">
-                    <Image src="/icons/general/time.svg" alt="Time icon" width={15} height={15} />
-                    <p className="text-[10px]">
-                         asked {askedTimeAgo(post.createdAt)}
-                    </p>
-                </div>
+                <AskedTime createdAt={post.createdAt} />
 
                 <div className="flex gap-1 items-center">
                     <Image src="/icons/general/message.svg" alt="Like icon" width={20} height={20} />
