@@ -2,13 +2,15 @@ import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { verifyLogin } from "@/lib/actions/verifyLogin";
 
 
 export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boolean, theme: string, logged: Session | null}){
 
     const pathname = usePathname();
+    const router = useRouter();
 
     const linkStyles = `cursor-pointer w-45 h-12 flex items-center justify-start px-5 gap-3 border border-transparent
     hover:border-amber-600 rounded-sm } `;
@@ -18,11 +20,16 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
             && "text-white bg-linear-to-r from-(--primary-color-button) to-(--secondary-color-button) font-bold"}`;
     }
 
-    const profileHandler = (e : React.MouseEvent) => {
-        if(!logged){
-            e.preventDefault();
+    const protectedRoutes = async(e : React.MouseEvent, route: string) => {
+        e.preventDefault();
+
+        if(!await verifyLogin()){
             toast.warning("Must be logged!");
+            router.push(pathname);
+            return;
         }
+
+        router.push(route);
     }
 
     const loginHandler = async() => {
@@ -37,8 +44,7 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
             await signIn("github");
             toast.success("Logged in successfully.", {id: loading});
         }
-        
-        
+    
     }
 
     return (
@@ -60,7 +66,7 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
                     </Link>
 
                     <Link href="/collections" className={`${linkStyles} ${linkSelected("/collections")}`} 
-                    onClick={(e)=> profileHandler(e)}>
+                    onClick={(e) => protectedRoutes(e,"/collections")}>
                         <Image src={`/icons/${theme}/star.svg`} alt="Star Icon"  width={18} height={18} />
                         <p className={`text-[13px] ${pathname !== "/collections" && "text-(--sidebar-text-color)"}`}>Collections</p>
                     </Link>
@@ -70,17 +76,20 @@ export function LeftSideBar({sidebarOpened, theme, logged} : {sidebarOpened: boo
                         <p className={`text-[13px] ${pathname !== "/tags" && "text-(--sidebar-text-color)"}`}>Tags</p>
                     </Link>
 
-                    <Link href="/profile" className={`${linkStyles} ${linkSelected("/profile")}`} onClick={(e)=> profileHandler(e)}>
-                        <Image src={`/icons/${theme}/profile.svg`} alt="Tag Icon"  width={18} height={18} />
-                        <p className={`text-[13px] ${pathname !== "/profile" && "text-(--sidebar-text-color)"}`}>Profile</p>
+                    
+                    <Link href="/profile" className={`${linkStyles} ${linkSelected("/profile")}`} 
+                    onClick={(e) => protectedRoutes(e,"/profile")}>
+                        <Image src={`/icons/${theme}/profile.svg`} alt="Profile Icon"  width={18} height={18} />
+                        <p className={`text-[13px] ${pathname !== "/tags" && "text-(--sidebar-text-color)"}`}>Profile</p>
                     </Link>
 
-                    <Link href="/question" className={`${linkStyles} ${linkSelected("/question")}`} onClick={(e)=> profileHandler(e)}>
-                        <Image src={`/icons/${theme}/ask.svg`} alt="Tag Icon"  width={18} height={18} />
+                    <Link href="/question" className={`${linkStyles} ${linkSelected("/question")}`}
+                    onClick={(e) => protectedRoutes(e,"/question")}>
+                        <Image src={`/icons/${theme}/ask.svg`} alt="Question Icon"  width={18} height={18} />
                         <p className={`text-[13px] ${pathname !== "/question" && "text-(--sidebar-text-color)"}`}>Ask a question</p>
                     </Link>
-                
-                    
+
+            
                 </nav>
                 
                 <button className="md:bg-(--secondary-button) bg-(--secondary-button-hover) text-[13px] rounded-sm w-43 h-10

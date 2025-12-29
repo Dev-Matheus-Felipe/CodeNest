@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import Link from "next/link";
 
 export default async function RightSideBar(){
     const posts = await prisma.post.findMany();
@@ -55,9 +56,9 @@ export default async function RightSideBar(){
                     {
                         topTags.map((e,index) => (
                             <div className={containeTag} key={index}>
-                                <p className={tagTitle}>
+                                <Link className={tagTitle} href={`/tags?tag=${e.tag}`}>
                                     {e.tag}
-                                </p>
+                                </Link>
 
                                 <p className="w-[19%] text-sm">{e.count}</p>
                             </div>

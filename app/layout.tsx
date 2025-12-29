@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "Code Nest",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class">
           <Toaster />
           {children}
+          <NextTopLoader color="#ff5e00" height={3} crawl crawlSpeed={200} showSpinner={false} easing="ease" />
         </ThemeProvider>
 
       </body>

@@ -2,8 +2,9 @@
 
 import { PostType } from "@/lib/types/post"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { PostComponent } from "../posts/postComponent"
+import { useParams, useSearchParams } from "next/navigation"
 
 type Result  = {
     description: string,
@@ -14,6 +15,14 @@ type Result  = {
 export function TagsContainer({result} : {result: Result[]}){
     const [posts, setPosts] = useState<Result | null>(null);
     const [search, setSearch] = useState<string>("");
+
+    const params = useSearchParams();
+    
+    useEffect(() => {
+        const tag = params.get("tag");
+        const el = result.find(e => e.tag.toLowerCase() === tag?.toLocaleLowerCase());
+        if(tag && el) setPosts(el);
+    },[params])
  
     return (
          <div className="w-full h-[calc(100vh-120px)] flex flex-col gap-7 p-[2%] items-center">
@@ -29,7 +38,7 @@ export function TagsContainer({result} : {result: Result[]}){
                                 alt="Search Icon" 
                                 width={15}
                                 height={15} 
-                                className="absolute top-1/2 left-4 -translate-y-1/2"/>
+                                className="absolute top-1/2 left-4 -translate-y-1/2 "/>
 
                             <input 
                                 type="text" 
@@ -60,7 +69,7 @@ export function TagsContainer({result} : {result: Result[]}){
                 </>
 
                 : 
-                    <div className="w-full h-[calc(100vh-120px)] p-[2%] gap-7 grid grid-cols-1 grid-rows-[auto_1fr]">
+                    <div className="w-full h-[calc(100vh-120px)]  gap-7 grid grid-cols-1 grid-rows-[auto_1fr]">
                         <div className="col-span-1 row-span-1 flex flex-col gap-5">
                             <div className="flex justify-between">
                                 <h1 className="text-2xl font-bold">{posts.tag}</h1>
