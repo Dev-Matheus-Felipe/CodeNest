@@ -1,5 +1,4 @@
 import { CodeEditorComponent } from "@/components/CodeEditor/CodeEditorComponent";
-import { askedTimeAgo } from "@/components/posts/postInfo";
 import { Response } from "@/components/posts/response";
 import { Like } from "@/components/buttons/like";
 import { prisma } from "@/lib/prisma";
