@@ -4,8 +4,8 @@ import { UserType } from "./getUser";
         if(!user) return 0;
         
         const userLikes = 
-            user.posts.reduce<number>((acc: number, post: {likedBy: string[]}) => acc + post.likedBy.length, 0) + 
-            user.responses.reduce<number>((acc: number, response: {likedBy: string[]}) => acc +  response.likedBy.length, 0);
+            user.posts.reduce((acc, post) => acc + post.likedBy.length, 0) + 
+            user.responses.reduce((acc, response) => acc +  response.likedBy.length, 0);
 
         return userLikes;
     }
