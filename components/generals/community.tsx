@@ -25,13 +25,13 @@ export function CommunityContainer({users} : {users: User[]}){
 
         case "Date ↑":
             setUseresState(
-                [...users].sort((a,b) =>  b.createdAt.getTime() -  a.createdAt.getTime())
+                [...users].sort((a,b) =>  b.createdAt!.getTime() -  a.createdAt!.getTime())
             );
             break;
 
         case "Date ↓":
             setUseresState(
-                [...users].sort((a,b) => a.createdAt.getTime() - b.createdAt.getTime())
+                [...users].sort((a,b) => a.createdAt!.getTime() - b.createdAt!.getTime())
             );
             break;
 
