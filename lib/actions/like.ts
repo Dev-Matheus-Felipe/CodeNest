@@ -40,7 +40,7 @@ export async function leaveLike({ id, content }: LeaveLikeInput) {
       data: {
         likedBy: {
           set: hasLiked
-            ? post.likedBy.filter((uid) => uid !== userId)
+            ? post.likedBy.filter((uid: string) => uid !== userId)
             : [...post.likedBy, userId],
         },
       },
@@ -60,7 +60,7 @@ export async function leaveLike({ id, content }: LeaveLikeInput) {
       data: {
         likedBy: {
           set: hasLiked
-            ? response.likedBy.filter((uid) => uid !== userId)
+            ? response.likedBy.filter((uid: string) => uid !== userId)
             : [...response.likedBy, userId],
         },
       },
