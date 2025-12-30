@@ -7,8 +7,15 @@ import { useForm } from "react-hook-form";
 import { User } from "next-auth";
 import { toast } from "sonner";
 
+type InitialValues = {
+    name: string,
+    username: string,
+    bio: string,
+    portfolio: string
+}
+
 export function Form({user} : {user: User}){  
-    const initialValues = {
+    const initialValues: InitialValues = {
         name: user.name ?? "",
         username: user.username ?? "",
         bio: user.bio ?? "",
@@ -25,7 +32,7 @@ export function Form({user} : {user: User}){
         defaultValues: initialValues
     });
 
-    const inputStyle = "bg-(--secondary-button) h-11 mt-1 mb-4 w-full rounded-sm outline-0 px-3 text-xs";
+    const inputStyle: string = "bg-(--secondary-button) h-11 mt-1 mb-4 w-full rounded-sm outline-0 px-3 text-xs";
     const inputsData: (keyof EditProfileSchemaType)[] = ["name","username","bio","portfolio"];
 
 

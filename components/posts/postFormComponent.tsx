@@ -2,6 +2,7 @@
 
 import { postFormType, PostFormType } from '@/lib/schemas/postFormSchema';
 import CodeEditor from '@uiw/react-textarea-code-editor';
+import { UniquePostEdit } from '@/lib/types/uniquePost';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { codeEditTags, tags } from '@/lib/tagsData';
@@ -10,21 +11,19 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { toast } from 'sonner';
 
-
-type Post = {
-  id: string;
-  title: string;
-  description: string;
-  code: string | null;
-  language: string;
-  tags: string;
-};
+type InitialValues = {
+    title: string,
+    description: string,
+    code: string,
+    language: string,
+    tagsSelected: string[]
+}
 
 
-export  function PostFormComponent({post} : {post?: Post}){
+export  function PostFormComponent({post} : {post?: UniquePostEdit}){
     const inputStyle = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";
 
-    const initialValues = {
+    const initialValues: InitialValues = {
         title: post?.title ?? "",
         description:  post?.description ?? "",
         code:  post?.code ?? "",
@@ -46,7 +45,7 @@ export  function PostFormComponent({post} : {post?: Post}){
         defaultValues: initialValues
     });
 
-    const [searchTags, setSearchTags] = useState("");
+    const [searchTags, setSearchTags] = useState<string>("");
     const [editCodeTags, setEditCodeTags] = useState<boolean>(false);
 
     const tagsSelected = watch("tagsSelected");
@@ -129,7 +128,7 @@ export  function PostFormComponent({post} : {post?: Post}){
                             
                             <div className='w-[99%] max-h-50 overflow-y-auto flex flex-col pl-2'>
                                 { 
-                                    searchTags && filteredTags.map((e, index) => (
+                                    searchTags && filteredTags.map((e: string, index: number) => (
                                         <p 
                                             className={`text-xs w-[99%] cursor-pointer hover:text-orange-500 border 
                                             border-transparent hover:border-(--primary-color-button) pl-3 py-3`} 
@@ -152,7 +151,7 @@ export  function PostFormComponent({post} : {post?: Post}){
 
                     <div className="flex w-full items-center gap-2">
                         {   
-                            tagsSelected.map((e) => (
+                            tagsSelected.map((e: string) => (
                                 <p 
                                     key={e} 
                                     onClick={() => setValue("tagsSelected", tagsSelected.filter(t => t !== e))}
@@ -189,7 +188,7 @@ export  function PostFormComponent({post} : {post?: Post}){
                         <div className={`absolute z-10 top-full left-full -translate-x-full h-60 w-25
                         bg-(--codeEdit-tag) translate-y-1.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
                             {
-                                codeEditTags.map((e) => (
+                                codeEditTags.map((e: string) => (
                                     <p 
                                         key={e} 
                                         className='border py-1 pl-2 hover:text-orange-500 cursor-pointer rounded-sm'

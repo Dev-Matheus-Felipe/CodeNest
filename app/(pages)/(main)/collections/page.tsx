@@ -1,15 +1,14 @@
 import { CollectionContainer } from "@/components/generals/collection";
-import { auth } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
-import { SavedPostSchema } from "@/lib/schemas/savedPostSchema";
+import { SavedPostsType } from "@/lib/types/savedPosts";
 import { redirect } from "next/navigation";
-
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 
 export default async function Collections(){
     const session = await auth();
     if(!session?.user.id) redirect("/");
 
-    const savedPosts: SavedPostSchema[] = await prisma.savedPost.findMany({
+    const savedPosts: SavedPostsType[] = await prisma.savedPost.findMany({
         where: {
             userId: session.user.id
         },

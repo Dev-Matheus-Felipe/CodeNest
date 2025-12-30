@@ -1,16 +1,16 @@
-import { UserType } from "../profile/functions/getUser";
+import { GeneralPostType } from "@/lib/types/generalPost";
+import { FullUserType } from "@/lib/types/fullUser";
 import { DeletePost } from "../buttons/deletePost";
 import { EditPost } from "../buttons/editPost";
-import { PostType } from "@/lib/types/post";
 import { askedTimeAgo } from "./postInfo";
 import Image from "next/image";
 import Link from "next/link";
 
-export const titleIconsCss = 
+export const titleIconsCss: string = 
     "z-10 w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center cursor-pointer";
 
-export function PostComponent({post, user} : {post: PostType, user?: UserType}){
-    const tags = post.tags.split(",");
+export function PostComponent({post, user} : {post: GeneralPostType, user?: FullUserType}){
+    const tags: string[] = post.tags.split(",");
 
     return (
         <Link className={`flex flex-col w-[98%] py-3 mb-5 rounded-sm cursor-pointer relative gap-2
@@ -36,7 +36,7 @@ export function PostComponent({post, user} : {post: PostType, user?: UserType}){
             {/* TAGS */}
             <div className="flex gap-2">
                 {
-                    tags.map((e, index) => (
+                    tags.map((e: string, index: number) => (
                         <p className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-2 px-3 rounded-2xl 
                         cursor-pointer`} key={index}>{e}</p>
                     ))

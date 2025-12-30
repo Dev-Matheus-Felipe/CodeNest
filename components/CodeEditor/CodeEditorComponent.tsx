@@ -1,10 +1,10 @@
 "use client"
 
+import { ResponseGeneralType } from '@/lib/types/response';
 import CodeEditor from '@uiw/react-textarea-code-editor';
-import { PostType } from '../posts/postInfo';
-import { ResponseTpe } from '../posts/response';
+import { UniquePost } from '@/lib/types/uniquePost';
 
-export function CodeEditorComponent({post} : {post: PostType | ResponseTpe}){
+export function CodeEditorComponent({post} : {post: UniquePost | ResponseGeneralType}){
     if(!post.code) return null;
     
     return (

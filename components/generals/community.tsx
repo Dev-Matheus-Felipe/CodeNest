@@ -15,7 +15,7 @@ export function CommunityContainer({users} : {users: User[]}){
     const [usersState, setUseresState] = useState<User[]>(users);
     const [search, setSearch] = useState<SearchType>({input: "", filter: "Select a filter", openFilter: false});
 
-    const filters = ["Select a filter", "Date ↑", "Date ↓"];
+    const filters: string[] = ["Select a filter", "Date ↑", "Date ↓"];
     useEffect(() => {
         switch(search.filter){
 
@@ -25,13 +25,13 @@ export function CommunityContainer({users} : {users: User[]}){
 
         case "Date ↑":
             setUseresState(
-                [...users].sort((a,b) =>  b.createdAt!.getTime() -  a.createdAt!.getTime())
+                [...users].sort((a: User,b: User) =>  b.createdAt!.getTime() -  a.createdAt!.getTime())
             );
             break;
 
         case "Date ↓":
             setUseresState(
-                [...users].sort((a,b) => a.createdAt!.getTime() - b.createdAt!.getTime())
+                [...users].sort((a: User,b: User) => a.createdAt!.getTime() - b.createdAt!.getTime())
             );
             break;
 
@@ -41,6 +41,7 @@ export function CommunityContainer({users} : {users: User[]}){
         }
 
     },[search.filter]);
+
     return (
         <div className="w-full h-full flex flex-col gap-7 p-[2%] items-center">
             <h1 className="text-2xl w-full px-4 border-b border-[#565656] pb-5 font-bold">All Users</h1>
@@ -86,7 +87,7 @@ export function CommunityContainer({users} : {users: User[]}){
                             <div className={`absolute z-10 top-full left-full -translate-x-full      w-28
                             bg-(--codeEdit-tag) translate-y-1.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
                                 {
-                                    filters.map((e) => (
+                                    filters.map((e: string) => (
                                         <p 
                                             key={e} 
                                             className='border py-2 px-1 hover:text-orange-500 cursor-pointer rounded-sm'
@@ -102,7 +103,7 @@ export function CommunityContainer({users} : {users: User[]}){
 
             <div className="w-full max-h-full gap-5 grid pr-5 overflow-y-scroll grid-cols-[repeat(auto-fit,minmax(130px,150px))">
                 {
-                    users.filter(e => (e.name ?? "").toLowerCase().includes(search.input.toLowerCase())).map((e) => (
+                    users.filter((e: User) => (e.name ?? "").toLowerCase().includes(search.input.toLowerCase())).map((e: User) => (
                         <Link href={`/profile/${users[0].username}`} key={e.id} className={`flex flex-col items-center w-43 py-3 
                         cursor-pointer rounded-md text-center duration-200  h-full`}>
                             <Image 

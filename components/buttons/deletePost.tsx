@@ -1,11 +1,11 @@
 "use client"
 
-import Image from "next/image";
+import { GeneralPostType } from "@/lib/types/generalPost";
 import { titleIconsCss } from "../posts/postComponent";
-import { PostType } from "@/lib/types/post";
 import { DeleteItem } from "@/lib/actions/deleteItem";
+import Image from "next/image";
 
-export function DeletePost({post} : {post: PostType}){
+export function DeletePost({post} : {post: GeneralPostType}){
     return (
         <button className={titleIconsCss} onClick={(e) => {
             e.preventDefault();

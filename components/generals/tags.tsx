@@ -1,14 +1,14 @@
 "use client"
 
-import { PostType } from "@/lib/types/post"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { PostComponent } from "../posts/postComponent"
 import { useSearchParams } from "next/navigation"
+import { GeneralPostType } from "@/lib/types/generalPost"
 
 type Result  = {
     description: string,
-    posts: PostType[],
+    posts: GeneralPostType[],
     tag: string,
 }
 
@@ -54,7 +54,8 @@ export function TagsContainer({result} : {result: Result[]}){
                     <div className={`grid profile:grid-cols-[repeat(auto-fill,min(210px))] grid-cols-[repeat(auto-fill,min(150px))] 
                         gap-1 w-full overflow-y-auto justify-center gap-y-10`}>
                         {
-                            result.filter((e) => e.tag.toLowerCase().includes(search.toLowerCase())).map((e, index) => (
+                            result.filter((e: Result) => e.tag.toLowerCase().includes(search.toLowerCase()))
+                            .map((e: Result, index: number) => (
                                 <div 
                                     key={index} 
                                     className="flex flex-col gap-3 max-w-45 cursor-pointer" 
@@ -106,8 +107,9 @@ export function TagsContainer({result} : {result: Result[]}){
                         <div className="overflow-y-auto! w-full h-full">
                             {
                                 posts.posts.length > 0
-                                    ? posts.posts.filter((e) => e.title.toLowerCase().includes(search.toLowerCase())).map(post => (
-                                        <PostComponent post={post} key={post.id} /> ))
+                                    ? posts.posts.filter((e: GeneralPostType) => 
+                                        e.title.toLowerCase().includes(search.toLowerCase())).map((post: GeneralPostType) => (
+                                            <PostComponent post={post} key={post.id} /> ))
                                     : <p>No posts with this tag yet...</p>
                             }
                         </div>

@@ -1,25 +1,3 @@
-export type PostType = {
-  id: string;
-  title: string;
-  description: string;
-  code?: string | null;
-  language: string;
-  tags: string;
-  createdAt: Date;
-
-  likedBy: string[];
-
-  author: {
-    id: string;
-    name?: string | null;
-    username?: string | null;
-    image?: string | null;
-    bio?: string | null;
-    portfolio?: string | null;
-  };
-};
-
-
 export function askedTimeAgo(date: Date | string) {
   const now = new Date();
   const past = new Date(date);

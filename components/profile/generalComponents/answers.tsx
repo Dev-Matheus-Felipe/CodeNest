@@ -1,9 +1,16 @@
 import { prisma } from "@/lib/prisma";
 import { User } from "next-auth";
 
+type Answers = {
+    id: string
+}
+
 export async function Answers({user} : {user: User}){
-    const answers = await prisma.response.findMany({
-        where: {authorId: user.id}
+    const answers: Answers[] = await prisma.response.findMany({
+        where: {authorId: user.id},
+        select: {
+            id: true
+        }
     })
 
     return (

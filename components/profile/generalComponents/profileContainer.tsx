@@ -1,11 +1,9 @@
-import { UserType } from "../functions/getUser";
 import { GetTags } from "../functions/getTags";
 import { PostAnswers } from "./post-answers";
 import { Answers } from "./answers";
+import { FullUserType } from "@/lib/types/fullUser";
 
-export async function ProfileContainer({user} : {user: UserType}){
-    if(!user) return null;
-    
+export async function ProfileContainer({user} : {user: FullUserType}){    
     const topTags = GetTags({posts: user.posts});
 
     return (
@@ -33,7 +31,7 @@ export async function ProfileContainer({user} : {user: UserType}){
                             <h1 className="text-lg w-40">Top Tags</h1>
                             <div className="w-40 h-18 flex flex-col gap-3 items-center justify-center rounded-md">
                                 {
-                                    topTags.map((tagObj, index) => (
+                                    topTags.map((tagObj: {tag: string, count: number}, index: number) => (
                                         <div className="flex w-full justify-between items-center" key={index}>
                                             <p className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-1.5 px-3
                                             rounded-2xl cursor-pointer`}>{tagObj.tag}</p>

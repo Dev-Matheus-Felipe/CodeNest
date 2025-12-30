@@ -1,23 +1,21 @@
 "use client"
 
+import { FullUserType, UserPosts, UserResponses } from "@/lib/types/fullUser"
 import { PostComponent } from "@/components/posts/postComponent"
 import { askedTimeAgo } from "@/components/posts/postInfo"
 import { DeleteItem } from "@/lib/actions/deleteItem"
-import { UserType } from "../functions/getUser"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { PostType } from "@/lib/types/post"
-import { Response } from "@/components/posts/responseForm"
 
-export function PostAnswers({user} : {user: UserType}){
+export function PostAnswers({user} : {user: FullUserType}){
     if(!user) return null;
     
     const router = useRouter();
     const [state, setState] = useState("posts");
 
-    const data = state === "posts" ? user.posts : user.responses;
+    const data: UserPosts[] | UserResponses[] = state === "posts" ? user.posts : user.responses;
     const titleIconsCss = 
     "z-10 w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center cursor-pointer";
 
@@ -42,12 +40,12 @@ export function PostAnswers({user} : {user: UserType}){
                     )}
 
                     {state === "posts" &&
-                        user.posts.map((post: PostType, index: number) => (
+                        user.posts.map((post: UserPosts, index: number) => (
                             <PostComponent key={post.id} post={user.posts[index]} user={user} />
                         ))}
 
                     {state === "responses" &&
-                        user.responses.map((response: Response, index: number) => (
+                        user.responses.map((response: UserResponses, index: number) => (
                             <Link key={response.id} className={`flex flex-col w-[99%] py-3 mt-5 rounded-sm cursor-pointer relative gap-2
                             hover:bg-[rgba(255,255,255,0.02)] px-3`}  href={`/post/${user.posts[index].id}`}>
                                 <div className="flex justify-between">

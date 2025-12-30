@@ -1,11 +1,11 @@
 "use server"
 
-import { prisma } from "../prisma";
+import { GeneralPostType } from "../types/generalPost";
+import { ResponseType } from "../types/response";
 import { revalidatePath } from "next/cache";
-import { PostType } from "../types/post";
-import { Response } from "@/components/posts/responseForm";
+import { prisma } from "../prisma";
 
-export async function DeleteItem({itemType, item} : {itemType: "post" | "response", item: Response | PostType}){
+export async function DeleteItem({itemType, item} : {itemType: "post" | "response", item: ResponseType | GeneralPostType}){
     if(itemType === "post")
         await prisma.post.delete({where: {id: item.id}});
 

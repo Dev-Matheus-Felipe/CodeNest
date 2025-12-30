@@ -1,13 +1,19 @@
 "use client"
 
-import { PostComponent } from "./postComponent";
+import { GeneralPostType } from "@/lib/types/generalPost";
 import { AskAQuestion } from "../buttons/askQuesion";
-import Image from "next/image";
-import { homePostSchema } from "@/lib/schemas/homePostSchema";
+import { PostComponent } from "./postComponent";
 import { useState } from "react";
+import Image from "next/image";
 
-export  function HomePosts ({posts} : {posts: homePostSchema[]}){
-    const [state, setState] = useState<{posts: homePostSchema[], input: string, type?: string}>({
+type StateType = {
+    posts: GeneralPostType[],
+    input: string,
+    type?: string
+}
+
+export  function HomePosts ({posts} : {posts: GeneralPostType[]}){
+    const [state, setState] = useState<StateType>({
         posts: posts, input: "", type: "All"
     });
 
@@ -48,12 +54,12 @@ export  function HomePosts ({posts} : {posts: homePostSchema[]}){
                     <p className={tagStyles("All")} onClick={()=> setState(prev =>({...prev, posts: posts, type: "All"}))}>All</p>
 
                     <p className={tagStyles("Answered")} onClick={()=>{
-                        const data = posts.filter(e => e.responses.length > 0);
+                        const data = posts.filter((e: GeneralPostType) => e.responses.length > 0);
                         setState(prev => ({...prev, posts: data, type: "Answered" }))
                     }}>Answered</p>
 
                     <p className={tagStyles("Unanswered")} onClick={()=>{
-                        const data = posts.filter(e => e.responses.length === 0);
+                        const data = posts.filter((e: GeneralPostType) => e.responses.length === 0);
                         setState(prev => ({...prev, posts: data, type: "Unanswered" }))
                     }}>Unanswered</p>
                 </div>
@@ -63,9 +69,10 @@ export  function HomePosts ({posts} : {posts: homePostSchema[]}){
                 {
                     state.posts.length <= 0
                         ? <p className="text-sm">No posts added yet...</p>
-                        : state.posts.filter(e => e.title.toLowerCase().includes(state.input.toLowerCase())).map((post) => (
-                            <PostComponent post={post} key={post.id} />
-                        ))
+                        : state.posts.filter((e: GeneralPostType) => 
+                            e.title.toLowerCase().includes(state.input.toLowerCase())).map((post) => (
+                                <PostComponent post={post} key={post.id} />
+                            ))
 
                 }
             </div>

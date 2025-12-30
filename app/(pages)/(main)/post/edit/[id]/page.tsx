@@ -1,6 +1,7 @@
 import { PostFormComponent } from "@/components/posts/postFormComponent";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { UniquePostEdit } from "@/lib/types/uniquePost";
 import { redirect } from "next/navigation";
 
 export default async function EditPost({params} : {params: {id: string}}){
@@ -9,7 +10,7 @@ export default async function EditPost({params} : {params: {id: string}}){
     const session = await auth();
     if(!session?.user) redirect("/");
 
-    const post = await prisma.post.findUnique({
+    const post: UniquePostEdit | null = await prisma.post.findUnique({
         where: {id: id}
     })
 

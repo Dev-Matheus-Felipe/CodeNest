@@ -1,13 +1,12 @@
 import { EditProfileButton } from "./buttons/editProfile";
 import { GetLikes } from "./functions/getLikes";
-import { UserType } from "./functions/getUser";
 import Image from "next/image";
 import { Answers } from "./generalComponents/answers";
 import { GetTags } from "./functions/getTags";
 import { PostAnswers } from "./generalComponents/post-answers";
+import { FullUserType } from "@/lib/types/fullUser";
 
-export function ProfileComponent({user, myProfile} : {user: UserType, myProfile: boolean}){
-    if(!user) return null;
+export function ProfileComponent({user, myProfile} : {user: FullUserType, myProfile: boolean}){    
     const topTags = GetTags({posts: user.posts});
     const userLikes = GetLikes({user: user});
 
@@ -88,7 +87,7 @@ export function ProfileComponent({user, myProfile} : {user: UserType, myProfile:
                         <h1 className="text-lg w-40">Top Tags</h1>
                         <div className="w-40 h-18 flex flex-col gap-3 items-center justify-center rounded-md">
                             {
-                                topTags.map((tagObj, index) => (
+                                topTags.map((tagObj: {tag: string, count: number}, index: number) => (
                                     <div className="flex w-full justify-between items-center" key={index}>
                                         <p className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-1.5 px-3
                                         rounded-2xl cursor-pointer`}>{tagObj.tag}</p>

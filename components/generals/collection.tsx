@@ -1,6 +1,6 @@
 "use client"
 
-import { SavedPostSchema } from "@/lib/schemas/savedPostSchema";
+import { SavedPostsType } from "@/lib/types/savedPosts";
 import { PostComponent } from "../posts/postComponent";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -11,11 +11,11 @@ type SearchType = {
     openFilter: boolean
 }
 
-export function CollectionContainer({savedPosts} : {savedPosts: SavedPostSchema[]}){
-    const [posts, setPosts] = useState<SavedPostSchema[]>(savedPosts);
+export function CollectionContainer({savedPosts} : {savedPosts: SavedPostsType[]}){
+    const [posts, setPosts] = useState<SavedPostsType[]>(savedPosts);
     const [search, setSearch] = useState<SearchType>({input: "", filter: "Select a filter", openFilter: false});
 
-    const filters = ["Select a filter", "Date ↑", "Date ↓","Answered","Unanswered"];
+    const filters: string[] = ["Select a filter", "Date ↑", "Date ↓","Answered","Unanswered"];
     useEffect(() => {
         switch(search.filter){
             case "Answered":
@@ -95,7 +95,7 @@ export function CollectionContainer({savedPosts} : {savedPosts: SavedPostSchema[
                             <div className={`absolute z-10 top-full left-full -translate-x-full h-70 w-28
                             bg-(--codeEdit-tag) translate-y-1.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
                                 {
-                                    filters.map((e) => (
+                                    filters.map((e: string) => (
                                         <p 
                                             key={e} 
                                             className='border py-2 px-1 hover:text-orange-500 cursor-pointer rounded-sm'
@@ -113,9 +113,10 @@ export function CollectionContainer({savedPosts} : {savedPosts: SavedPostSchema[
                 {
                     posts.length <= 0
                         ? <p className="text-sm">No posts saved yet...</p>
-                        : posts.filter(e => e.post.title.toLowerCase().includes(search.input.toLowerCase())).map((savedPost) => (
-                            <PostComponent post={savedPost.post} key={savedPost.id} />
-                        ))
+                        : posts.filter((e: SavedPostsType) => 
+                            e.post.title.toLowerCase().includes(search.input.toLowerCase())).map((savedPost) => (
+                                <PostComponent post={savedPost.post} key={savedPost.id} />
+                            ))
 
                 }
             </div>

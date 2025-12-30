@@ -1,5 +1,5 @@
 import { CodeEditorComponent } from "@/components/CodeEditor/CodeEditorComponent";
-import { Response, ResponseTpe } from "@/components/posts/response";
+import { Response } from "@/components/posts/response";
 import { Like } from "@/components/buttons/like";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
@@ -7,12 +7,14 @@ import Image from "next/image";
 import { ResponseForm } from "@/components/posts/responseForm";
 import { AddCollection } from "@/components/buttons/addCollection";
 import { AskedTime } from "@/components/generals/askedTime";
+import { UniquePost } from "@/lib/types/uniquePost";
+import { ResponseGeneralType } from "@/lib/types/response";
 
 export default async function Post({params}: { params: {id: string} }){
     
     const { id } =  await params;
 
-    const post = await prisma.post.findUnique({
+    const post: UniquePost | null = await prisma.post.findUnique({
         where: {id: id},
         include: {
             author: true, 
@@ -34,7 +36,7 @@ export default async function Post({params}: { params: {id: string} }){
     if(!post) return <p className="w-full h-[50%] flex justify-center items-center">Post not foud</p>
     
     const session = await auth();
-    const liked =  !!session?.user?.id && post.likedBy.includes(session.user.id);
+    const liked: boolean =  !!session?.user?.id && post.likedBy.includes(session.user.id);
 
     const saved = (session?.user.id) 
         ? await prisma.savedPost.findUnique({where: {userId_postId: {userId: session.user.id, postId: post.id}}}) ? true : false
@@ -82,7 +84,7 @@ export default async function Post({params}: { params: {id: string} }){
             
             {post.code && <CodeEditorComponent post={post} />}
 
-            {post.responses.length >=0 && post.responses.map((response: ResponseTpe) => (
+            {post.responses.length >=0 && post.responses.map((response: ResponseGeneralType) => (
                 <Response key={response.id} response={response} />
             ))}
 

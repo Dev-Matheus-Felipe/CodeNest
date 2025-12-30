@@ -1,9 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { FullUserType } from "@/lib/types/fullUser";
 
 export async function GetUser({ username }: { username: string }) {
-  const user = await prisma.user.findUnique({
+  const user: FullUserType | null = await prisma.user.findUnique({
     where: { username },
     include: {
       posts: {
@@ -15,7 +16,14 @@ export async function GetUser({ username }: { username: string }) {
             }
           },
 
-          responses: { select: { id: true } }
+          responses: { 
+            select: { 
+              id: true,
+              content: true,
+              likedBy: true,
+              createdAt: true,
+            } 
+          }
         }
       },
 
@@ -36,7 +44,3 @@ export async function GetUser({ username }: { username: string }) {
 
   return user;
 }
-
-
-// Tipo do retorno da função GetUser
-export type UserType = Awaited<ReturnType<typeof GetUser>>;

@@ -1,32 +1,15 @@
-import Image from "next/image";
+import { CodeEditorResponse } from "../CodeEditor/CodeEditorResponse";
+import { ResponseGeneralType } from "@/lib/types/response";
 import { askedTimeAgo } from "./postInfo";
 import { Like } from "../buttons/like";
 import { auth } from "@/lib/auth";
-import { CodeEditorResponse } from "../CodeEditor/CodeEditorResponse";
-
-export type ResponseTpe = {
-    id: string;
-    content: string;
-    code?: string | null;
-    language: string;
-    createdAt: Date;
-    likedBy: string[];
-    postId: string,
-    authorId: string,
-
-    author: {
-        id: string;
-        username?: string | null;
-        name?: string | null;
-        image?: string | null;
-    };
-};  
+import Image from "next/image";
 
 
-export async function Response({response} : {response: ResponseTpe}){
+export async function Response({response} : {response: ResponseGeneralType}){
      const session = await auth();
 
-     const liked =
+     const liked: boolean =
         !!session?.user?.id && response.likedBy.includes(session.user.id);
 
     return (

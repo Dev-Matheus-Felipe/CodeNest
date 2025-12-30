@@ -1,12 +1,13 @@
 "use client"
 
-import Image from "next/image";
+import { GeneralPostType } from "@/lib/types/generalPost";
 import { titleIconsCss } from "../posts/postComponent";
-import { PostType } from "@/lib/types/post";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-export function EditPost({post} : {post: PostType}){
+export function EditPost({post} : {post: GeneralPostType}){
     const router = useRouter();
+    
     return (
         <button className={titleIconsCss} onClick={(e) => {
             e.preventDefault();

@@ -10,21 +10,17 @@ import { Controller, useForm } from "react-hook-form";
 import { responseSchema, ResponseSchemaType } from "@/lib/schemas/responseSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Responseform } from "@/lib/actions/reponseForm";
+import { ResponseType } from "@/lib/types/response";
 
-export type Response = {
-    id: string;
-    content: string;
-    code: string | null;
-    language: string;
-    createdAt: Date;
-    likedBy: string[];
-    postId: string;
-    authorId: string;
+type InitialState = {
+    content: string,
+    code: string,
+    language: string
 }
 
-export function ResponseForm({user, post, response} : {user?: User, post: string, response?: Response}){
-    const inputStyle = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";
-     const initialState = {
+export function ResponseForm({user, post, response} : {user?: User, post: string, response?: ResponseType}){
+    const inputStyle: string = "bg-(--secondary-button) h-11 mt-2  w-full rounded-sm outline-0 px-3 profile:text-xs text-[9px] ";
+     const initialState: InitialState = {
         content: response?.content ?? "",
         code: response?.code ?? "",
         language: response?.language ?? "html",
@@ -46,7 +42,7 @@ export function ResponseForm({user, post, response} : {user?: User, post: string
 
 
     const [editCodeTags, setEditCodeTags] = useState<boolean>(false);
-    const [opened, setOpened] = useState(response ? true : false);
+    const [opened, setOpened] = useState<boolean>(response ? true : false);
 
     const language = watch("language");
     
@@ -126,7 +122,7 @@ export function ResponseForm({user, post, response} : {user?: User, post: string
                         <div className={`absolute z-10 top-full left-full -translate-x-full h-60 w-25
                         bg-(--codeEdit-tag) translate-y-1.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
                             {
-                                codeEditTags.map((e) => (
+                                codeEditTags.map((e: string) => (
                                     <p 
                                         key={e} 
                                         className='border py-1 pl-2 hover:text-orange-500 cursor-pointer rounded-sm'

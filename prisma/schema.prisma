@@ -45,9 +45,11 @@ model Post {
   createdAt   DateTime @default(now())
   
   authorId    String
-  author      User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
-  likedBy       String[]         
+  likedBy       String[]      
+
+  author      User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+   
   responses   Response[]          
   savedBy     SavedPost[]             
 }

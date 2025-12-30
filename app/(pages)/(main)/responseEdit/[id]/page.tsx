@@ -1,6 +1,7 @@
 import { ResponseForm } from "@/components/posts/responseForm";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { ResponseType } from "@/lib/types/response";
 import { redirect } from "next/navigation";
 
 export default async function ResponseEdit({params} : {params: {id: string}}){
@@ -9,7 +10,7 @@ export default async function ResponseEdit({params} : {params: {id: string}}){
     const session = await auth();
     if(!session?.user) redirect("/");
 
-    const response = await prisma.response.findUnique({
+    const response: ResponseType | null = await prisma.response.findUnique({
         where: {id: id}
     })
 

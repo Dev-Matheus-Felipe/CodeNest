@@ -1,10 +1,10 @@
 "use client"
 
+import { ResponseGeneralType } from "@/lib/types/response";
 import { CodeEditorComponent } from "./CodeEditorComponent"
-import { ResponseTpe } from "../posts/response"
 import { useState } from "react"
 
-export function CodeEditorResponse({response} : {response: ResponseTpe}){
+export function CodeEditorResponse({response} : {response: ResponseGeneralType}){
     const [state, setState] = useState<boolean>(true);
     return  (
         <>
