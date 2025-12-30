@@ -1,6 +1,6 @@
 "use server";
 
-import { Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export type UserType = Prisma.UserGetPayload<{
