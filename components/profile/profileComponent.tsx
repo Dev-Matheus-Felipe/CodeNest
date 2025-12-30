@@ -7,6 +7,7 @@ import { GetTags } from "./functions/getTags";
 import { PostAnswers } from "./generalComponents/post-answers";
 
 export function ProfileComponent({user, myProfile} : {user: UserType, myProfile: boolean}){
+    if(!user) return null;
     const topTags = GetTags({posts: user.posts});
     const userLikes = GetLikes({user: user});
 

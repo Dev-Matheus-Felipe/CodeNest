@@ -10,6 +10,8 @@ import Image from "next/image"
 import Link from "next/link"
 
 export function PostAnswers({user} : {user: UserType}){
+    if(!user) return null;
+    
     const router = useRouter();
     const [state, setState] = useState("posts");
 

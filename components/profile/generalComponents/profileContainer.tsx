@@ -4,6 +4,7 @@ import { PostAnswers } from "./post-answers";
 import { Answers } from "./answers";
 
 export async function ProfileContainer({user} : {user: UserType}){
+    if(!user) return null;
     
     const topTags = GetTags({posts: user.posts});
 
