@@ -1,6 +1,6 @@
 "use client"
 
-import { SavedPostWithPost } from "@/lib/schemas/savedPostSchema";
+import { SavedPostSchema } from "@/lib/schemas/savedPostSchema";
 import { PostComponent } from "../posts/postComponent";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -11,8 +11,8 @@ type SearchType = {
     openFilter: boolean
 }
 
-export function CollectionContainer({savedPosts} : {savedPosts: SavedPostWithPost[]}){
-    const [posts, setPosts] = useState<SavedPostWithPost[]>(savedPosts);
+export function CollectionContainer({savedPosts} : {savedPosts: SavedPostSchema[]}){
+    const [posts, setPosts] = useState<SavedPostSchema[]>(savedPosts);
     const [search, setSearch] = useState<SearchType>({input: "", filter: "Select a filter", openFilter: false});
 
     const filters = ["Select a filter", "Date ↑", "Date ↓","Answered","Unanswered"];

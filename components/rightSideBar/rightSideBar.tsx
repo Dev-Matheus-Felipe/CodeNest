@@ -1,8 +1,20 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link";
 
+type RightSideBarPost = {
+    id: string;
+    createdAt: Date;
+    code: string | null;
+    language: string;
+    likedBy: string[];
+    authorId: string;
+    title: string;
+    description: string;
+    tags: string;
+}
+
 export default async function RightSideBar(){
-    const posts = await prisma.post.findMany();
+    const posts: RightSideBarPost[] = await prisma.post.findMany({});
 
     const tags = posts.flatMap(e => e.tags.split(","));
 

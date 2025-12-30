@@ -5,7 +5,7 @@ import { ResponseTpe } from "../posts/response"
 import { useState } from "react"
 
 export function CodeEditorResponse({response} : {response: ResponseTpe}){
-    const [state, setState] = useState(true);
+    const [state, setState] = useState<boolean>(true);
     return  (
         <>
             <div className="profile:text-[17px] text-xs pb-5 flex justify-between ">

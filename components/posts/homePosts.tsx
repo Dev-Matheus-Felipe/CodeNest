@@ -3,7 +3,7 @@
 import { PostComponent } from "./postComponent";
 import { AskAQuestion } from "../buttons/askQuesion";
 import Image from "next/image";
-import { homePostSchema } from "@/lib/schemas/savedPostSchema";
+import { homePostSchema } from "@/lib/schemas/homePostSchema";
 import { useState } from "react";
 
 export  function HomePosts ({posts} : {posts: homePostSchema[]}){

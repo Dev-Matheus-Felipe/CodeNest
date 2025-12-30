@@ -1,8 +1,9 @@
 import { HomePosts } from "@/components/posts/homePosts";
 import { prisma } from "@/lib/prisma";
+import { homePostSchema } from "@/lib/schemas/homePostSchema";
 
 export default async function Home() {
-  const posts = await prisma.post.findMany({
+  const posts: homePostSchema[] = await prisma.post.findMany({
       select: {
           id: true,
           title: true,
