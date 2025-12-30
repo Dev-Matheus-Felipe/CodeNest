@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { PostType } from "@/lib/types/post"
 
 export function PostAnswers({user} : {user: UserType}){
     if(!user) return null;
@@ -40,7 +41,7 @@ export function PostAnswers({user} : {user: UserType}){
                     )}
 
                     {state === "posts" &&
-                        user.posts.map((post, index) => (
+                        user.posts.map((post: PostType, index) => (
                             <PostComponent key={post.id} post={user.posts[index]} user={user} />
                         ))}
 
