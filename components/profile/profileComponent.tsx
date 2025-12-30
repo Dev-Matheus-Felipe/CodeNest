@@ -1,7 +1,6 @@
 import { EditProfileButton } from "./buttons/editProfile";
 import { GetLikes } from "./functions/getLikes";
 import Image from "next/image";
-import { Answers } from "./generalComponents/answers";
 import { GetTags } from "./functions/getTags";
 import { PostAnswers } from "./generalComponents/post-answers";
 import { FullUserType } from "@/lib/types/fullUser";
@@ -77,7 +76,10 @@ export function ProfileComponent({user, myProfile} : {user: FullUserType, myProf
                             <p>Questions</p>
                         </div>
 
-                        <Answers user={user} />
+                        <div className="flex flex-col items-center text-[12px]">
+                            <p>{user.responses.length}</p>
+                            <p>Answers</p>
+                        </div>
                     </div>
                 </div>
 
@@ -101,7 +103,7 @@ export function ProfileComponent({user, myProfile} : {user: FullUserType, myProf
 
             </div>
 
-            <PostAnswers user={user} />
+            <PostAnswers user={user} myProfile={myProfile} />
         </div>
     )
 }

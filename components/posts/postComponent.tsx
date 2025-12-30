@@ -9,7 +9,7 @@ import Link from "next/link";
 export const titleIconsCss: string = 
     "z-10 w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center cursor-pointer";
 
-export function PostComponent({post, user} : {post: GeneralPostType, user?: FullUserType}){
+export function PostComponent({post, user, myProfile} : {post: GeneralPostType, user?: FullUserType,  myProfile?: Boolean}){
     const tags: string[] = post.tags.split(",");
 
     return (
@@ -24,7 +24,7 @@ export function PostComponent({post, user} : {post: GeneralPostType, user?: Full
 
                 
                 {   /* TITLE ICONS */
-                    (user?.id) &&
+                    (myProfile) &&
                     <div className="flex gap-1 p-2 absolute left-full -translate-x-full top-1">
                         <DeletePost post={post} />
 

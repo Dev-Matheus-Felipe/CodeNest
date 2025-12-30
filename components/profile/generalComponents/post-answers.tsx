@@ -9,14 +9,13 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
-export function PostAnswers({user} : {user: FullUserType}){
-    if(!user) return null;
+export function PostAnswers({user, myProfile} : {user: FullUserType, myProfile: boolean}){
     
     const router = useRouter();
     const [state, setState] = useState("posts");
 
     const data: UserPosts[] | UserResponses[] = state === "posts" ? user.posts : user.responses;
-    const titleIconsCss = 
+    const titleIconsCss: string = 
     "z-10 w-auto min-w-8 h-auto hover:bg-(--secondary-button-hover) rounded-full p-2 flex justify-center items-center cursor-pointer";
 
     const colorHandler = (p: string) => `cursor-pointer px-3 py-2  ${state === p && "text-orange-500 bg-(--secondary-button-hover)" }`;
@@ -41,7 +40,7 @@ export function PostAnswers({user} : {user: FullUserType}){
 
                     {state === "posts" &&
                         user.posts.map((post: UserPosts, index: number) => (
-                            <PostComponent key={post.id} post={user.posts[index]} user={user} />
+                            <PostComponent key={post.id} post={user.posts[index]} user={user} myProfile={myProfile} />
                         ))}
 
                     {state === "responses" &&

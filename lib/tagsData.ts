@@ -5,6 +5,10 @@ export const tags = [
     description: "Core web language used on front-end and back-end to build dynamic, interactive and scalable applications."
   },
   {
+    name: "Delphi",
+    description: "Delphi is an object-oriented programming language and IDE (Integrated Development Environment) based on Object Pascal."
+  },
+  {
     name: "TypeScript",
     description: "JavaScript superset that adds static typing, improving code quality, maintainability and developer experience."
   },

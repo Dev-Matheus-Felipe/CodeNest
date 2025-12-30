@@ -43,7 +43,7 @@ export function CommunityContainer({users} : {users: User[]}){
     },[search.filter]);
 
     return (
-        <div className="w-full h-full flex flex-col gap-7 p-[2%] items-center">
+        <div className="w-full h-full flex flex-col gap-7 p-[2%] items-center overflow-hidden ">
             <h1 className="text-2xl w-full px-4 border-b border-[#565656] pb-5 font-bold">All Users</h1>
             <div className="w-full flex justify-between items-center gap-2">
                 <form className=" w-[75%] h-11 relative flex items-center"  onSubmit={(e) => e.preventDefault()}>
@@ -84,7 +84,7 @@ export function CommunityContainer({users} : {users: User[]}){
 
                         {
                             search.openFilter &&
-                            <div className={`absolute z-10 top-full left-full -translate-x-full      w-28
+                            <div className={`absolute z-10 top-full left-full -translate-x-full w-28
                             bg-(--codeEdit-tag) translate-y-1.5  rounded-md p-3 text-xs flex flex-col gap-5 overflow-auto`}>
                                 {
                                     filters.map((e: string) => (
@@ -101,10 +101,10 @@ export function CommunityContainer({users} : {users: User[]}){
                 </div>
             </div>
 
-            <div className="w-full max-h-full gap-5 grid pr-5 overflow-y-scroll grid-cols-[repeat(auto-fit,minmax(130px,150px))">
+            <div className="w-full flex-1 gap-5 grid pr-5 overflow-y-scroll! grid-cols-[repeat(auto-fit,minmax(130px,150px))]">
                 {
-                    users.filter((e: User) => (e.name ?? "").toLowerCase().includes(search.input.toLowerCase())).map((e: User) => (
-                        <Link href={`/profile/${users[0].username}`} key={e.id} className={`flex flex-col items-center w-43 py-3 
+                    usersState.filter((e: User) => (e.name ?? "").toLowerCase().includes(search.input.toLowerCase())).map((e: User) => (
+                        <Link href={`/profile/${e.username}`} key={e.id} className={`flex flex-col items-center w-35 py-3 
                         cursor-pointer rounded-md text-center duration-200  h-full`}>
                             <Image 
                                 src={e.image ?? "/icons/general/user.svg"}

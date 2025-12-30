@@ -214,7 +214,7 @@ export  function PostFormComponent({post} : {post?: UniquePostEdit}){
                             padding={10}
                             id="code"
                             placeholder="Please write your code here if it is needed"
-                            className="min-h-60 text-md! rounded-md w-full max-w-250 overflow-x-scroll bg-(--code-editor)"
+                            className="min-h-60 text-md! rounded-md w-full overflow-x-scroll bg-(--code-editor)"
                             />
                         )}
                     />

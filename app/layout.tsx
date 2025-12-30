@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" defaultTheme="dark"  enableSystem={false}>
           <Toaster />
           {children}
           <NextTopLoader color="#ff5e00" height={3} crawl crawlSpeed={200} showSpinner={false} easing="ease" />

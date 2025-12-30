@@ -5,6 +5,8 @@ export default async function Community(){
     const users = await prisma.user.findMany();
     
     return (
-        <CommunityContainer users={users} />
+        <div className="h-[calc(100vh-115px)] w-full">
+            <CommunityContainer users={users} />
+        </div>
     )
 }
