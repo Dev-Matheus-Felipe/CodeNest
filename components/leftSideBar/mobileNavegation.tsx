@@ -2,6 +2,7 @@ import Link from "next/link"
 import { linkStyles } from "./leftSideBar"
 import Image from "next/image"
 import { Dispatch } from "react"
+import { Session } from "next-auth";
 
 export function MobileNavegation({
     pathname,
@@ -14,7 +15,7 @@ export function MobileNavegation({
     setSidebar
     }: {
     pathname: string, 
-    logged: boolean,
+    logged: Session | null,
     theme: string,
     linkSelected: (currentlyPath: string) => void | string,
     protectedRoutes: (e: React.MouseEvent, route: string, mobile?: boolean) => Promise<void>,

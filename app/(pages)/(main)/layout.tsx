@@ -1,5 +1,3 @@
-import { MainLoading } from "@/components/loadings/main";
-import RightSidebarLoading from "@/components/loadings/rightSidebar";
 import { NavBar } from "@/components/navBar/navBar";
 import RightSideBar from "@/components/rightSideBar/rightSideBar";
 import { SessionProvider } from "next-auth/react";
@@ -14,12 +12,12 @@ export default function MainLayout({children} : {children: React.ReactNode}){
                 </SessionProvider>
                 
                     <main className="col-span-1 row-span-1 p-[2%]">
-                        <Suspense fallback={<MainLoading />}>
+                        <Suspense fallback={<p></p>}>
                             {children}
                         </Suspense>
                     </main>
 
-                <Suspense fallback={<RightSidebarLoading />}>
+                <Suspense fallback={<p></p>}>
                     <RightSideBar />
                 </Suspense>
             </div>

@@ -62,14 +62,14 @@ export function LeftSideBar({
         <>
            <DesktopNavegation 
                 pathname={pathname} 
-                logged={false} theme={theme} 
+                logged={logged} theme={theme} 
                 linkSelected={linkSelected} 
                 protectedRoutes={protectedRoutes}
                 loginHandler={loginHandler} />
 
             <MobileNavegation 
                 pathname={pathname} 
-                logged={false} theme={theme} 
+                logged={logged} theme={theme} 
                 linkSelected={linkSelected} 
                 protectedRoutes={protectedRoutes}
                 loginHandler={loginHandler} 

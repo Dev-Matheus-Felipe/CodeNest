@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { linkStyles } from "./leftSideBar"
 import Image from "next/image"
+import { Session } from "next-auth";
 
 export function DesktopNavegation({
     pathname,
@@ -11,7 +12,7 @@ export function DesktopNavegation({
     loginHandler,
     }: {
     pathname: string, 
-    logged: boolean,
+    logged: Session | null,
     theme: string,
     linkSelected: (currentlyPath: string) => void | string,
     protectedRoutes: (e: React.MouseEvent, route: string) => Promise<void>,
