@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { LeftSideBar } from "../leftSideBar/leftSideBar";
 import { useSession } from "next-auth/react";
 import { GlobalSearch } from "../generals/globalSearch";
+import Link from "next/link";
 
 export function NavBar(){
     const {theme, setTheme} = useTheme();
@@ -23,18 +24,19 @@ export function NavBar(){
             {/* NAVBAR */}
             <div className="col-span-full row-span-1 flex items-center justify-between profile:px-10 px-4">
             
-            <div className="flex gap-2">
+            <Link className="flex gap-2" href="/">
                 <Image 
                     src={`/icon.png`} 
                     alt="Dark mode Icon" 
                     width={26} 
                     height={26} 
-                    loading="eager" />
+                    loading="eager"
+                    className="w-auto h-auto"/>
                     
-                    <div className="text-xl">
-                        Code<span className="text-[#ff5e00] font-bold">Nest</span>
-                    </div>
+                <div className="text-xl">
+                    Code<span className="text-[#ff5e00] font-bold">Nest</span>
                 </div>
+            </Link>
 
                 {/* GLOBAL SEARCH */}
                 <GlobalSearch />
@@ -55,7 +57,9 @@ export function NavBar(){
                     </button>
 
                     { session && session?.user && 
-                        <Image src={`${session.user.image!}`} alt="user icon" width={35} height={35} className="rounded-sm" /> }
+                        <Link href="/profile">
+                            <Image src={`${session.user.image!}`} alt="user icon" width={35} height={35} className="rounded-sm" />
+                        </Link> }
                     
                     <button onClick={()=> setSidebarOpened(prev => !prev)} className="z-11" aria-label="dark mode bars">
                         <Image 
@@ -69,7 +73,7 @@ export function NavBar(){
             </div>
 
             {/* SIDEBAR */}
-            <LeftSideBar sidebarOpened={sidebarOpened} theme={theme ?? "dark"} logged={session}  />
+            <LeftSideBar sidebar={sidebarOpened} setSidebar={setSidebarOpened} theme={theme ?? "dark"} logged={session}  />
         </>
     )
 }

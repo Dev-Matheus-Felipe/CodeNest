@@ -22,7 +22,7 @@ export  function HomePosts ({posts} : {posts: GeneralPostType[]}){
         ${state.type === type && "text-[#ff5e00]"}`;
 
     return (
-        <div className="w-full h-[calc(100vh-120px)] p-[2%] pt-5 pr-10 grid grid-cols-1 grid-rows-[auto_1fr]">
+        <div className="w-full h-[calc(100vh-120px)] p-[3%] pt-5 grid grid-cols-1 grid-rows-[auto_1fr]">
             <div className="col-span-1 row-span-1">
                 <div className="flex justify-between">
                     <h1 className="text-2xl font-bold ">All Questions</h1>

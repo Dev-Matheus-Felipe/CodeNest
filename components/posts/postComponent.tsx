@@ -74,7 +74,7 @@ export function PostComponent({post, user, myProfile} : {post: GeneralPostType, 
                         </p>
                     </div>
 
-                    <div className="flex gap-2 items-center">
+                    <div className="gap-2 items-center profile:flex hidden">
                         <Image src="/icons/general/message.svg" alt="Like icon" width={20} height={20} />
 
                         <p className="profile:text-xs text-[10px]">

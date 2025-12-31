@@ -13,7 +13,7 @@ type RightSideBarPost = {
     tags: string;
 }
 
-export default async function RightSideBar(){
+export default async function RightSideBar(){ 
     const posts: RightSideBarPost[] = await prisma.post.findMany({});
 
     const tags = posts.flatMap(e => e.tags.split(","));

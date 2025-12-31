@@ -12,6 +12,9 @@ const verifyPath = (pathname : string) => {
 export async function proxy(request: NextRequest) {
     const session = await auth();
 
+    if(session && request.nextUrl.pathname === "/login")
+        return NextResponse.redirect(new URL("/",request.url ));
+
     const isProtected = verifyPath(request.nextUrl.pathname);
 
     if(!session) return (isProtected) 

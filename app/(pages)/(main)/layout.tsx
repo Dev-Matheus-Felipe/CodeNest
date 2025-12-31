@@ -1,3 +1,5 @@
+import { MainLoading } from "@/components/loadings/main";
+import RightSidebarLoading from "@/components/loadings/rightSidebar";
 import { NavBar } from "@/components/navBar/navBar";
 import RightSideBar from "@/components/rightSideBar/rightSideBar";
 import { SessionProvider } from "next-auth/react";
@@ -6,18 +8,18 @@ import { Suspense } from "react";
 export default function MainLayout({children} : {children: React.ReactNode}){
     return (
             <div className="grid grid-rows-[100px_1fr] min-h-screen
-            sidebar:grid-cols-[0.72fr_3fr_1.1fr] md:max-sidebar:grid-cols-[0.8fr_3fr] md:max-md-grid-cols-1 ">
+            sidebar:grid-cols-[auto_3fr_1.1fr] md:max-sidebar:grid-cols-[0.8fr_3fr] md:max-md-grid-cols-1 ">
                 <SessionProvider>
                     <NavBar />
                 </SessionProvider>
                 
                     <main className="col-span-1 row-span-1 p-[2%]">
-                        <Suspense fallback={<p></p>}>
+                        <Suspense fallback={<MainLoading />}>
                             {children}
                         </Suspense>
                     </main>
 
-                <Suspense fallback={<p>Loading...</p>}>
+                <Suspense fallback={<RightSidebarLoading />}>
                     <RightSideBar />
                 </Suspense>
             </div>

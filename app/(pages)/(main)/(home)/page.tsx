@@ -28,7 +28,6 @@ export default async function Home() {
           }
       }
   });
-
   return (
     <HomePosts posts={posts} />
   );
