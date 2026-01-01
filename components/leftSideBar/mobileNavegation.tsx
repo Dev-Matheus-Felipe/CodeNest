@@ -26,7 +26,7 @@ export function MobileNavegation({
 
     return (
         <>
-            <aside className={`h-screen col-span-1 row-span-1 md:hidden absolute top-0 left-0 flex flex-col items-start 
+            <aside className={`h-auto col-span-1 row-span-1 md:hidden absolute top-0 left-0 flex flex-col items-start  duration-300
             justify-between p-4  gap-10 z-11 rounded-sm  bg-(--secondary-button) ${sidebar ? "left-0" : " left-[-90%]"}`}>
                 <nav className="w-full flex flex-col items-start gap-7">
                     

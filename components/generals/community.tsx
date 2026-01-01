@@ -101,8 +101,7 @@ export function CommunityContainer({users} : {users: User[]}){
                 </div>
             </div>
 
-            <div className={`w-full flex-1 gap-5 grid overflow-y-scroll! grid-cols-[repeat(auto-fit,minmax(30px,130px))]
-            profile:justify-start justify-center`}>
+            <div className={`w-full flex-1 gap-5 grid overflow-y-scroll! grid-cols-[repeat(auto-fit,minmax(30px,130px))]`}>
                 {
                     usersState.filter((e: User) => (e.name ?? "").toLowerCase().includes(search.input.toLowerCase())).map((e: User) => (
                         <Link href={`/profile/${e.username}`} key={e.id} className={`flex flex-col items-center py-3 w-full

@@ -2,6 +2,22 @@ import { TagsContainer } from "@/components/generals/tags";
 import { prisma } from "@/lib/prisma";
 import { tags } from "@/lib/tagsData";
 import { GeneralPostType } from "@/lib/types/generalPost";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tags – Code Nest",
+  description:
+    "Browse questions by programming tags and discover topics you care about.",
+  keywords: [
+    "programming tags",
+    "topics",
+    "questions by tag",
+    "javascript",
+    "react",
+    "nextjs",
+  ],
+};
+
 
 export default async function Tags() {
   const posts: GeneralPostType[] = await prisma.post.findMany({

@@ -3,7 +3,7 @@
 import { GeneralPostType } from "@/lib/types/generalPost";
 import { AskAQuestion } from "../buttons/askQuesion";
 import { PostComponent } from "./postComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 type StateType = {
@@ -16,6 +16,11 @@ export  function HomePosts ({posts} : {posts: GeneralPostType[]}){
     const [state, setState] = useState<StateType>({
         posts: posts, input: "", type: "All"
     });
+
+    useEffect(() => {
+        setState(prev => ({ ...prev, posts }));
+    }, [posts]);
+
 
     const tagStyles = (type: string) => 
         `text-xs text-(--username-color) bg-(--secondary-button) py-2 px-3 rounded-lg cursor-pointer

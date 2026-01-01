@@ -6,6 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { User } from "next-auth";
 import { toast } from "sonner";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation";
+import { refresh } from "next/cache";
 
 type InitialValues = {
     name: string,
@@ -35,7 +38,6 @@ export function Form({user} : {user: User}){
     const inputStyle: string = "bg-(--secondary-button) h-11 mt-1 mb-4 w-full rounded-sm outline-0 px-3 text-xs";
     const inputsData: (keyof EditProfileSchemaType)[] = ["name","username","bio","portfolio"];
 
-
     const nameToLabel = (word: string) => {
         return `${word[0].toUpperCase()}${word.slice(1)}`
     }
@@ -55,10 +57,10 @@ export function Form({user} : {user: User}){
         const loadingID  = toast.loading("Saving...");
         const result = await EditProfileForm({data: data});
 
-        if (result.success) 
+        if (result.success){
             toast.success("Profile updated successfully",{id: loadingID});
-
-        else
+            refresh()
+        }else
             toast.error(result.message.update ,{id: loadingID});
         
     }

@@ -10,6 +10,26 @@ import { AskedTime } from "@/components/generals/askedTime";
 import { UniquePost } from "@/lib/types/uniquePost";
 import { ResponseGeneralType } from "@/lib/types/response";
 
+import type { Metadata } from "next";
+import { NotFound } from "@/components/generals/notFound";
+
+export const metadata: Metadata = {
+  title: "Question – Code Nest",
+  description:
+    "View a programming question and community answers on Code Nest.",
+  openGraph: {
+    title: "Question on Code Nest",
+    description:
+      "Explore a developer question and see answers from the community.",
+    type: "article",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+
 export default async function Post({params}: { params: {id: string} }){
     
     const { id } =  await params;
@@ -33,7 +53,7 @@ export default async function Post({params}: { params: {id: string} }){
     })
 
 
-    if(!post) return <p className="w-full h-[50%] flex justify-center items-center">Post not foud</p>
+    if(!post) return <NotFound data="Post not found." />
     
     const session = await auth();
     const liked: boolean =  !!session?.user?.id && post.likedBy.includes(session.user.id);

@@ -3,6 +3,18 @@ import { Form as ProfileForm } from "@/components/profile/form/form";
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edit Profile – Code Nest",
+  description: "Edit your profile information, bio, and preferences.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+
 export default async  function Edit(){    
     const session = await auth();
     if(!session?.user) return redirect("/");

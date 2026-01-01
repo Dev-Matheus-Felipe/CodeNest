@@ -1,7 +1,6 @@
 "use server"
 
 import { postFormType, PostFormType } from "../schemas/postFormSchema";
-import { refresh, revalidatePath } from "next/cache";
 import { prisma } from "../prisma";
 import { auth } from "../auth";
 
@@ -45,11 +44,9 @@ export async function PostForm({data, type} : {data: PostFormType, type?: string
             })
         }
 
-        refresh();
-        revalidatePath("/")
         return {success: true, message: {updated: `Post has been ${type? "updated" : "created" } successfully`}};
 
     }catch{
         return {success: false, message: {updated: "Something went wrong, Please try again later"}};
     }
-}
+} 

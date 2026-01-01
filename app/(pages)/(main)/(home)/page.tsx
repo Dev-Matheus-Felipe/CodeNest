@@ -1,34 +1,34 @@
 import { GeneralPostType } from "@/lib/types/generalPost";
 import { HomePosts } from "@/components/posts/homePosts";
-import { prisma } from "@/lib/prisma";
+import { GetAllPosts } from "@/lib/actions/getAllPosts";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CodeNest – Questions & Answers for Developers",
+  description:
+    "Ask questions, share answers, and learn from the developer community. A place to grow your programming knowledge.",
+  keywords: [
+    "programming",
+    "developers",
+    "questions and answers",
+    "stackoverflow alternative",
+    "coding",
+    "frontend",
+    "backend",
+  ],
+  openGraph: {
+    title: "Code Nest",
+    description:
+      "A community where developers ask questions, share answers, and learn together.",
+    type: "website",
+  },
+};
+
 
 export default async function Home() {
-  const posts: GeneralPostType[] = await prisma.post.findMany({
-      select: {
-          id: true,
-          title: true,
-          tags: true,
-          createdAt: true,
-          likedBy: true,
+    const posts: GeneralPostType[] = await GetAllPosts();
 
-          author: {
-              select: {
-                  name: true,
-                  image: true
-              }
-          },
-
-          responses: {
-              select: {
-                  id: true,
-                  content: true,
-                  likedBy: true,
-                  createdAt: true
-              }
-          }
-      }
-  });
-  return (
-    <HomePosts posts={posts} />
-  );
+    return (
+        <HomePosts posts={posts} />
+    );
 }
