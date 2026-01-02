@@ -1,8 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💻 Code Nest
 
-## Getting Started
+Code Nest is a web application inspired by **Stack Overflow**, built to allow developers to ask questions, share knowledge, and interact with the community in a clean and intuitive way.
 
-First, run the development server:
+The project was developed using **Next.js**, featuring OAuth2 authentication, database integration with Prisma, and a modern UI with light and dark themes.
+
+---
+
+## 🚀 Main Features
+
+- 📄 View posts made by the community
+- 🏷️ Browse posts by tags specifications
+- 👥 Community page with registered users
+- ⭐ Save posts to personal collections
+- 👤 User profile with edit options
+- ❓ Ask and answer questions
+- ✏️ Edit as well as Like questions and answers
+- 🌗 Switch between Light Mode and Dark Mode
+
+---
+
+## 📑 Pages
+
+- **Home** – General feed of questions
+- **Community** – Platform users
+- **Collections** – Saved posts
+- **Profile** – User profile and edit page
+- **Tags** – Questions organized by tags
+- **Ask a Question** – Create new questions
+
+---
+
+## 🔐 Authentication
+
+Authentication is handled via **OAuth2**, using:
+
+- GitHub
+- Google
+- Discord
+
+The system is implemented with **NextAuth (Auth.js)** and integrated with the database using the **Prisma Adapter**.
+
+---
+
+## 🎥 Video Demo
+
+> ⚠️ **Coming soon**
+
+A demo video will be added showing:
+- Application navigation
+- Asking and answering questions
+- Editing posts and answers
+- Like system
+- Light and dark themes
+- OAuth authentication flow
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- next-themes
+- lucide-react
+
+### Authentication
+- NextAuth (Auth.js)
+- OAuth2 (GitHub, Google, Discord)
+
+### Backend / Database
+- Prisma
+- Prisma Client
+- MongoDB
+
+### UX / UI
+- Sonner (toasts & notifications)
+- @uiw/react-textarea-code-editor
+
+---
+
+## ⚙️ Getting Started
+
+Follow the steps below to run the project locally.
+
+Clone the repository:
+```bash
+git clone https://github.com/Dev-Matheus-Felipe/CodeNest.git
+```
+Navigate to the project directory:
+
+```bash
+cd CodeNest
+```
+Install the dependencies:
+
+```bash
+npm install
+```
+Create a .env file in the root of the project and configure the following variables:
+```bash
+DATABASE_URL="your mongodb database url"
+NODE_ENV="development"
+
+AUTH_GITHUB_ID=your_github_client_id
+AUTH_GITHUB_SECRET=your_github_client_secret
+
+AUTH_GOOGLE_ID=your_google_client_id
+AUTH_GOOGLE_SECRET=your_google_client_secret
+
+AUTH_DISCORD_CLIENT_ID=your_discord_client_id
+AUTH_DISCORD_CLIENT_SECRET=your_discord_client_secret
+
+NEXTAUTH_URL=http://localhost:3000
+AUTH_TRUST_HOST=true
+```
+
+Generate Prisma Client and Next Auth Secret:
+```bash
+npx auth secret
+
+npx prisma generate
+```
+Run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +135,47 @@ pnpm dev
 bun dev
 ```
 
+Open your browser and access:
+
+```
+http://localhost:3000
+```
+
+---
+
+Feel free to contribute or open issues if you find any bugs or have suggestions.
+
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📚 Additional Setup Help
 
-## Learn More
+If you have any questions about how to configure the MongoDB database or how to obtain OAuth Client IDs and Secrets, please refer to the official documentation links below:
 
-To learn more about Next.js, take a look at the following resources:
+🐙 GitHub OAuth
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🔎 Google OAuth
 
-## Deploy on Vercel
+https://developers.google.com/identity/protocols/oauth2
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🎮 Discord OAuth
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+https://discord.com/developers/docs/topics/oauth2
+
+🗄 MongoDB (Atlas)
+
+https://www.mongodb.com/docs/atlas/getting-started/
+
+https://www.prisma.io/docs/orm/overview/databases/mongodb
+
+💡 Note
+
+Make sure your OAuth callback URLs match your environment (local or production), and never commit your .env file to the repository.
+
+
+
+
