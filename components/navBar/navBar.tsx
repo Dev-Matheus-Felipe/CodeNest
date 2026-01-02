@@ -39,7 +39,7 @@ export function NavBar(){
             </Link>
 
                 {/* GLOBAL SEARCH */}
-                <GlobalSearch />
+                <GlobalSearch theme={theme} />
 
                 {/*BUTTONS */}
                 <div className="flex gap-7 items-center">

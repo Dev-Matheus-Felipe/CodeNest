@@ -26,7 +26,7 @@ export const postFormType = z4.object({
   description: z4
     .string()
     .min(5, "Min Length: 5")
-    .max(200, "Max Length: 200")
+    .max(300, "Max Length: 300")
     .refine(
       v => !/<\/?[a-z][\s\S]*?>/i.test(v),
       "HTML or script tags are not allowed"

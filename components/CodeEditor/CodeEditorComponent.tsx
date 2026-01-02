@@ -13,6 +13,8 @@ export function CodeEditorComponent({post} : {post: UniquePost | ResponseGeneral
                 value={post.code}
                 language={post.language}
                 padding={20}
+                readOnly
+                disabled
                 className='h-full text-sm! rounded-md overflow-y-scroll! w-[99%] bg-(--code-editor)!' />
         </div>
     )

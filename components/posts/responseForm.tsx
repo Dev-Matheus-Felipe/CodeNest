@@ -77,7 +77,7 @@ export function ResponseForm({user, post, response} : {user?: User, post: string
 
     return(
          <div className={`mt-10 bg-(--secondary-button-hover) hover:bg-(--secondary-button-hover) cursor-pointer rounded-md
-         overflow-y-hidden ${opened && user ? "min-h-150" : "h-11.5"} duration-500 w-full h-10`}>
+         overflow-y-hidden ${opened && user ? "min-h-150 h-auto" : "h-11.5"} duration-500 w-full h-10`}>
             <div className="flex justify-between px-3 h-11.5 items-center" onClick={()=> openForm()}>
                 <h1 className="text-md">Write your answer here</h1>
                 <Image src="/icons/general/arrow.svg" alt="Arrow icon" width={15} height={15} />
@@ -148,7 +148,7 @@ export function ResponseForm({user, post, response} : {user?: User, post: string
                             padding={10}
                             id="code"
                             placeholder="Please write your code here if it is needed"
-                            className="min-h-60 text-md! rounded-md  w-full overflow-x-scroll bg-(--code-editor)"
+                            className="min-h-60 text-md! rounded-md  w-full overflow-x-scroll bg-(--code-editor) max-w-300"
                             />
                         )}
                     />

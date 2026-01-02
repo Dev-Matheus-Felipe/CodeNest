@@ -12,6 +12,7 @@ import { ResponseGeneralType } from "@/lib/types/response";
 
 import type { Metadata } from "next";
 import { NotFound } from "@/components/generals/notFound";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Question – Code Nest",
@@ -66,13 +67,15 @@ export default async function Post({params}: { params: {id: string} }){
         <div className="flex flex-col w-full h-full pt-5 p-[3%] pb-4 gap-3">
             <div className="flex justify-between">
                 <div className="flex gap-3 items-center">
-                    <Image 
-                        src={post.author.image ?? "/icons/general/user.svg"} 
-                        alt="Author Image" 
-                        width={30} 
-                        height={30} 
-                        className="rounded-full"/> 
-                    <p className="text-md">{post.author.name}</p>
+                    <Link href={`/profile/${post.author.username}`} className="cursor-pointer flex gap-2 items-center">
+                        <Image 
+                            src={post.author.image ?? "/icons/general/user.svg"} 
+                            alt="Author Image" 
+                            width={30} 
+                            height={30} 
+                            className="rounded-full"/> 
+                        <p className="text-md">{post.author.name}</p>
+                    </Link>
                 </div>
 
                 <div className="flex gap-4 text-xs items-center">
@@ -100,7 +103,7 @@ export default async function Post({params}: { params: {id: string} }){
                 </div>
             </div>
 
-            <p className="text-md w-full px-1">{post.description}</p>
+            <p className="text-sm w-full px-1">{post.description}</p>
             
             {post.code && <CodeEditorComponent post={post} />}
 

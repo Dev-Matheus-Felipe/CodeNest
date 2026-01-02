@@ -57,7 +57,7 @@ export  function PostFormComponent({post} : {post?: UniquePostEdit}){
     ).map(e => e.name);
 
     const onSubmit = async(data : PostFormType) => {
-        if(isDirty && post){
+        if(!isDirty && post){
             toast.warning("nothing to update");
             return;
         }
