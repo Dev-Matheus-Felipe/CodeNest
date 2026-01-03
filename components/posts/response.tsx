@@ -16,7 +16,7 @@ export async function Response({response} : {response: ResponseGeneralType}){
         <div className={`flex flex-col w-full py-6 mt-5 rounded-sm cursor-pointer relative gap-2
         hover:bg-[rgba(255,255,255,0.02)] px-4`}>
 
-           <CodeEditorResponse response={response}  />
+
 
             {/* AUTHOR INFO */}
             <div className="pt-4 flex justify-between">
@@ -50,6 +50,8 @@ export async function Response({response} : {response: ResponseGeneralType}){
                     </div>
                 </div>
             </div>
+
+             <CodeEditorResponse response={response}  />
         </div>
     )
 }

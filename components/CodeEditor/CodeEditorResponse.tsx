@@ -8,7 +8,7 @@ export function CodeEditorResponse({response} : {response: ResponseGeneralType})
     const [state, setState] = useState<boolean>(true);
     return  (
         <>
-            <div className="profile:text-[17px] text-xs pb-5 flex justify-between ">
+            <div className="profile:text-sm text-xs pt-3 flex justify-between ">
                 <h1>{response.content} </h1>
                 {
                     response.code && 

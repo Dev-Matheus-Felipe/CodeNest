@@ -46,7 +46,7 @@ export function PostAnswers({user, myProfile} : {user: FullUserType, myProfile: 
                     {state === "responses" &&
                         user.responses.map((response: UserResponses, index: number) => (
                             <Link key={response.id} className={`flex flex-col w-[99%] py-3 mt-5 rounded-sm cursor-pointer relative gap-2
-                            hover:bg-[rgba(255,255,255,0.02)] px-3`}  href={`/post/${user.posts[index].id}`}>
+                            hover:bg-[rgba(255,255,255,0.02)] px-3`}  href={`/post/${response.postId}`}>
                                 <div className="flex justify-between">
                     
                                     {/* TITLE */}
