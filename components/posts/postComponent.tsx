@@ -37,7 +37,7 @@ export function PostComponent({post, user, myProfile} : {post: GeneralPostType, 
             <div className="flex gap-2">
                 {
                     tags.map((e: string, index: number) => (
-                        <p className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-2 px-3 rounded-2xl 
+                        <p className={`text-[10px] text-(--username-color) bg-(--secondary-button) py-2 px-3 rounded-2xl text-center
                         cursor-pointer`} key={index}>{e}</p>
                     ))
                 }

@@ -101,11 +101,12 @@ export function CommunityContainer({users} : {users: User[]}){
                 </div>
             </div>
 
-            <div className={`w-full flex-1 gap-5 grid overflow-y-scroll! grid-cols-[repeat(auto-fit,minmax(30px,130px))]`}>
+            <div
+            className="grid w-full flex-1 gap-5 overflow-y-scroll grid-cols-[repeat(auto-fill,145px)] justify-center">
                 {
                     usersState.filter((e: User) => (e.name ?? "").toLowerCase().includes(search.input.toLowerCase())).map((e: User) => (
                         <Link href={`/profile/${e.username}`} key={e.id} className={`flex flex-col items-center py-3 w-full
-                        cursor-pointer rounded-md text-center duration-200  h-full`}>
+                        cursor-pointer rounded-md text-center duration-200 h-min`}>
                             <Image 
                                 src={e.image ?? "/icons/general/user.svg"}
                                 className="rounded-full"
