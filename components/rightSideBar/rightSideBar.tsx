@@ -37,26 +37,38 @@ export default async function RightSideBar(){
             <div className="flex flex-col">
                 <h1 className="text-lg">Top Questions</h1>
 
-                <div className="flex mt-10 gap-5 cursor-pointer h-auto w-full items-center">
-                    <p className="xl:text-xs text-[10px] w-[75%]">Best practing for fetching data in a 
-                    Next.js application with Server Components</p>
+                <Link 
+                    href="/post/cmjwrow1x0001vyk8f66zm2l7" 
+                    className="flex mt-10 gap-5 cursor-pointer h-auto w-full items-center">
+                    <p className="xl:text-xs text-[10px] w-[75%]">When should i use server actions and API 
+                    routes to get and post data in the backend?</p>
                     <p >{`>`}</p>
-                </div>
+                </Link>
 
-                <div className="flex mt-10 gap-5 cursor-pointer h-auto w-full items-center">
-                    <p className="xl:text-xs text-[10px] w-[75%]">How does CacheComponents from Next.js 16 work?</p>
+                <Link 
+                    href="/post/cmk08szqn0001lb04jtyd6wf3" 
+                    className="flex mt-10 gap-5 cursor-pointer h-auto w-full items-center">
+                    <p className="xl:text-xs text-[10px] w-[75%]">How to choose bettwen react-hook-form and
+                    useActionState form to handle forms?</p>
                     <p >{`>`}</p>
-                </div>
+                </Link>
 
-                <div className="flex mt-10 gap-5 cursor-pointer h-auto w-full items-center">
-                    <p className="xl:text-xs text-[10px] w-[75%]">Ways to cache data with Next.Js 16</p>
-                    <p>{`>`}</p>
-                </div>
 
-                <div className="flex mt-10 gap-5 cursor-pointer h-auto w- items-center">
-                    <p className="xl:text-xs text-[10px] w-[75%]">What exactly is React Compiler?</p>
+                <Link 
+                    href="/post/cmk4qfxij0001vy4k87jvyy07" 
+                    className="flex mt-10 gap-5 cursor-pointer h-auto w-full items-center">
+                    <p className="xl:text-xs text-[10px] w-[75%]">Does anyone know a good roadmap to start 
+                    learning Java Spring Boot?</p>
                     <p >{`>`}</p>
-                </div>
+                </Link>
+
+                <Link 
+                    href="/post/cmjxdpua70001l7049op8hqs6" 
+                    className="flex mt-10 gap-5 cursor-pointer h-auto w-full items-center">
+                    <p className="xl:text-xs text-[10px] w-[75%]">Qual o melhor roadmap para aprender HTML?</p>
+                    <p >{`>`}</p>
+                </Link>
+              
             </div>
 
             {
