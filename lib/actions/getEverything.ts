@@ -36,14 +36,14 @@ export async function GetEverything({search} : {search: string}){
 
     const responses = await prisma.response.findMany({
         where: {content: {contains: search}},
-        select: {id: true, content: true},
+        select: {id: true, content: true, postId: true},
         take: 4
     });
 
     const filteredResponses = responses.map(e => ({
         name: e.content,
         id: e.id,
-        href: `/response/${e.id}`,
+        href: `/post/${e.postId}`,
         type: "RESPONSE"
     }));
 
